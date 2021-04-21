@@ -1,0 +1,74 @@
+<%- include("./partials/header.ejs") %>
+
+    <!-- content carousel -->
+
+    <div id="carouselExampleIndicators" class="carousel slide carousel-fade custom-carousel" data-bs-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+            <li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="5000">
+                <img src="https://www.lib.kmutt.ac.th/wp-content/uploads/2021/01/Red-Status-on-Web-01.jpg"
+                    class="d-block w-100" alt="..." />
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="https://www.lib.kmutt.ac.th/wp-content/uploads/2021/02/Orange-%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%A1-on-WEB.jpg"
+                    class="d-block w-100" alt="..." />
+            </div>
+
+            <div class="carousel-item" data-bs-interval="5000">
+                <img src="https://www.lib.kmutt.ac.th/wp-content/uploads/2016/07/kmuttarchive.png" class="d-block w-100"
+                    alt="..." />
+            </div>
+        </div>
+
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </a>
+    </div>
+
+    <!-- List Card -->
+    <% if (workspace.length > 0 ) { %>
+        
+    <div class="list-card-grid">
+        <% workspace.forEach((workspaces, index) => { %> 
+            <% if (workspaces.location == "CB06") { %>
+        <div class="custom-card">
+            <img src="/assets/img/<%= workspaces.image %>" alt="Card image cap" />
+            <div class="card-body">
+                <i class="far fa-building"></i>
+                <h5 class="card-title"><%= workspaces.workspace_name %></h5>
+                <br />
+                <i class="fas fa-check-circle"></i>
+                <p class="status"><%= workspaces.workspace_status %></p>
+                <i class="far fa-clock"></i>
+                <p class="clock">11.00 - 16.00</p>
+                <meter class="csprogress" value="7" min="0" max="10"></meter>
+                <p class="status">7/10</p>
+
+                <p class="card-text">
+                    <%= workspaces.detail %>
+                </p>
+                <a href="#" class="btn-custom">ดูรายละเอียด</a>
+            </div>
+        </div>
+        <% }%>
+        <% }) %>
+    </div>
+        
+    <% } else { %>
+        <p class="text-center">No workspace found.</p>
+    <% } %>
+
+
+
+<%- include("./partials/footer.ejs") %>

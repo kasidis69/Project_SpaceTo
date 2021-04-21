@@ -1,0 +1,59 @@
+<%- include("./partials/header.ejs") %>
+
+    <div class="container">
+        <% if (message) { %>
+            <p class="text-center text-danger">
+                <%= message %>
+            </p>
+            <% } %>
+                <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+                    <div class="row justify-content-start">
+                        <div class="form-group col-md-4 ">
+                            <input type="text" class="form-control" name="workspace_name" id="workspace-name"
+                                placeholder="Workspace Name" required>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <select id="location" name="location" class="form-control" required>
+                                <option selected disabled>Choose location</option>
+                                <option>CB01</option>
+                                <option>CB02</option>
+                                <option>CB03</option>
+                                <option>CB04</option>
+                                <option>CB05</option>
+                                <option>CB06</option>
+                                <option>SIT</option>
+                                <option>Library</option>
+                                
+                            </select>
+                        </div>
+                        <!--div class="form-group col-md-4 ">
+                            <input type="text" class="form-control" name="location" id="location"
+                                placeholder="Location" required>
+                        </div-->
+                        <div class="form-group col-md-4 ">
+                            <input type="text" class="form-control" name="detail" id="detail" placeholder="Detail"
+                                required>
+                        </div>
+                    </div>
+                    <!--div class="row justify-content-start table-wrapper">
+                        <div-- class="form-group col-md-6">
+                            <input type="number" class="form-control" name="number" id="number" placeholder="Number"
+                                required>
+                        </div-->
+                      
+                        <div class="col-md-12 table-wrapper">
+                            <label for="player-img"><b>Workspace Image</b></label><br>
+                            <input type="file" name="image" id="workspace-img" class="" required>
+                            
+                            <button type="submit" class="btn btn-primary float-right  ">Add Workspace</button>
+                       
+                        </div>
+                    </div>
+                    
+                   
+                
+                </form>
+    </div>
+    
+
+<%- include("./partials/footer.ejs") %>
