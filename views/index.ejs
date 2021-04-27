@@ -41,13 +41,13 @@
         
     <div class="list-card-grid">
         <% workspace.forEach((workspaces, index) => { %> 
-            <% if (workspaces.location == "CB06") { %>
+            <% if (workspaces.location == "SIT") { %>
         <div class="custom-card">
             <img src="/assets/img/<%= workspaces.image %>" alt="Card image cap" />
             <div class="card-body">
                 <i class="far fa-building"></i>
                 <h5 class="card-title"><%= workspaces.workspace_name %></h5>
-                <br />
+                <br/>
                 <i class="fas fa-check-circle"></i>
                 <p class="status"><%= workspaces.workspace_status %></p>
                 <i class="far fa-clock"></i>

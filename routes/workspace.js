@@ -18,10 +18,15 @@ module.exports = {
         let location = req.body.location;
         let status = "Test";
         let detail = req.body.detail;
+        let timeopen = req.body.timeopen;
+        let timeclose = req.body.timeclose;
+        let timeopenclose =timeopen+" - "+timeclose;
         let uploadedFile = req.files.image;
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];
+        let reservetime =req.body.reservetime
 
+        console.log(timeopen);
         image_name = workspace_name + '.' + fileExtension;
 
         let workspaceNameQuery = "SELECT * FROM workspace WHERE workspace_name = '"+ workspace_name +"'";
