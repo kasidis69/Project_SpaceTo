@@ -18,15 +18,18 @@ module.exports = {
         let location = req.body.location;
         let status = "Test";
         let detail = req.body.detail;
+        let workspacetypeid = req.body.roomtype ;
         let timeopen = req.body.timeopen;
         let timeclose = req.body.timeclose;
-        let timeopenclose =timeopen+" - "+timeclose;
+        let timeopenclose =timeopen+"-"+timeclose;
         let uploadedFile = req.files.image;
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];
         let reservetime =req.body.reservetime
 
-        console.log(timeopen);
+
+
+        console.log(workspacetypeid);
         image_name = workspace_name + '.' + fileExtension;
 
         let workspaceNameQuery = "SELECT * FROM workspace WHERE workspace_name = '"+ workspace_name +"'";
@@ -48,7 +51,7 @@ module.exports = {
                             return res.status(500).send(err);
                         }
 
-                        let query = "INSERT INTO workspace (workspace_name, location, workspace_status, detail, image) VALUES ('"+ workspace_name +"', '"+ location +"', '"+ status +"', '"+ detail +"', '"+ image_name +"') ";
+                        let query = "INSERT INTO workspace (workspace_name, location, workspace_status, detail, image, timeopenclose, workspacetypeid) VALUES ('"+ workspace_name +"', '"+ location +"', '"+ status +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+  workspacetypeid +"' ) ";
 
                         db.query(query, (err, result) => {
                             if (err) {

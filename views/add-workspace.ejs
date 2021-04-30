@@ -1,134 +1,130 @@
 <%- include("./partials/header.ejs") %>
 
     <div class="add-css">
-        <h1 style="font-size: 30px;" align='center'>Add workspace</h1>
+        <h3 align='center'>Add workspace</h2>
 
-        <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
-            <h4>Workspace name</h4>
-            <input name="workspace_name" type="text" class="form-control" placeholder="Enter workspace name" required>
-<br>
-            <div>
-                <h4>Location building</h4>
-                <select name="location" id="location"  class="form-control">
+            <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+                <h4>Workspace name</h4>
+                <input name="workspace_name" type="text" class="form-control" placeholder="Enter workspace name"
                     required>
-                    <option selected disabled>select location building</option>
-                    <option >SIT</option>
-                    <option >CB1</option>
-                    <option >CB2</option>
-                    <option >library KMUTT</option>
-            
 
-                </select>
-            </div>
-            <br>
-            <div>
-                <h4> Detail </h4>
-                <textarea name="detail" rows="10" cols="55" class="form-control">
+                <div>
+                    <h4>Location building</h4>
+                    <select name="location" class="form-control" required>
+                        <option selected disabled>select location building</option>
+                        <option >SIT
+                        <option >CB1
+                        <option >CB2
+                        <option >library KMUTT
+                    </select>
+                </div>
+
+                <div>
+                    <h4> Detail </h4>
+                    <textarea name="detail" rows="10" cols="55" class="form-control">
                 </textarea>
-            </div>
-<br>
-            <div>
-                <h4> Type </h4>
-                <input name=user type="radio"> &nbsp;Room &nbsp; &nbsp;
-                <input name=user type="radio"> &nbsp;Chair
-            </div>
+                </div>
 
-            <br>
-            <div>
-                <h4> Time </h4>
-                <p>Open</p>
-                <select name="timeopen" class="form-control">
-                    <option selected disabled>select tiome open</option>
-                    <option>08:30
-                    <option>09:00
-                    <option>09:30
-                    <option>10:00
-                    <option>10:30
-                    <option>11:00
-                    <option>11:30
-                    <option>12:00
-                    <option>12:30
-                    <option>13:00
-                    <option>13:30
-                    <option>14:00
-                    <option>14:30
-                    <option>15:00
-                    <option>15:30
-                    <option>16:00
-                    <option>16:30
+                <div>
+                    <h4> Type </h4>
+                    <input name=roomtype type="radio" value="1"> &nbsp;Room &nbsp; &nbsp;
+                    <input name=roomtype type="radio" value="2"> &nbsp;Chair
+                </div>
 
-
-                </select>
-                <p>Close</p>
-
-                <select name="timeclose" class="form-control">
-                    <option selected disabled>select time close</option>
-                    <option>08:30
-                    <option>09:00
-                    <option>09:30
-                    <option>10:00
-                    <option>10:30
-                    <option>11:00
-                    <option>11:30
-                    <option>12:00
-                    <option>12:30
-                    <option>13:00
-                    <option>13:30
-                    <option>14:00
-                    <option>14:30
-                    <option>15:00
-                    <option>15:30
-                    <option>16:00
-                    <option>16:30
-
-                </select>
-            </div>
-            <br>
+                <br>
+                <div>
+                    <h4> Time </h4>
+                    <p>Open</p>
+                    <select name="timeopen" class="form-control">
+                        <option selected disabled>select tiome open</option>
+                        <option >08:30
+                        <option >09:00
+                        <option >09:30
+                        <option >10:00
+                        <option >10:30
+                        <option >11:00
+                        <option >11:30
+                        <option >12:00
+                        <option >12:30
+                        <option >13:00
+                        <option >13:30
+                        <option >14:00
+                        <option >14:30
+                        <option >15:00
+                        <option >15:30
+                        <option >16:00
+                        <option >16:30
 
 
-            <h4>Time slot </h4>
-            วันที่ :
-            <input type="datetime-local" name="reservetime" class="form-control">
-            <br>
+                    </select>
+                    <p>Close</p>
+
+                    <select name="timeclose" class="form-control">
+                        <option selected disabled>select time close</option>
+                        <option >08:30
+                        <option >09:00
+                        <option >09:30
+                        <option >10:00
+                        <option >10:30
+                        <option >11:00
+                        <option >11:30
+                        <option >12:00
+                        <option >12:30
+                        <option >13:00
+                        <option >13:30
+                        <option >14:00
+                        <option >14:30
+                        <option >15:00
+                        <option >15:30
+                        <option >16:00
+                        <option >16:30
+
+                    </select>
+                </div>
+                <br>
+
+            
+                <!--h4>Time slot </!--h4>
+                วันที่ :
+                <input type="datetime-local" name="reservetime" class="form-control">
+                <br>
 
 
-            <h4> Equipment </h4>
+                <!--h4> Equipment </!--h4>
 
-            <form name=form1>
-                <input type="checkbox" name=user type="radio">Pen
+                <form name=form1>
+                    <input type="checkbox" name=user type="radio">Post-it
 
-                <input type=button value="+" onclick="document.form1.input1.value++">
+                    <input type=button value="+" onclick="document.form1.input1.value++">
 
-                <input name=input1 value="0" size=1 onfocus="buffer=this.value" onchange="if (isNaN(this.value)) 
+                    <input name=input1 value="0" size=1 onfocus="buffer=this.value" onchange="if (isNaN(this.value)) 
+                { this.value=buffer}">
+
+                    <input type=button value="-" onclick="document.form1.input1.value--">
+                </form>
+
+                <br>
+                <form!-- name=form2>
+                    <input type="checkbox" name=user type="radio">Pen
+
+                    <input type=button value="+" onclick="document.form2.input1.value++">
+
+                    <input name=input1 value="0" size=1 onfocus="buffer=this.value" onchange="if (isNaN(this.value)) 
                     { this.value=buffer}">
 
-                <input type=button value="-" onclick="document.form2.input1.value--">
-            </form>
+                    <input type=button value="-" onclick="document.form2.input1.value--">
+                </form!-->
 
-            <br>
-            <form name=form2>
-                <input type="checkbox" name=user type="radio">Pen
-
-                <input type=button value="+" onclick="document.form2.input2.value++">
-
-                <input name=input2 value="0" size=1 onfocus="buffer=this.value" onchange="if (isNaN(this.value)) 
-                    { this.value=buffer}">
-
-                <input type=button value="-" onclick="document.form2.input2.value--">
-            </form>
- 
-            <br>
-            <div class="col-md-12 table-wrapper">
-                <input type="file" name="image" id="workspace-img" class="" required />
                 <br>
-                <br>
-                <button type="submit" class="button">Create</a>
-            </div>
+                <div class="col-md-12 table-wrapper">
+                    <input type="file" name="image" id="workspace-img" class="" required />
+                    <button type="submit" class="button">Create</a>
+                </div>
 
-        </form>
+            </form>
 
     </div>
 
 
 
-    <%- include("./partials/footer.ejs") %>
+        <%- include("./partials/footer.ejs") %>
