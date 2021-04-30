@@ -321,40 +321,34 @@ footer p{
   /* หน้า add */
   .add-css{
    
-    margin: 40px;
+    margin: 30px;
     margin-left: 500px;
     margin-right: 500px;
+    
 }
 
 .button{
-    background-color: white;
+   
     font-size: 16px;
     border-radius: 10px;
-    text-align: center;
-    
-    
-}
-
-
-.button{
+    margin: auto auto;
     background-color: #FFB800;
     border: none;
     border-radius: 10px;
     color: white;
     padding: 5px 120px;
-    text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 20px;
-    margin-left: 650px;
-    margin-right: 300px;
-        text-align: center;
-    
+    margin: auto auto;
+    display: block;
+
     
 }
+
+
 .button:hover{
-    background-color:#eeb973;
+    background-color:#fc8f12;
     color:white;
 }
 
