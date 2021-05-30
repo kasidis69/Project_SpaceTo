@@ -25,7 +25,7 @@ module.exports = {
         let uploadedFile = req.files.image;
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];
-        let reservetime =req.body.reservetime
+        let reservetime =req.body.reservetime;
 
 
 
@@ -71,6 +71,24 @@ module.exports = {
             }
               
         });
-    }//,
-   // editWorkspacePage
+    },
+    detailWorkspacePage: (req, res) => {
+
+        let workspaceId = req.params.workspace_id
+        let query = "SELECT * FROM workspace WHERE workspace_id = '" + workspaceId + "' ";
+
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            res.render('detail-workspace.ejs', {
+                title: "Welcome to Spaceto | detail of Workspaces",
+                detail: result[0],
+                message: ''
+            });
+        });
+
+        
+    }
 }

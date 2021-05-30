@@ -7,7 +7,7 @@ const app = express();
 
 
 const {getHomePage} = require('./routes/index');
-const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace} = require('./routes/workspace');
+const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage} = require('./routes/workspace');
 
 const port = 5000;
 
@@ -38,6 +38,7 @@ app.use(fileUpload());
 
 app.get('/', getHomePage);
 app.get('/add', addWorkspacePage);
+app.get('/detail/:workspace_id', detailWorkspacePage);
 //app.get('/edit/:workspace_id', editWorkspacePage);
 //app.get('/delete/:workspace_id', deleteWorkspace);
 app.post('/add', addWorkspace);
