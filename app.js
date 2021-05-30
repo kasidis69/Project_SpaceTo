@@ -15,12 +15,7 @@ const {addEquipmentPage, addEquipment} = require('./routes/equipment');
 
 const port = 3000;
 
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'spaceto'
-});
+var db = mysql.createConnection({host: "spaceto-mysql.mysql.database.azure.com", user: "spaceto@spaceto-mysql", password: "admin-2020", database: "spaceto", port: 3306});
 
 db.connect((err) => {
     if (err) {
