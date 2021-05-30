@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
     timeOpenClose: DataTypes.INTEGER,
     adminNo: DataTypes.INTEGER,
     workspacetypeNo: DataTypes.INTEGER,
-    workspaceEquipmentNo: DataTypes.INTEGER,
+    equipmentNameNo: DataTypes.INTEGER,
     image: DataTypes.STRING
   }, {
     sequelize,
