@@ -1,5 +1,7 @@
 /* All */
 
+
+
 * {
     margin: 0;
     padding: 0;
@@ -321,7 +323,7 @@ footer p{
   /* หน้า add */
   .add-css{
    
-    margin: 30px;
+    margin: 40px;
     margin-left: 500px;
     margin-right: 500px;
     
@@ -331,7 +333,6 @@ footer p{
    
     font-size: 16px;
     border-radius: 10px;
-    margin: auto auto;
     background-color: #FFB800;
     border: none;
     border-radius: 10px;
@@ -339,16 +340,52 @@ footer p{
     padding: 5px 120px;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
     margin: auto auto;
     display: block;
 
-    
 }
-
 
 .button:hover{
     background-color:#fc8f12;
     color:white;
 }
+
+.container-eq{
+    line-height: 18pt 
+}
+
+.add_form_field{
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #5bacf8;
+    border: none;
+    color: white;
+    padding: 3px 25px;
+    text-decoration: none;
+    display: inline-block;
+ 
+}
+.add_form_field:hover{
+    background-color:#3d8cd6;
+    color:white;
+}
+
+.delete{
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #ff8880;
+    border: none;
+    color: white;
+    padding: 3px 25px;
+    text-decoration: none;
+    display: inline-block;
+    
+  
+}
+.delete:hover{
+    background-color:#ff746a;
+    color:white;
+
+}
+
 
