@@ -12,7 +12,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       locationNo: {
-        unique: true,
+        index: true,
         type: Sequelize.INTEGER
       },
       status: {
@@ -25,15 +25,15 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       adminNo: {
-        unique: true,
+        customIndex: true,
         type: Sequelize.INTEGER
       },
       workspacetypeNo: {
-        unique: true,
+        customIndex: true,
         type: Sequelize.INTEGER
       },
       equipmentNameNo: {
-        unique: true,
+        customIndex: true,
         type: Sequelize.INTEGER
       },
       image: {

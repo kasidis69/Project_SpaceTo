@@ -35,30 +35,29 @@
             <span class="visually-hidden">Next</span>
         </a>
     </div>
-
+    
     <!-- List Card -->
     <% if (workspace.length > 0 ) { %>
         
     <div class="list-card-grid">
         <% workspace.forEach((workspaces, index) => { %> 
-            <% if (workspaces.location == "CB06") { %>
+            <% if (workspaces.locationNo) { %>
         <div class="custom-card">
             <img src="/assets/img/<%= workspaces.image %>" alt="Card image cap" />
             <div class="card-body">
                 <i class="far fa-building"></i>
-                <h5 class="card-title"><%= workspaces.workspace_name %></h5>
+                <h5 class="card-title"><%= workspaces.workspaceName %></h5>
                 <br/>
                 <i class="fas fa-check-circle"></i>
-                <p class="status"><%= workspaces.workspace_status %></p>
+                <p class="status"><%= workspaces.status %></p>
                 <i class="far fa-clock"></i>
                 <p class="clock">11.00 - 16.00</p>
                 <meter class="csprogress" value="7" min="0" max="10"></meter>
                 <p class="status">7/10</p>
-
                 <p class="card-text">
-                    <%= workspaces.detail %>
+                    <%= workspaces.details %>
                 </p>
-                <a href="/detail/<%= workspaces.workspace_id %>" target="_blank" class="btn-custom">ดูรายละเอียด</a>
+                <a href="/detail/<%= workspaces.workspaceNo %>" target="_blank" class="btn-custom">ดูรายละเอียด</a>
             </div>
         </div>
         <% }%>

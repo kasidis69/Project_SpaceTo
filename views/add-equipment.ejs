@@ -1,0 +1,60 @@
+<%- include("./partials/header.ejs") %>
+
+    <div class="add-css">
+        <h3 align='center'>Add Equipment</h2>
+
+            <% if (message){%>
+                <p class="text-center text-danger">
+                    <%-message%>
+                    </p>
+            <% } %>
+                    
+            
+            
+            <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+                <h4>Equipment Name </h4>
+                <input name="equipment_name" type="text" class="form-control" placeholder="Enter workspace name"
+                    required>
+                <br>
+                <h4>Equipment Serial ID</h4>
+                <input name="equipment_serial_id"  type="text" step="1" min="6" maxlength="6" pattern="[0-9]{6}"  class="form-control" placeholder="serial id" 
+                
+                required>
+                <br>
+                <h4>Equipment Brand</h4>
+                <input name="equipment_brand" type="text" class="form-control" placeholder="Brand"
+                    required>
+                <br>
+                <h4>Equipment Model</h4>
+                <input name="equipment_model" type="text" class="form-control" placeholder="Model"
+                    required>
+                <br>
+             
+            
+
+                <div>
+                    <h4>Location</h4>
+                    <select name="location" class="form-control" required>
+                        <option selected disabled>select location building</option>
+                        <option>SIT
+                        <option>CB1
+                        <option>CB2
+                        <option>library KMUTT
+                    </select>
+                </div>
+
+
+
+                <br>
+                <div class="col-md-12 table-wrapper">
+
+                    <button type="submit" class="button">Create</a>
+                </div>
+
+            </form>
+
+    </div>
+
+
+
+    <%- include("./partials/footer.ejs") %>

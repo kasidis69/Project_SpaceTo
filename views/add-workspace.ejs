@@ -1,30 +1,41 @@
 <%- include("./partials/header.ejs") %>
 
+<% if (message){%>
+        <p class="text-center text-danger">
+            <%-message%>
+            </p>
+    <% } %>
+    
+   
+    
+    
+
     <div class="add-css">
-        <h3 align='center' style="font-size: 25px;">Add workspace</h2>
+        <h1 align='center' style="font-size: 25px;">Add workspace</h1>
 
             <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
-                <h4>Workspace name</h4>
+                
+                <h4>Workspace name  </h4>
                 <input name="workspace_name" type="text" class="form-control" placeholder="Enter workspace name"
                     required>
-                <br>
+
                 <div>
                     <h4>Location building</h4>
                     <select name="location" class="form-control" required>
                         <option selected disabled>select location building</option>
-                        <option>SIT
-                        <option>CB1
-                        <option>CB2
-                        <option>library KMUTT
+                        <option value="1">SIT</option>
+                        <option value="2">CB1</option>
+                        <option value="3">CB2</option>
+                        <option value="4">library KMUTT</option>
                     </select>
                 </div>
-                <br>
+
                 <div>
                     <h4> Detail </h4>
                     <textarea name="detail" rows="10" cols="55" class="form-control">
                 </textarea>
                 </div>
-                <br>
+
                 <div>
                     <h4> Type </h4>
                     <input name=roomtype type="radio" value="1"> &nbsp;Room &nbsp; &nbsp;
@@ -37,23 +48,23 @@
                     <p>Open</p>
                     <select name="timeopen" class="form-control">
                         <option selected disabled>select tiome open</option>
-                        <option>08:30
-                        <option>09:00
-                        <option>09:30
-                        <option>10:00
-                        <option>10:30
-                        <option>11:00
-                        <option>11:30
-                        <option>12:00
-                        <option>12:30
-                        <option>13:00
-                        <option>13:30
-                        <option>14:00
-                        <option>14:30
-                        <option>15:00
-                        <option>15:30
-                        <option>16:00
-                        <option>16:30
+                        <option >08:30
+                        <option >09:00
+                        <option >09:30
+                        <option >10:00
+                        <option >10:30
+                        <option >11:00
+                        <option >11:30
+                        <option >12:00
+                        <option >12:30
+                        <option >13:00
+                        <option >13:30
+                        <option >14:00
+                        <option >14:30
+                        <option >15:00
+                        <option >15:30
+                        <option >16:00
+                        <option >16:30
 
 
                     </select>
@@ -61,36 +72,27 @@
 
                     <select name="timeclose" class="form-control">
                         <option selected disabled>select time close</option>
-                        <option>08:30
-                        <option>09:00
-                        <option>09:30
-                        <option>10:00
-                        <option>10:30
-                        <option>11:00
-                        <option>11:30
-                        <option>12:00
-                        <option>12:30
-                        <option>13:00
-                        <option>13:30
-                        <option>14:00
-                        <option>14:30
-                        <option>15:00
-                        <option>15:30
-                        <option>16:00
-                        <option>16:30
+                        <option >08:30
+                        <option >09:00
+                        <option >09:30
+                        <option >10:00
+                        <option >10:30
+                        <option >11:00
+                        <option >11:30
+                        <option >12:00
+                        <option >12:30
+                        <option >13:00
+                        <option >13:30
+                        <option >14:00
+                        <option >14:30
+                        <option >15:00
+                        <option >15:30
+                        <option >16:00
+                        <option >16:30
 
                     </select>
                 </div>
                 <br>
-
-
-                <!--h4>Time slot </h4>
-                วันที่ :
-                <input type="datetime-local" name="reservetime" class="form-control"class="form-control">
-                <br-->
-
-
-
 
                 <h4 valign="top">Equipment </h4>
 
@@ -98,45 +100,71 @@
                     <button class="add_form_field">+ Add others equipment </button>
 
                     <div class="container-eq mt-3">
-                        <select name="equipmentname[]" class="form-control mt-3">
-                            <option selected disabled>select equipment name</option>
-                            <option>Post-it</option>
-                            <option>Pen</option>
-                            <option>Flip borad</option>
-                            <option>Projector</option>
+                        <select name="Equipmentname" class="form-control mt-3" required>
+                            <option selected disabled>select location building</option>
+                        <% eqp.forEach((eqps, index) => { %> 
+                        <option ><%- eqps.equipmentName%> 
+                            <% }) %> 
                         </select>
                         
-                        <input type="number" name="amount" class="form-control" placeholder="amount" >
+                        <input type="number" name="amount" class="form-control" placeholder="max amount" >
                     </div>
                 </div>
                 <br>
 
 
-                <div class="upload-file">
+                <!--h4>eqpname</+h4>
+                <input name="eqpname" type="text" class="form-control" placeholder="Enter workspace name"
+                    required>
+
+
+
+                <!--h4>Time slot </!--h4>
+                วันที่ :
+                <input type="datetime-local" name="reservetime" class="form-control">
+                <br>
+
+
+                <!--h4> Equipment </!--h4>
+
+                <form name=form1>
+                    <input type="checkbox" name=user type="radio">Post-it
+
+                    <input type=button value="+" onclick="document.form1.input1.value++">
+
+                    <input name=input1 value="0" size=1 onfocus="buffer=this.value" onchange="if (isNaN(this.value)) 
+                { this.value=buffer}">
+
+                    <input type=button value="-" onclick="document.form1.input1.value--">
+                </form>
+
+                <br>
+                <form!-- name=form2>
+                    <input type="checkbox" name=user type="radio">Pen
+
+                    <input type=button value="+" onclick="document.form2.input1.value++">
+
+                    <input name=input1 value="0" size=1 onfocus="buffer=this.value" onchange="if (isNaN(this.value)) 
+                    { this.value=buffer}">
+
+                    <input type=button value="-" onclick="document.form2.input1.value--">
+                </form!-->
+
+                <br>
+                <div class="col-md-12 table-wrapper">
                     <input type="file" name="image" id="workspace-img" class="" required />
+                    <button type="submit" class="button">Create</a>
                 </div>
 
-                <br>
-                <br>
-
-                <button type="submit"  class="button">Create</a>
-    </div>
-    
-
-    </form>
-
-
-
+            </form>
 
     </div>
 
+ <!-- addequipment-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-    <!-- addequipment-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <%- include("./partials/footer.ejs") %>
 
-
-
-    <%- include("./partials/footer.ejs") %>
 
         <style>
             /* Chrome, Safari, Edge, Opera */
