@@ -13,7 +13,7 @@ const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editW
 const {addEquipmentPage, addEquipment} = require('./routes/equipment');
 
 
-const port = 3000;
+const port = 5000;
 
 const db = mysql.createConnection({
     host: 'localhost',
