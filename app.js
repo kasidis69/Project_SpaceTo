@@ -13,7 +13,7 @@ const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editW
 const {addEquipmentPage, addEquipment} = require('./routes/equipment');
 
 
-const port = process.env.PORT || 3000;
+const port = 5000;
 
 var db = mysql.createConnection({host: "spaceto-mysql.mysql.database.azure.com", user: "spaceto@spaceto-mysql", password: "admin-2020", database: "spaceto", port: 3306});
 
