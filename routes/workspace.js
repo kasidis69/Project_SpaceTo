@@ -1,9 +1,10 @@
+const { query } = require('express');
 const e = require('express');
 const fs = require('fs');
 
 module.exports = {
     addWorkspacePage: (req, res) => {
-        let query = "SELECT * FROM equipmentnames ORDER BY equipmentNameNo ASC";
+        let query = "SELECT * FROM equipmentname ORDER BY equipment_name_no ASC";
 
         // execute query
         db.query(query, (err, result) => {
@@ -45,7 +46,7 @@ module.exports = {
         
         image_name = workspace_name + '.' + fileExtension;
 
-        let workspaceNameQuery = "SELECT * FROM workspaces WHERE workspaceName = '"+ workspace_name +"'";
+        let workspaceNameQuery = "SELECT * FROM workspace WHERE workspace_name = '"+ workspace_name +"'";
         db.query(workspaceNameQuery, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
@@ -67,13 +68,13 @@ module.exports = {
                             return res.status(500).send(err);
                         }
      
-                        let queryequipmentname= "SELECT equipmentNameNo FROM equipmentnames where equipmentName ='"+Equipmentname+"'" ;
+                        let queryequipmentname= "SELECT equipment_name_no FROM equipmentname where equipment_name ='"+Equipmentname+"'" ;
                         db.query(queryequipmentname, (err, result) => {
                             if (err) {
                                 return res.status(500).send(err);
                             }    
                           
-                        let eqpnameno = result[0].equipmentNameNo;    
+                        let eqpnameno = result[0].equipment_name_no;    
                         console.log(eqpnameno);
 
 
@@ -111,7 +112,7 @@ module.exports = {
 
                             }  */
                    
-                        let query = "INSERT INTO workspaces (workspaceName, locationNo, status, details, image, timeopenclose, workspacetypeno, equipmentNameNo) VALUES ('"+ workspace_name +"', '"+ location +"', '"+ status +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ eqpnameno +"' ) ";
+                        let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, equipment_name_no) VALUES ('"+ workspace_name +"', '"+ location +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ eqpnameno +"' ) ";
                         db.query(query, (err, result3) => {
                             if (err) {
                                 return res.status(500).send(err);
@@ -139,7 +140,7 @@ module.exports = {
     detailWorkspacePage: (req, res) => {
 
         let workspaceId = req.params.workspaceNo
-        let query = "SELECT * FROM workspaces WHERE workspaceNo = '"+ workspaceId +"' ";
+        let query = "SELECT * FROM workspace WHERE workspace_no = '"+ workspaceId +"' ";
 
         db.query(query, (err, result) => {
             if (err) {
@@ -154,5 +155,42 @@ module.exports = {
         });
 
         
-    }
+    },
+    editWorkspacePage: (req, res) =>{
+        let workspaceId = req.params.workspaceNo;
+        let query = "SELECT * FROM workspace WHERE workspace_no = '"+ workspaceId +"' ";
+
+        db.query(query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+
+            res.render('edit-workspace.ejs', {
+                title: "Welcome to Spaceto | edit of Workspaces",
+                detail: result[0],
+                message: ''
+            });
+        });
+
+
+    },
+    editWorkspace: (req, res) =>{
+        
+        let workspace_name =req.body.workspace_name;
+        let image_name = uploadedFile.name;
+        let timeopen = req.body.timeopen;
+        let timeclose = req.body.timeclose;
+        let timeopenclose =timeopen+"-"+timeclose;
+        
+        let query = "update workspace set workspace_name = '" + workspace_name + "', image = '" + image_name + "', time_openclose = '" + timeopenclose + "' where workspace_no = '" + workspaceNo + "' "
+        db.query(query, (err,result) => {
+            if(err){
+                return res.status(500).send(err);
+            }
+            res.redirect('/');
+
+            
+        });
+
+}
 }

@@ -22,7 +22,7 @@ module.exports = {
         let location = req.body.location;
 
 
-        let equipmentidQuery = "SELECT * FROM equipmentnames WHERE equipmentname  = '" + equipment_name + "'";
+        let equipmentidQuery = "SELECT * FROM equipmentname WHERE equipment_name  = '" + equipment_name + "'";
 
         db.query(equipmentidQuery, (err, result) => {
             if (err) {
@@ -40,7 +40,7 @@ module.exports = {
 
             } else {
  
-                        let query = "INSERT INTO equipmentnames (equipmentName) VALUES ('" + equipment_name + "' ) ";
+                        let query = "INSERT INTO equipmentname (equipment_name) VALUES ('" + equipment_name + "' ) ";
                         db.query(query, (err, result) => {
                             if (err) {
                                 return res.status(500).send(err);

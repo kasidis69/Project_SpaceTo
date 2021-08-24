@@ -1,6 +1,6 @@
 module.exports = {
     getHomePage: (req, res) => {
-        let query = "SELECT * FROM workspaces ORDER BY workspaceNo ASC";
+        let query = "SELECT * FROM workspace ORDER BY workspace_no ASC";
 
         // execute query
         db.query(query, (err, result) => {
