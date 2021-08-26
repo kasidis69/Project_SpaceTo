@@ -35,39 +35,56 @@
             <span class="visually-hidden">Next</span>
         </a>
     </div>
+
+      <!-- search-->
+
+      <div class="search">
+        <input type="search"  placeholder="Search here...." class="form-control">
+        <button type="submit" class="button1" value='Go'>Search</a>
+    </div>
+    
+
+
     
     <!-- List Card -->
-    <% if (workspace.length > 0 ) { %>
-        
-    <div class="list-card-grid">
-        <% workspace.forEach((workspaces, index) => { %> 
-            <% if (workspaces.locationNo) { %>
-        <div class="custom-card">
-            <img src="/assets/img/<%= workspaces.image %>" alt="Card image cap" />
-            <div class="card-body">
-                <i class="far fa-building"></i>
-                <h5 class="card-title"><%= workspaces.workspaceName %></h5>
-                <br/>
-                <i class="fas fa-check-circle"></i>
-                <p class="status"><%= workspaces.status %></p>
-                <i class="far fa-clock"></i>
-                <p class="clock">11.00 - 16.00</p>
-                <meter class="csprogress" value="7" min="0" max="10"></meter>
-                <p class="status">7/10</p>
-                <p class="card-text">
-                    <%= workspaces.details %>
-                </p>
-                <a href="/detail/<%= workspaces.workspaceNo %>" target="_blank" class="btn-custom">ดูรายละเอียด</a>
-            </div>
+    <% if (workspace.length> 0 ) { %>
+
+        <div class="list-card-grid">
+            <% workspace.forEach((workspaces, index)=> { %>
+                <% if (workspaces.locationNo) { %>
+                    <div class="custom-card">
+                        <img src="/assets/img/<%= workspaces.image %>" alt="Card image cap" />
+                        <div class="card-body">
+                            <i class="far fa-building"></i>
+                            <h5 class="card-title">
+                                <%= workspaces.workspaceName %>
+                            </h5>
+                            <br />
+                            <i class="fas fa-check-circle"></i>
+                            <p class="status">
+                                <%= workspaces.status %>
+                            </p>
+                            <i class="far fa-clock"></i>
+                            <p class="clock">11.00 - 16.00</p>
+                            <meter class="csprogress" value="7" min="0" max="10"></meter>
+                            <p class="status">7/10</p>
+                            <p class="card-text">
+                                <%= workspaces.details %>
+                            </p>
+                            <a href="/detail/<%= workspaces.workspaceNo %>" target="_blank"
+                                class="btn-custom">ดูรายละเอียด</a>
+                        </div>
+                    </div>
+
+                    <% }%>
+                        <% }) %>
         </div>
-        <% }%>
-        <% }) %>
-    </div>
-        
-    <% } else { %>
-        <p class="text-center">No workspace found.</p>
-    <% } %>
+
+
+        <% } else { %>
+            <p class="text-center">No workspace found.</p>
+            <% } %>
 
 
 
-<%- include("./partials/footer.ejs") %>
+                <%- include("./partials/footer.ejs") %>
