@@ -124,8 +124,6 @@ nav {
 }
 
 
-
-
 /* hr {
     display: block;
     unicode-bidi: isolate;
@@ -317,13 +315,11 @@ footer p{
     
   }
 
-  /* หน้า add */
+  /* หน้า add-ws*/
   .add-css{
-   
     margin: 40px;
     margin-left: 500px;
     margin-right: 500px;
-    
 }
 
 .button{
@@ -346,6 +342,24 @@ footer p{
     background-color:#fc8f12;
     color:white;
 }
+.delete{
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #ff8880;
+    border: none;
+    color: white;
+    padding: 3px 25px;
+    text-decoration: none;
+    display: inline-block;
+    
+  
+}
+.delete:hover{
+    background-color:#ff746a;
+    color:white;
+
+}
+
 
 .container-eq{
     line-height: 18pt 
@@ -367,20 +381,94 @@ footer p{
     color:white;
 }
 
-.delete{
+ /* หน้า add-eq */
+.add_equipment:hover{
+    background-color:#3d8cd6;
+    color:white;
+}
+.add_equipment{
     font-size: 16px;
     border-radius: 5px;
-    background-color: #ff8880;
+    background-color: #5bacf8;
     border: none;
     color: white;
     padding: 3px 25px;
     text-decoration: none;
     display: inline-block;
-    
-  
+ 
 }
-.delete:hover{
-    background-color:#ff746a;
-    color:white;
+
+ /*ช่องค้นหา */ 
+.search{
+   display: flex;
+   justify-content: center;
+   margin-top: 2%;
+   margin: 40px;
+   margin-left: 500px;
+    margin-right: 500px;
+   
+}
+.input{
+    width: 350px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: 5px; 
+}
+
+.button1{
+    background-color: #cb4335;
+    border: none;
+    height: 40px;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 7px;
+    
+}
+.button1:hover{
+background-color: #ff9407;
 
 }
+
+ /* หน้า detail */ 
+ .detail{
+    font-size: 19px;
+ }
+ .Edit-btn{
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    border: none;
+    color: #e0461f;
+    background-color: #b43333;
+    color: white;
+
+    margin-left: 500px;
+
+}
+
+.Edit-btn:hover {
+    color: black;
+    background: #f87f0e;
+}
+
+
+ /* Footer */ 
+ .fa-envelope-square{
+    font-size: 35px; 
+  
+ }
+ .fa-envelope-square:hover{
+    color: #FFDEAD;
+ }
+ .fa-facebook-square{
+    font-size: 35px;
+
+ }
+ .fa-facebook-square:hover{
+    color:  #66CCFF;
+ }
+ 
