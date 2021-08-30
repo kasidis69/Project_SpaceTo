@@ -18,6 +18,22 @@ module.exports = {
                 message:''
             });
         });
+        
+        let query2 = "SELECT * FROM admin ORDER BY admin_no ASC";
+
+        // execute query
+        db.query(query2, (err, result2) => {
+            if (err){
+                res.redirect('/');
+            }
+
+            res.render('add-workspace.ejs', {
+                title: "Welcome to Spaceto | View Workspaces",
+                adm: result2,
+                message:''
+            });
+        }); 
+
     },
 
 
@@ -41,6 +57,8 @@ module.exports = {
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];
         let Equipmentname = req.body.Equipmentname;
+        let admin_no = req.body.admin_no;
+        let equipmentamount =req.body.equipmentamount;
 
 
         
@@ -67,65 +85,50 @@ module.exports = {
                         if (err) {
                             return res.status(500).send(err);
                         }
-     
-                        let queryequipmentname= "SELECT equipment_name_no FROM equipmentname where equipment_name ='"+Equipmentname+"'" ;
-                        db.query(queryequipmentname, (err, result) => {
-                            if (err) {
-                                return res.status(500).send(err);
-                            }    
-                          
-                        let eqpnameno = result[0].equipment_name_no;    
-                        console.log(eqpnameno);
+                        
 
-
-                        /* อันนี้ตัวทดลองที่ทำได้
-                        let queryeqpname= "insert into test(eqpname) values ('"+ eqpname +"')";
-                        db.query(queryeqpname, (err, result) => {
+                            let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, admin_no) VALUES ('"+ workspace_name +"', '"+ location +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ admin_no +"' ) ";
+                            db.query(query, (err, result3) => {
                             if (err) {
                                 return res.status(500).send(err);
                             }          
                             
-                        let querylasteqp="SELECT eqpid FROM test where eqpid = (SELECT MAX(eqpid) FROM test) "    
-                        db.query(querylasteqp, (err, result2) => {
-                            if (err) {
-                                return res.status(500).send(err);
-                            }  
+                            let queryequipmentno  = "SELECT * FROM equipmentname where equipment_name = '"+ Equipmentname +"'";                           
+                            db.query(queryequipmentno, (err, result) => {
+                                if (err) {
+                                    return res.status(500).send(err);
+                                }          
+                                
+                                let equipmentnameno  = result[0].equipment_name_no;
+                                console.log(equipmentnameno+"+++++++");
 
-                        let eqpid = result2[0].eqpid;    
-                        console.log(eqpid);
+                                let insertworkspaceno = "SELECT * FROM workspace where workspace_no = (SELECT MAX(workspace_no) FROM workspace) ";
+                                db.query(insertworkspaceno, (err, result) => {
+                                    if (err) {
+                                        return res.status(500).send(err);
+                                    } 
 
+                                let lastworkspaceno = result[0].workspace_no
 
-/*
-อันที่ลองเขียนเอง many to many
-                    let queryequipmentname= "SELECT equipment_name_no FROM equipmentname where equipment_name ='"+Equipmentname+"'" ;
-                        db.query(queryequipmentname, (err, result) => {
-                            if (err) {
-                                return res.status(500).send(err);
-                            }          
-                        let eqpnameno = result[0].equipment_name_no;    
-                        console.log(eqpnameno);
+                                let insertworkspaceequipment = "INSERT INTO workspace_equipment (equipment_name_no, workspace_no, equipment_max_amount) VALUES ('"+ equipmentnameno +"', '"+ lastworkspaceno +"', '"+ equipmentamount +"') ";
+                                db.query(insertworkspaceequipment, (err, result) => {
+                                    if (err) {
+                                        return res.status(500).send(err);
+                                    }          
+                                    
+                                    res.redirect('/');
+            
+                            });
 
-                      let insertnameno="insert into workspace_equipment(equipment_name_no) values ('"+ eqpnameno +"')";  
-                        db.query(querylasteqp, (err, result2) => {
-                            if (err) {
-                                return res.status(500).send(err);
-
-                            }  */
-                   
-                        let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, equipment_name_no) VALUES ('"+ workspace_name +"', '"+ location +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ eqpnameno +"' ) ";
-                        db.query(query, (err, result3) => {
-                            if (err) {
-                                return res.status(500).send(err);
-                            }          
-                            res.redirect('/');
-
-                            console.log(Equipmentname);
+                                
+                                
                         
                         });
-                          
-               
-                     }); 
+                                                                   
+                                                      
                     })
+                })
+            })
                 } else {
                     message = "Invalid File Format. Only 'Png', 'Jpeg', and 'Gif' images are allowed. "
                     res.render('add-workspace.ejs', {
@@ -139,8 +142,12 @@ module.exports = {
     },
     detailWorkspacePage: (req, res) => {
 
-        let workspaceId = req.params.workspaceNo
+        let workspaceId = req.params.workspace_no;
         let query = "SELECT * FROM workspace WHERE workspace_no = '"+ workspaceId +"' ";
+
+
+    
+        
 
         db.query(query, (err, result) => {
             if (err) {
@@ -157,7 +164,7 @@ module.exports = {
         
     },
     editWorkspacePage: (req, res) =>{
-        let workspaceId = req.params.workspaceNo;
+        let workspaceId = req.params.workspace_no;
         let query = "SELECT * FROM workspace WHERE workspace_no = '"+ workspaceId +"' ";
 
         db.query(query, (err, result) => {
@@ -167,7 +174,7 @@ module.exports = {
 
             res.render('edit-workspace.ejs', {
                 title: "Welcome to Spaceto | edit of Workspaces",
-                detail: result[0],
+                edit: result,
                 message: ''
             });
         });
@@ -176,13 +183,18 @@ module.exports = {
     },
     editWorkspace: (req, res) =>{
         
+        let workspaceId = req.params.workspace_no;
         let workspace_name =req.body.workspace_name;
-        let image_name = uploadedFile.name;
         let timeopen = req.body.timeopen;
         let timeclose = req.body.timeclose;
         let timeopenclose =timeopen+"-"+timeclose;
+        let location =req.body.location;
+        let detail = req.body.detail;
+        let type = req.body.roomtype;
+
+
         
-        let query = "update workspace set workspace_name = '" + workspace_name + "', image = '" + image_name + "', time_openclose = '" + timeopenclose + "' where workspace_no = '" + workspaceNo + "' "
+        let query = "update workspace set workspace_name = '" + workspace_name + "', location_no = '" + location + "', time_openclose = '" + timeopenclose + "', detail = '" + detail + "', workspace_type_no = '" + type + "' where workspace_no = '" + workspaceId + "' "
         db.query(query, (err,result) => {
             if(err){
                 return res.status(500).send(err);
@@ -193,4 +205,5 @@ module.exports = {
         });
 
 }
+
 }

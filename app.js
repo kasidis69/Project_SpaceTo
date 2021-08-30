@@ -15,7 +15,13 @@ const {addEquipmentPage, addEquipment} = require('./routes/equipment');
 
 const port = 5000;
 
-var db = mysql.createConnection({host: "spaceto-mysql.mysql.database.azure.com", user: "spaceto@spaceto-mysql", password: "admin-2020", database: "spaceto", port: 3306});
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'spaceto'
+});
+
 
 db.connect((err) => {
     if (err) {
@@ -38,15 +44,15 @@ app.use(fileUpload());
 app.get('/', getHomePage);
 app.get('/add', addWorkspacePage);
 
-app.get('/detail/:workspaceNo', detailWorkspacePage);
-
+app.get('/detail/:workspace_no', detailWorkspacePage);
+app.get('/edit/:workspace_no', editWorkspacePage);
 app.get('/eqp', addEquipmentPage);
 
-//app.get('/edit/:workspace_id', editWorkspacePage);
+
 //app.get('/delete/:workspace_id', deleteWorkspace);
 app.post('/add', addWorkspace);
 app.post('/eqp', addEquipment);
-//app.post('/edit/:workspace_id', editWorkspace);
+app.post('/edit/:workspace_no', editWorkspace);
 
 
 

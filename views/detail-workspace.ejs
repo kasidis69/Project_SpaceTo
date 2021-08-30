@@ -1,21 +1,77 @@
 <%- include("./partials/header.ejs") %>
 
-<%= detail.workspaceName %>
-<br>
-<%= detail.locationNo %>
-    <br>
-    <%= detail.status %>
+
+    <div class="add-css">
+        <h3 align='center' style="font-size: 25px;">Details Of Rooms</h3>
+
         <br>
-        <%= detail.details %>
-            <br>
-            <%= detail.image %>
-                <br>
-                <%= detail.timeopenclose %>
-                    <%= detail.workspaceTypeNo %>
+        <div class="detail">
+            <table style="width:60%" >
+
+                <tr>
+                    <td>Workspace Name</td>
+                    <td>:</td>
+                    <td>
+                        <%= detail.workspace_name %>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>Location building</td>
+                    <td>:</td>
+                    <td>
+                        <%= detail.location_no %>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>:</td>
+                    <td>
+                        <%= detail.workspace_status %>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Detail</td>
+                    <td>:</td>
+                    <td>
+                        <%= detail.detail %>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Image</td>
+                    <td>:</td>
+                    <td>
+                        <%= detail.image %>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Timeopen-close</td>
+                    <td>:</td>
+                    <td>
+                        <%= detail.time_openclose %>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Workspacetype</td>
+                    <td>:</td>
+                    <td>
+                        <%= detail.workspace_type_no %>
+                    </td>
+                </tr>
 
 
 
-<%- include("./partials/footer.ejs") %>
+            </table>
+            </tr>
+        </div>
 
-
-
+        <br>
+        <a href="/edit/<%= detail.workspace_no %>" class="Edit-btn" >Edit Workspace</a>
+    </div>
+    <%- include("./partials/footer.ejs") %>

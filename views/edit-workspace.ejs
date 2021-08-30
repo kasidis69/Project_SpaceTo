@@ -1,0 +1,121 @@
+<%- include("./partials/header.ejs") %>
+
+<% if (message){%>
+        <p class="text-center text-danger">
+            <%-message%>
+            </p>
+    <% } %>
+    
+    <div class="add-css">
+
+        <h1 align='center' style="font-size: 25px;">Edit workspace</h1>
+
+            <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+                
+                <h4>Workspace name</h4>
+                <input name="workspace_name" type="text" class="form-control" placeholder="Enter workspace name"
+                    required>
+                        <br>
+
+                <div>
+                    <h4>Location building</h4>
+                    <select name="location" class="form-control" required>
+                        <option selected disabled>select location building</option>
+                        <option value="0">SIT</option>
+                        <option value="1">CB1</option>
+                        <option value="2">CB2</option>
+                        <option value="3">library KMUTT</option>
+                    </select>
+                </div>
+                    <br>
+
+                <div>
+                    <h4> Detail </h4>
+                    <textarea name="detail" rows="10" cols="55" class="form-control">
+                </textarea>
+                </div>
+                    <br>
+
+                <div>
+                    <h4> Type </h4>
+                    <input name=roomtype type="radio" value="0"> &nbsp;Room &nbsp; &nbsp;
+                    <input name=roomtype type="radio" value="1"> &nbsp;Chair
+                </div>
+
+                <br>
+                <div>
+                    <h4> Time </h4>
+                    <p>Open</p>
+                    <select name="timeopen" class="form-control">
+                        <option selected disabled>select tiome open</option>
+                        <option >08:30
+                        <option >09:00
+                        <option >09:30
+                        <option >10:00
+                        <option >10:30
+                        <option >11:00
+                        <option >11:30
+                        <option >12:00
+                        <option >12:30
+                        <option >13:00
+                        <option >13:30
+                        <option >14:00
+                        <option >14:30
+                        <option >15:00
+                        <option >15:30
+                        <option >16:00
+                        <option >16:30
+
+
+                    </select>
+                    <p>Close</p>
+
+                    <select name="timeclose" class="form-control">
+                        <option selected disabled>select time close</option>
+                        <option >08:30
+                        <option >09:00
+                        <option >09:30
+                        <option >10:00
+                        <option >10:30
+                        <option >11:00
+                        <option >11:30
+                        <option >12:00
+                        <option >12:30
+                        <option >13:00
+                        <option >13:30
+                        <option >14:00
+                        <option >14:30
+                        <option >15:00
+                        <option >15:30
+                        <option >16:00
+                        <option >16:30
+
+                    </select>
+                </div>
+                
+                
+                        
+                   
+                <div class="col-md-12 table-wrapper">
+
+                    <button type="submit" class="button">Update</a>
+                </div>
+
+            </form>
+
+    </div>
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <%- include("./partials/footer.ejs") %>
+
+
+        <style>
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        </style>
