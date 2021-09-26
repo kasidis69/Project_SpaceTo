@@ -11,6 +11,7 @@ const {getHomePage} = require('./routes/index');
 const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage} = require('./routes/workspace');
 
 const {addEquipmentPage, addEquipment} = require('./routes/equipment');
+const { reserveWorkspacePage,  reserveWorkspace } = require('./routes/reserve');
 
 
 const port = 5000;
@@ -47,12 +48,16 @@ app.get('/add', addWorkspacePage);
 app.get('/detail/:workspace_no', detailWorkspacePage);
 app.get('/edit/:workspace_no', editWorkspacePage);
 app.get('/eqp', addEquipmentPage);
+app.get('/reserve/:workspace_no', reserveWorkspacePage);
 
 
-//app.get('/delete/:workspace_id', deleteWorkspace);
+app.get('/delete/:workspace_no', deleteWorkspace);
 app.post('/add', addWorkspace);
 app.post('/eqp', addEquipment);
 app.post('/edit/:workspace_no', editWorkspace);
+app.post('/reserve/:workspace_no', reserveWorkspace);
+app.post('/', getHomePage);
+
 
 
 

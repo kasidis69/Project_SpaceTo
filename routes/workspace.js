@@ -19,20 +19,8 @@ module.exports = {
             });
         });
         
-        let query2 = "SELECT * FROM admin ORDER BY admin_no ASC";
-
-        // execute query
-        db.query(query2, (err, result2) => {
-            if (err){
-                res.redirect('/');
-            }
-
-            res.render('add-workspace.ejs', {
-                title: "Welcome to Spaceto | View Workspaces",
-                adm: result2,
-                message:''
-            });
-        }); 
+        
+        
 
     },
 
@@ -59,6 +47,7 @@ module.exports = {
         let Equipmentname = req.body.Equipmentname;
         let admin_no = req.body.admin_no;
         let equipmentamount =req.body.equipmentamount;
+        
 
 
         
@@ -70,14 +59,20 @@ module.exports = {
                 return res.status(500).send(err);
             }
 
-            if (result.length < 0) {
+            if (result.length > 0) {
+
+                let query = "SELECT * FROM equipmentname ORDER BY equipment_name_no ASC";
                 message = "Workspace Name already exists";
-
-                res.render('add-workspace.ejs', {
-                    message,
-                    title: "Welcome to Spaceto | Add a new Workspaces"
-                });
-
+                    db.query(query, (err, result) => {
+                        if (err){
+                            return res.status(500).send(err);
+                        }
+                        res.render('add-workspace.ejs', {
+                            title: "Welcome to Spaceto | View Workspaces",
+                            eqp: result,
+                            message
+                        });
+                    });
 
             } else {
                 if (uploadedFile.mimetype === 'image/png' || uploadedFile.mimetype === 'image/jpeg' || uploadedFile.mimetype === 'image/gif') {
@@ -100,7 +95,7 @@ module.exports = {
                                 }          
                                 
                                 let equipmentnameno  = result[0].equipment_name_no;
-                                console.log(equipmentnameno+"+++++++");
+                                console.log(equipmentnameno+"+testtest++++++++");
 
                                 let insertworkspaceno = "SELECT * FROM workspace where workspace_no = (SELECT MAX(workspace_no) FROM workspace) ";
                                 db.query(insertworkspaceno, (err, result) => {
@@ -146,8 +141,6 @@ module.exports = {
         let query = "SELECT * FROM workspace WHERE workspace_no = '"+ workspaceId +"' ";
 
 
-    
-        
 
         db.query(query, (err, result) => {
             if (err) {
@@ -176,6 +169,7 @@ module.exports = {
                 title: "Welcome to Spaceto | edit of Workspaces",
                 edit: result,
                 message: ''
+                
             });
         });
 
@@ -199,11 +193,27 @@ module.exports = {
             if(err){
                 return res.status(500).send(err);
             }
+            
             res.redirect('/');
 
             
         });
 
-}
+    },
+        deleteWorkspace: (req, res) =>{
+            
+            let workspaceId = req.params.workspace_no;
+            let query = "delete from workspace where workspace_no = "+ workspaceId + "";
+            db.query(query, (err,result) => {
+                if(err){
+                    return res.status(500).send(err);
+                }
+                
+                res.redirect('/');
+
+                
+            });
+
+        }
 
 }

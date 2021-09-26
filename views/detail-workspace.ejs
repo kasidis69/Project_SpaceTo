@@ -66,13 +66,24 @@
                     </td>
                 </tr>
 
+                
+              
 
 
             </table>
             </tr>
+
+            <br>
+            <a href="/reserve/<%= detail.workspace_no %>" class="Edit-btn" >Reserve Workspace</a>
         </div>
 
         <br>
-        <a href="/edit/<%= detail.workspace_no %>" class="Edit-btn" >Edit Workspace</a> 
+        <a href="/edit/<%= detail.workspace_no %>" class="Edit-btn" >Edit Workspace</a>
+        
+
+        <div>
+        <br>
+            <a href="/delete/<%= detail.workspace_no %>" class="Edit-btn" >Delete Workspace</a>
+        </div>    
     </div>
     <%- include("./partials/footer.ejs") %>
