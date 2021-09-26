@@ -1,88 +1,119 @@
-/*แฮม modal*/
-function openPopover(event, popoverID) {
-  let element = event.target;
-  while (element.nodeName !== "BUTTON") {
-    element = element.parentNode;
-  }
-  var popper = Popper.createPopper(element, document.getElementById(popoverID), {
-    placement: 'bottom'
-  });
-  document.getElementById(popoverID).classList.toggle("hidden");
-}
+<%- include("./partials/header.ejs") %>
 
+    <div class="reserve-css">
+        <form action="" method="POST" name="contact" id="contact">
+            <h3 align='center' style="font-size: 25px;">Reserve Workspace</h2>
+                <br>
 
+                <h4 style="font-size: 20px;"> Date </h4>
+                <input name="reservedate"  type="date"  id="datefield"   class="form-control" required>
+    
+                <br>
+               
+                    <h4>Start</h4>
+                    <input name="timestart" type="time"   id="arrive"   class="form-control" required>
+                    <br>
+                    <h4>End</h4>
+                    <input name="timeend" type="time" id="arrive"  class="form-control" required>
+            
+                   <br>
+                    <br> 
 
+                    <div class="bt-rs">
+                        <input type="reset" class="button3" name="reset" id="reset" value="Reset">
+                        &nbsp;&nbsp; &nbsp;
+                        <input type="submit" name="regis" class="button4" id="regis" value="Reserve">
+                    </div>
 
-/*หน้า add-workspace_เรียกข้อมูลaddเพิ่ม*/
-$(document).ready(function () {
-  var max_fields = 10;
-  var wrapper = $(".container-eq");
-  var add_button = $(".add_form_field");
+               
+                <div class="calendar" id="calendar-app">
+                    <div class="calendar--day-view" id="day-view">
+                      <span class="day-view-exit" id="day-view-exit">&times;</span>
+                      <span class="day-view-date" id="day-view-date">MAY 29 2016</span>
+                      <div class="day-view-content">
+                        <div class="day-highlight">
+                          You <span class="day-events" id="day-events">had no reserve for today</span>. &nbsp; <span tabindex="0" onkeyup="if(event.keyCode != 13) return; this.click();" class="day-events-link" id="add-event" data-date>Add a new reserve?</span>
+                        </div>
+                        <div class="day-add-event" id="add-day-event-box" data-active="false">
+                          <div class="row">
+                            <div class="half">
+                              <label class="add-event-label">
+                                 Name of reserve
+                                <input type="text" class="add-event-edit add-event-edit--long" placeholder="New reserve" id="input-add-event-name">
+                               
+                              </label>
+                            </div>
+                            <div class="qtr">
+                              <label class="add-event-label">
+                            Start Time
+                                <input type="text" class="add-event-edit" placeholder="8:15" id="input-add-event-start-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
+                                <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-start-ampm" data-options="a,p,am,pm">
+                              </label>
+                            </div>
+                            <div class="qtr">
+                              <label class="add-event-label">
+                            End Time
+                                <input type="text" class="add-event-edit" placeholder="9" id="input-add-event-end-time" data-options="1,2,3,4,5,6,7,8,9,10,11,12" data-format="datetime">
+                                <input type="text" class="add-event-edit" placeholder="am" id="input-add-event-end-ampm" data-options="a,p,am,pm">
+                              </label>
+                            </div>
+                            <div class="half">
+                              <a onkeyup="if(event.keyCode != 13) return; this.click();" tabindex="0" id="add-event-save" class="event-btn--save event-btn">save</a>
+                              <a tabindex="0" id="add-event-cancel" class="event-btn--cancel event-btn">cancel</a>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        <div id="day-events-list" class="day-events-list">
+                          
+                        </div>
+                        <div class="day-inspiration-quote" id="inspirational-quote">
+                         
+                          </div>
+                      </div>
+                    </div>
+                    <div class="calendar--view" id="calendar-view">
+                      <div class="cview__month">
+                        <span class="cview__month-last" id="calendar-month-last">Apr</span>
+                        <span class="cview__month-current" id="calendar-month">May</span>
+                        <span class="cview__month-next" id="calendar-month-next">Jun</span>
+                      </div>
+                      <div class="cview__header">Sun</div>
+                      <div class="cview__header">Mon</div>
+                      <div class="cview__header">Tue</div>
+                      <div class="cview__header">Wed</div>
+                      <div class="cview__header">Thu</div>
+                      <div class="cview__header">Fri</div>
+                      <div class="cview__header">Sat</div>
+                      <div class="calendar--view" id="dates">
+                      </div>
+                    </div>
+                    <div class="footer">
+                      <span><span id="footer-date" class="footer__link">Today is May 30</span></span>    
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>
+            <%- include("./partials/footer.ejs") %>
 
-  var x = 1;
-  $(add_button).click(function (e) {
-    e.preventDefault();
-    if (x < max_fields) {
-      x++;
-      $(wrapper).append('<div><select name="equipmentname[]" class="form-control mt-3 "><option selected disabled>select equipment name</option><option>Post-it</option><option>Pen</option><option>Flip borad</option><option>Projector</option></select><input type="number" name="amount" class="form-control" placeholder="amount" />&nbsp;&nbsp;<a href="#" class="delete mt-2 ">Delete</a></div>'); //add input box
-    } else {
-      alert('limit')
-    }
-  });
+            
+    <script>
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+                    var yyyy = today.getFullYear();
+                    if(dd<10){
+                      dd='0'+dd
+                    } 
+                    if(mm<10){
+                      mm='0'+mm
+                    } 
+                    
+                    today = yyyy+'-'+mm+'-'+dd;
+                    document.getElementById("datefield").setAttribute("min", today);
 
-  $(wrapper).on("click", ".delete", function (e) {
-    e.preventDefault();
-    $(this).parent('div').remove();
-    x--;
-  })
-});
-
-/*หน้า add-workspace_ปุ่มเพิ่มลดจำนวน
-$(document).ready(function () {
-$('#sub1').click(function () {
-    var counter = $('#Number-Box1').val();
-    counter--;
-    $('#Number-Box1').val(counter);
-});
-});
-$(document).ready(function () {
-$('#Add1').click(function () {
-    var counter = $('#Number-Box1').val();
-    counter++;
-    $('#Number-Box1').val(counter);
-});
-}); */
-
-/*หน้า reserve-ws*/
-function setColor(btn, color) {
-  var count = 1;
-  var property = document.getElementById(btn);
-  if (count == 0) {
-    property.style.backgroundColor = "#FFFFFF"
-    count = 1;
-  }
-  else {
-    property.style.backgroundColor = "#FAEBD7"
-    count = 0;
-  }
-
-}
-
-function colorchange(id) {
-
-  var background = document.getElementById(id).style.background;
-
-  if (background = "#FFFFFF") {
-    document.getElementById(id).style.background = "#FAEBD7";
-  }
-  if (background == "#FAEBD7") {
-    document.getElementById(id).style.background = "#FFFFFF";
-  }
-
-}
-
-
-function CalendarApp(date) {
+                    function CalendarApp(date) {
   
   if (!(date instanceof Date)) {
     date = new Date();
@@ -90,7 +121,7 @@ function CalendarApp(date) {
   
   this.days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   this.months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  this.quotes = ['Whatever the mind of man can conceive and believe, it can achieve. –Napoleon Hill', 'Strive not to be a success, but rather to be of value. –Albert Einstein', 'Two roads diverged in a wood, and I—I took the one less traveled by, And that has made all the difference.  –Robert Frost', 'I attribute my success to this: I never gave or took any excuse. –Florence Nightingale', 'You miss 100% of the shots you don’t take. –Wayne Gretzky', 'The most difficult thing is the decision to act, the rest is merely tenacity. –Amelia Earhart', 'Every strike brings me closer to the next home run. –Babe Ruth', 'Definiteness of purpose is the starting point of all achievement. –W. Clement Stone', 'Life isn’t about getting and having, it’s about giving and being. –Kevin Kruse', 'Life is what happens to you while you’re busy making other plans. –John Lennon', 'We become what we think about. –Earl Nightingale', 'Life is 10% what happens to me and 90% of how I react to it. –Charles Swindoll', 'The most common way people give up their power is by thinking they don’t have any. –Alice Walker', 'The mind is everything. What you think you become.  –Buddha', 'Winning isn’t everything, but wanting to win is. –Vince Lombardi', 'Every child is an artist.  The problem is how to remain an artist once he grows up. –Pablo Picasso', ' You can never cross the ocean until you have the courage to lose sight of the shore. –Christopher Columbus', 'I’ve learned that people will forget what you said, people will forget what you did, but people will never forget how you made them feel. –Maya Angelou', 'Either you run the day, or the day runs you. –Jim Rohn', 'Whether you think you can or you think you can’t, you’re right. –Henry Ford', 'The two most important days in your life are the day you are born and the day you find out why. –Mark Twain', 'Whatever you can do, or dream you can, begin it.  Boldness has genius, power and magic in it. –Johann Wolfgang von Goethe', 'The best revenge is massive success. –Frank Sinatra', 'People often say that motivation doesn’t last. Well, neither does bathing.  That’s why we recommend it daily. –Zig Ziglar', 'Life shrinks or expands in proportion to one’s courage. –Anais Nin', 'If you hear a voice within you say “you cannot paint,” then by all means paint and that voice will be silenced. –Vincent Van Gogh', 'There is only one way to avoid criticism: do nothing, say nothing, and be nothing. –Aristotle', 'Ask and it will be given to you; search, and you will find; knock and the door will be opened for you. –Jesus', 'The only person you are destined to become is the person you decide to be. –Ralph Waldo Emerson', 'Go confidently in the direction of your dreams.  Live the life you have imagined. –Henry David Thoreau',  'Few things can help an individual more than to place responsibility on him, and to let him know that you trust him.  –Booker T. Washington'];
+  this.quotes = [];
   this.apts = [
     {
       name: 'Finish this web app',
@@ -579,3 +610,11 @@ CalendarApp.prototype.showNewMonth = function(e){
 var calendar = new CalendarApp();
 console.log(calendar);
 
+
+                    </script>
+               
+        
+    
+
+
+   

@@ -11,13 +11,15 @@
     
 
     <div class="add-css">
+
         <h1 align='center' style="font-size: 25px;">Add workspace</h1>
 
             <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
-                
+                <div class="add-back-ws">
                 <h4>Workspace name</h4>
-                <input name="workspace_name" type="text" class="form-control" placeholder="Enter workspace name"
+                <input name="workspace_name" type="text1" class="form-control" placeholder="Enter workspace name"
                     required>
+                        <br>
 
                 <div>
                     <h4>Location building</h4>
@@ -28,19 +30,26 @@
                         <option value="2">CB2</option>
                         <option value="3">library KMUTT</option>
                     </select>
+
+                     
                 </div>
+                
+                    <br>
 
                 <div>
                     <h4> Detail </h4>
-                    <textarea name="detail" rows="10" cols="55" class="form-control">
+                    <textarea name="detail"  rows="5" cols="55" class="form-control" > Add details of rooms
                 </textarea>
+
                 </div>
+                    <br>
 
                 <div>
                     <h4> Type </h4>
                     <input name=roomtype type="radio" value="0"> &nbsp;Room &nbsp; &nbsp;
                     <input name=roomtype type="radio" value="1"> &nbsp;Chair
                 </div>
+              
 
                 <br>
                 <div>
@@ -92,12 +101,10 @@
 
                     </select>
                 </div>
+                
                 <br>
 
                 
-              
-           
-
 
                 <h4 valign="top"> Equipment </h4>
                 <div class="alleq">
@@ -114,9 +121,9 @@
                         
                         <input type="number" name="equipmentamount" class="form-control" placeholder="max amount of equipment" >
                     </div>
-                </div>
+                
 
-
+            </div>
             
             
                 <!--h4>Time slot </!--h4>
@@ -125,7 +132,7 @@
                 <br>
 
 
-                <!--h4> Equipment </!--h4>
+                <h4> Equipment </!--h4>
 
                 <form name=form1>
                     <input type="checkbox" name=user type="radio">Post-it
@@ -150,11 +157,15 @@
                     <input type=button value="-" onclick="document.form2.input1.value--">
                 </form!-->
 
-                <br>
+                
                 <div class="col-md-12 table-wrapper">
                     <input type="file" name="image" id="workspace-img" class="" required />
-                    <button type="submit" class="button">Create</a>
                 </div>
+                </div>
+                <br>
+                               <br>
+                    <button type="submit" class="button">Create</a>
+            
 
             </form>
 
