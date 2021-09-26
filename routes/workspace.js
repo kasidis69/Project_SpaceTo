@@ -199,11 +199,11 @@ module.exports = {
             if(err){
                 return res.status(500).send(err);
             }
+            console.log(workspace_name+"+++++++");
             res.redirect('/');
 
             
         });
-
 }
 
 }
