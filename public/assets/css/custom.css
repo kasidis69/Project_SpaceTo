@@ -452,7 +452,7 @@ input[type=text] {
 .button1{
     background-color: #cb4335;
     border: none;
-    height: 40px;
+    height: 60px;
     color: #FFF;
     font-weight: bold;
     cursor: pointer;
@@ -504,15 +504,38 @@ background-color: #ff9407;
     border-radius: .5rem;
     border: none;
     color: #e0461f;
-    background-color: #b43333;
+    background-color: #EF4444;
     color: white;
-    margin-left: 1020px;
+    margin-left: 0px;
 
 }
 .Edit-btn:hover {
-    color: black;
-    background: #f87f0e;
+    color: white;
+    background: #B91C1C;
+    transition: .5s ease-in-out;
 }
+
+.Edit-btn-res{
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .5rem;
+  border: none;
+  color: #e0461f;
+  background-color: #FFB800;
+  color: white;
+  margin-left: 0px;
+
+}
+
+.Edit-btn-res:hover {
+  color: white;
+  background: #f87f0e;
+}
+
+
 
 
 
@@ -685,7 +708,7 @@ background-color: #ff9407;
     background: transparent;
     outline: none;
     font: inherit;
-    color: #fff;
+    color: rgb(0, 0, 0);
     font-size: 18px;
     font-weight: 800;
   }
@@ -971,4 +994,20 @@ background-color: #ff9407;
     padding: 2px 5px;
     border-bottom: 1px solid #fff;
   }
+  
+  .res-date-center{
+    margin-left: 330px;
+
+  }
+
+
+ /*------- delete eqp------------*/
+ 
+
+
+ 
+
+
+
+
   

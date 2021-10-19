@@ -280,7 +280,43 @@ module.exports = {
 
 
         });
-    }
+    },
+
+    deleteEquipmentPage: (req, res) => {
+
+
+        let query = "SELECT * FROM equipmentname en join equipmentbrand eb on en.equipment_name_no = eb.equipment_name_no join equipmentmodel em on eb.brand_no = em.brand_no join equipmentitem ei on em.model_no = ei.model_no ORDER BY en.equipment_name_no ASC";
+        db.query(query, (err, result) => {
+            if (err){
+                res.redirect('/');
+            }
+
+            res.render('delete-equipment.ejs', {
+                title: "Welcome to Spaceto | All Equipment",
+                eqp: result
+            });
+
+           
+        });
+
+    },
+
+
+    deleteEquipment: (req, res) => {
+
+        let equipmentitemno = req.params.equipment_item_no;
+        let query = "delete from equipmentitem where equipment_item_no = "+ equipmentitemno + "";
+        db.query(query, (err,result) => {
+            if(err){
+                return res.status(500).send(err);
+            }
+            
+            res.redirect('/eqpdel');
+
+            
+        });
+    },
+    
 
 
 }

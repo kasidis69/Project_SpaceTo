@@ -10,7 +10,7 @@ const {getHomePage} = require('./routes/index');
 
 const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage} = require('./routes/workspace');
 
-const {addEquipmentPage, addEquipment} = require('./routes/equipment');
+const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment} = require('./routes/equipment');
 const { reserveWorkspacePage,  reserveWorkspace } = require('./routes/reserve');
 
 
@@ -48,7 +48,9 @@ app.get('/add', addWorkspacePage);
 app.get('/detail/:workspace_no', detailWorkspacePage);
 app.get('/edit/:workspace_no', editWorkspacePage);
 app.get('/eqp', addEquipmentPage);
+app.get('/eqpdel', deleteEquipmentPage);
 app.get('/reserve/:workspace_no', reserveWorkspacePage);
+
 
 
 app.get('/delete/:workspace_no', deleteWorkspace);
@@ -57,6 +59,7 @@ app.post('/eqp', addEquipment);
 app.post('/edit/:workspace_no', editWorkspace);
 app.post('/reserve/:workspace_no', reserveWorkspace);
 app.post('/', getHomePage);
+app.get('/eqpdel/:equipment_item_no', deleteEquipment);
 
 
 

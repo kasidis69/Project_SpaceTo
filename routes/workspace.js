@@ -95,7 +95,7 @@ module.exports = {
                                 }          
                                 
                                 let equipmentnameno  = result[0].equipment_name_no;
-                                console.log(equipmentnameno+"+testtest++++++++");
+                                
 
                                 let insertworkspaceno = "SELECT * FROM workspace where workspace_no = (SELECT MAX(workspace_no) FROM workspace) ";
                                 db.query(insertworkspaceno, (err, result) => {
@@ -138,14 +138,16 @@ module.exports = {
     detailWorkspacePage: (req, res) => {
 
         let workspaceId = req.params.workspace_no;
-        let query = "SELECT * FROM workspace WHERE workspace_no = '"+ workspaceId +"' ";
+        let query = "SELECT * FROM workspace join location on workspace.location_no = location.location_no join workspacetype on workspace.workspace_type_no = workspacetype.workspace_type_no WHERE workspace_no = '"+ workspaceId +"' ";
+        
 
-
-
+        
         db.query(query, (err, result) => {
             if (err) {
                 return res.status(500).send(err);
             }
+
+           
 
             res.render('detail-workspace.ejs', {
                 title: "Welcome to Spaceto | detail of Workspaces",

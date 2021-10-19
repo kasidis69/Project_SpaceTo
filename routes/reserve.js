@@ -37,32 +37,86 @@ module.exports = {
         let reserve_datetime_start =reservedate+" "+timestart;
         let reserve_datetime_end =reservedate+" "+timeend;
         
+       
         
         
         
-        let reservecheck ="select * from reserve where workspace_no = "+ workspaceId + " and reserve_datetime_start <= '"+ reserve_datetime_start + "' and reserve_datetime_end >= '"+ reserve_datetime_end +"'"
+        
+        
+        let reservecheck = "select * from reserve where workspace_no = "+ workspaceId + " and (reserve_datetime_start <= '"+ reserve_datetime_start + "' and reserve_datetime_end >= '"+ reserve_datetime_end +"')"
         db.query(reservecheck, (err,result) => {
             if(err){
                 return res.status(500).send(err);
             }
 
+
             if (result.length > 0) {
-                message = "this time already reserved";
+                message = "This period time  has already reserved , Please try again ";             
                 res.render('reserve-workspace.ejs', {
                     message,
                     title: "Welcome to Spaceto | Add a new Workspaces"
+               
                 });
 
                  
 
             }else{
-                let insertreserve = "insert reserve set workspace_no = '" + workspaceId + "', reserve_datetime_start = '" + reserve_datetime_start + "', reserve_datetime_end = '" + reserve_datetime_end + "' "
-                 db.query(insertreserve, (err,result) => {
+                let reservecheck2 = "select * from reserve where workspace_no = "+ workspaceId + " and (reserve_datetime_start > '"+ reserve_datetime_start + "' and reserve_datetime_start <= '"+ reserve_datetime_end +"')"
+                 db.query(reservecheck2, (err,result) => {
                  if(err){
                     return res.status(500).send(err);
                 }
-                console.log(reservecheck+"+++++++");
-                    res.redirect('/');
+
+                if(result.length >0){
+                    message = "This period time  has already reserved , Please try again ";      
+     
+                    res.render('reserve-workspace.ejs', {
+                    message,
+                    title: "Welcome to Spaceto | Add a new Workspaces"
+                    });
+
+                }else{
+                    let reservecheck3 = "select * from reserve where workspace_no = "+ workspaceId + " and (reserve_datetime_end >= '"+ reserve_datetime_start + "' and reserve_datetime_end < '"+ reserve_datetime_end +"')"
+                 db.query(reservecheck3, (err,result) => {
+                 if(err){
+                    return res.status(500).send(err);
+                }
+
+                if(result.length >0){
+                    message = "This period time  has already reserved , Please try again ";      
+                        
+                    res.render('reserve-workspace.ejs', {
+                    message,
+                    title: "Welcome to Spaceto | Add a new Workspaces"
+                    });
+
+                }else{
+                    
+                    let insertreserve = "insert reserve set workspace_no = '" + workspaceId + "', reserve_datetime_start = '" + reserve_datetime_start + "', reserve_datetime_end = '" + reserve_datetime_end + "' "
+                    db.query(insertreserve, (err,result) => {
+                    if(err){
+                       return res.status(500).send(err);
+                   }
+                   
+                       res.redirect('/');
+   
+               
+               });
+
+
+
+                }
+                
+                   
+
+            
+            });
+                    
+
+
+                }
+                
+                   
 
             
             });
