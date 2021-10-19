@@ -216,6 +216,12 @@ module.exports = {
                 
             });
 
-        }
+        },
+         myreservedPage: (req, res) => { 
+
+             res.render('my-reserved.ejs', { title: "Welcome to Spaceto | reserve Workspaces", message: '' }); 
+            
+            } 
+        
 
 }

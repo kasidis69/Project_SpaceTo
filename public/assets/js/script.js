@@ -611,3 +611,37 @@ $(document).ready(function () {
 
 
 
+/หน้า reserve-ws/
+function setColor(btn, color) {
+  var count = 1;
+  var property = document.getElementById(btn);
+  if (count == 0) {
+    property.style.backgroundColor = "#FFFFFF"
+    count = 1;
+  }
+  else {
+    property.style.backgroundColor = "#FAEBD7"
+    count = 0;
+  }
+
+}
+
+function colorchange(id) {
+
+  var background = document.getElementById(id).style.background;
+
+  if (background = "#FFFFFF") {
+    document.getElementById(id).style.background = "#FAEBD7";
+  }
+  if (background == "#FAEBD7") {
+    document.getElementById(id).style.background = "#FFFFFF";
+  }
+
+}
+
+
+function myFunction() {
+  var myobj = document.getElementById("myworksapce");
+  myobj.remove();
+
+}

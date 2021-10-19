@@ -8,7 +8,7 @@ const app = express();
 
 const {getHomePage} = require('./routes/index');
 
-const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage} = require('./routes/workspace');
+const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, myreservedPage} = require('./routes/workspace');
 
 const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment} = require('./routes/equipment');
 const { reserveWorkspacePage,  reserveWorkspace } = require('./routes/reserve');
@@ -50,6 +50,7 @@ app.get('/edit/:workspace_no', editWorkspacePage);
 app.get('/eqp', addEquipmentPage);
 app.get('/eqpdel', deleteEquipmentPage);
 app.get('/reserve/:workspace_no', reserveWorkspacePage);
+app.get('/myreserved', myreservedPage);
 
 
 
