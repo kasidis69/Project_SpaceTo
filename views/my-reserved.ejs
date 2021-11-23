@@ -22,9 +22,27 @@
     </div>
 
 
+ 
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+      <div class="modal-content">
+      <div class="container">
+          <h1 style="font-size: 20px;">Cancle Reserve</h1>
+          <p>Are you sure you want to cancle reserve?</p>
+        
+          <div class="clearfix">
+            <button type="button" onclick="document.getElementById('myworksapce').style.display='none'" class="deletebtn" onclick="myFunction()">Yes</button>
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">No</button>
+       
+          </div>
+        </div>
+      </div>  
+    </div>
+
+
     <div class="description">
       <div class="read-more">
-        <i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()" ></i>
+        <i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="document.getElementById('id01').style.display='block'"></i>
       </div>
       
       <h1>CB 2301</h1>
@@ -66,21 +84,3 @@
     </div>
 
 
-    <div class="description">
-      <div class="read-more">
-        <i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()" ></i>
-      </div>
-      
-      <h1>CB 2301</h1>
-      <h2>Opening a door to the future</h2>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta
-        praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.
-      </p>
-      <div class="read-more">
-        <button type="button" class="button_check">Check in/Check out</button>
-
-      </div>
-    </div>
-  </div>
-
-  <%- include("./partials/footer.ejs") %>
