@@ -181,5 +181,4 @@ window.onclick = function(event) {
 }
 
  
-  
-  
+  /*-------------------delete equipment--------------------*/

@@ -46,8 +46,6 @@ nav {
     
 }
 
-
-
 .ham-grid {
     grid-column: right;
     display: flex;
@@ -425,6 +423,40 @@ footer p{
 }
 
  /*ช่องค้นหา */ 
+
+ 
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+
+}
+
+form.example button {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 .search{
    display: flex;
    justify-content: center;
@@ -432,6 +464,8 @@ footer p{
    margin: auto;
    width: 700px;
    margin-top: 20px;
+   max-width: 800px;
+   cursor: pointer;
 }
 .input{
     width: 350px;
@@ -448,8 +482,10 @@ footer p{
     font-weight: bold;
     cursor: pointer;
     padding: 0 7px;
-    
+    cursor: pointer;
+
 }
+
 .button1:hover{
 background-color: #ff9407;
 
@@ -585,368 +621,6 @@ background-color: #ff9407;
     color:black;
 }
 
-
-.calendar{
-    color: #fff;
-    margin: 10px auto;
-    background: #04b6e2;
-    padding: 60px 40px 80px 40px;
-    width: 95%;
-    max-width: 700px;
-    height: 500px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 6px rgba(2,2,2,0.2);
-    position: relative;
-  }
-  .calendar__title{
-    text-align: center;
-  }
-  .calendar--day-view{
-    position: absolute;
-    border-radius: 3px;
-    top: -2.5%;
-    left: -2.5%;
-    width: 100%;
-    height: 100%;
-    background: rgba(255,255,255,1);
-   box-shadow: 3px 12px 5px rgba(2,2,2,0.16);
-    z-index: 2;
-    overflow: hidden;
-    transform: scale(0.9) translate(30px,30px);
-    opacity: 0;
-    visibility: hidden;
-  /*   border-radius: 5px; */
-    display: none;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  .day-view-content{
-    color: #222;
-    width: 100%;
-    padding-top: 55px;
-  }
-  .day-highlight, .day-add-event{
-    padding: 8px 10px;
-    margin: 12px 15px;
-    border-radius: 4px;
-    background: #e7e8e8;
-    color: #222;
-    font-size: 14px;
-    font-weight: 600;
-    font-family: "Avenir", sans-serif;
-  }
-  .row{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .row .qtr{
-    width: 40%;
-  }
-  .row .half{
-    width: 100%;
-  }
-  @media (min-width: 800px){
-    .row{
-      flex-wrap: nowrap;
-    }
-    .row .half{
-      width: 35%;
-    }
-    .row .qtr{
-      width: 25%;
-    }
-  }
-  
-  .day-add-event{
-    background: #04b6e2;
-    color: #fff;
-    padding: 16px;
-    display: none;
-    transform: translateY(-15px);
-    opacity: 0;
-  }
-  .day-add-event[data-active="true"]{
-    display: block;
-    animation: popIn 250ms 1 forwards;
-  }
-  .add-event-label{
-    padding: 10px 0;
-    font-size: 18px;
-    font-family: 'Avenir', sans-serif;
-    color: #fff;
-    font-weight: 400;
-    font-size: 12px;
-    color: rgba(255,255,255,0.8);
-  }
-  .add-event-edit{
-    display: block;
-    margin: 4px 0;
-    max-width: 70%;
-    border-bottom: 2px solid #fff;
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-  }
-  .add-event-edit--long{
-    max-width: 90%;
-  }
-  
-  input.add-event-edit{
-    border: none;
-    border-bottom: 2px solid #fff;
-    background: transparent;
-    outline: none;
-    font: inherit;
-    color: rgb(0, 0, 0);
-    font-size: 18px;
-    font-weight: 800;
-  }
-  .add-event-edit--error, input.add-event-edit--error{
-    border-color: #ff5151;
-    animation: shake 300ms 1 forwards;
-  }
-  @keyframes shake {
-    20%, 60%{
-      transform: translateX(4px);
-    }
-    40%, 80%{
-      transform: translateX(-4px);
-    }
-  }
-  input.add-event-edit::-webkit-input-placeholder {
-     color: #fff;
-  }
-  
-  input.add-event-edit:-moz-placeholder { /* Firefox 18- */
-     color: #fff;  
-  }
-  
-  input.add-event-edit::-moz-placeholder {  /* Firefox 19+ */
-     color: #fff;  
-  }
-  
-  input.add-event-edit:-ms-input-placeholder {  
-     color: #fff;  
-  }
-  .event-btn{
-    padding: 3px 8px;
-    border: 3px solid #fff;
-    color: #fff;
-    cursor: pointer;
-    display: inline-block;
-    width: 65px;
-    margin: 5px 0;
-    text-align: center;
-  }
-  .event-btn--cancel:hover{
-    box-shadow: 0px 2px 4px rgba(2,2,2,0.2);
-  }
-  /* .add-event-btn:hover, .add.event-btn:focus{
-    background: #00258e;
-    box-shadow: 0px -1px 2px rgba(3,2,2,0.2);
-  } */
-  .day-highlight .day-events-link{
-    border-bottom: 2px solid #222;
-    padding: 0;
-    cursor: pointer;
-  }
-  #add-event{
-    color: #04b6e2;
-    border-color: #04b6e2;
-  }
-  .day-view-exit{
-    position: absolute;
-    top: 24px;
-    line-height: 1em;
-    left: 22px;
-    font-size: 22px;
-    color: #252525;
-    font-family: 'Avenir', sans-serif;
-    font-weight: 800;
-    cursor: pointer;
-    opacity: 0;
-    animation: popIn 200ms 1 forwards;
-    text-transform: uppercase;
-  }
-  .day-view-date{
-    position: absolute;
-    top: 19px;
-    right: 22px;
-    text-align: right;
-    font-size: 22px;
-    font-family: 'Avenir', sans-serif;
-    font-weight: 800;
-    color: #393939;
-    border-bottom: 2px solid #222;
-    cursor: pointer;
-  }
-  .day-inspiration-quote{
-    position: absolute;
-  /*   top: 90px; */
-    margin-top: -40px;
-    left: 10%;
-    width: 80%;
-    height: calc(100% - 110px);
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
-    font-size: 32px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: #ddd;
-    line-height: 1.1em;
-    font-family: 'Avenir', sans-serif;
-    z-index: -1;
-  }
-  .day-event-list-ul{
-    list-style: none;
-    margin: auto;
-    width: 95%;
-    padding: 0;
-    max-height: 300px;
-    overflow: auto;
-  }
-  .day-event-list-ul li {
-    padding: 10px;
-    margin: 10px 0;
-  /*   background: #04b6e2; */
-  /*   box-shadow: 0px 1px 1px  rgba(2,2,2,0.5); */
-    position: relative;
-  }
-  .event-dates small{
-    font-size: 0.65em;
-    color: #444;
-  }
-  .event-dates{
-    font-weight: 800;
-    font-family: 'Avenir', sans-serif;
-    color: #04b6e2;
-    font-size: 18px;
-    text-transform: lowercase;
-  /*   position: relative; */
-  }
-  .event-delete{
-    position: absolute;
-    right: 10px;
-    top: 0px;
-    font-size: 12px;
-    color: #f25656;
-    cursor: pointer;
-  }
-  .event-name{
-    font-size: 19px;
-    font-family: 'Avenir', sans-serif;
-    color: #222;
-    padding:10px;
-    background: #f7f7f7;
-    margin: 2px 0;
-    display: block;
-    text-transform: initial;
-  }
-  .calendar--day-view-active{
-    animation: popIn 200ms 1 forwards;
-    visibility: visible;
-    display: flex;
-    transition: visibility 0ms;
-  
-  }
-  .calendar--view{
-    display: flex;
-    flex-wrap: wrap;
-    align-content: center;
-    justify-content: flex-start;
-    width: 100%;
-  }
-  .cview__month{
-    width: 100%;
-    text-align: center;
-    font-weight: 800;
-    font-size: 22px;
-    font-family: 'Avenir', sans-serif;
-    padding-bottom: 20px;
-    color: #222;
-    text-transform: uppercase;
-    display: flex;
-    flex-wrap: nowrap;
-    align-items: baseline;
-    justify-content: space-around;
-  }
-  .cview__month-last,.cview__month-next,.cview__month-current{
-    width: 33.33333%;
-    text-align: center;
-    font-size: 16px;
-    cursor: pointer;
-    color: #222;
-  }
-  .cview__month-last:hover,.cview__month-next:hover{
-    color: #fff;
-  }
-  
-  .cview__month-current{
-    font-size: 22px;
-    cursor: default;
-    animation: popIn 200ms 1 forwards;
-    transform: translateY(20px);
-    opacity: 0;
-    position: relative;
-  }
-  .cview__month-reset{
-    animation: none;
-  }
-  .cview__month-activate{
-    animation: popIn 100ms 1 forwards;
-  }
-  .cview--spacer, .cview__header, .cview--date{
-    width: 14.28571428571429%;
-    max-width: 14.28571428571429%;
-    padding: 10px;
-    box-sizing: border-box;
-    position: relative;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: clip;
-    font-size: 14px;
-    font-weight: 900;
-  }
-  .cview--date{
-    font-size: 16px;
-    font-weight: 400;
-    cursor: pointer;
-  }
-  .has-events::after{
-    border-radius:100%;
-    animation: popIn 200ms 1 forwards;
-    background: rgba(255,255,255,0.95);
-    transform: scale(0);
-    content: '';
-    display: block;
-    position: absolute;
-    width: 8px;
-    height: 8px;
-    top: 8px;
-    left: 12px;
-    
-  }
-  .cview--date:hover::before{
-    background: rgba(255,255,255,0.2);
-  }
-  .cview--date.today{
-    color: #111;  
-  }
-  .cview--date.today::before{
-    animation: popIn 200ms 1 forwards;
-    background: rgba(255,255,255,0.2);
-    transform: scale(0);
-  }
-  @keyframes popIn{
-  
-    100%{
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
 
 
  /*------------------------------------------------*/
@@ -1154,13 +828,15 @@ background-color: #ff9407;
 
 /*หน้า re*/
 .section {
-	position: relative;
-	height: 100vh;
+  position: relative;
+	height: 110vh;
+
+
 }
 
 .section .section-center {
 	position: absolute;
-	top: 50%;
+	top: 39%;
 	left: 0;
 	right: 0;
 	-webkit-transform: translateY(-50%);
@@ -1262,7 +938,7 @@ background-color: #ff9407;
 	text-transform: uppercase;
 	line-height: 24px;
 	height: 24px;
-	font-size: 12px;
+	font-size: 14px;
 	color: #98c9ee;
 }
 
@@ -1331,9 +1007,12 @@ background-color: #ff9407;
 	border-radius: 4px;
 	text-transform: uppercase
 }
-
+.submit-btn:hover{
+  background-color:#ff9407;
+}
 .booking-cta {
-	margin-top: 45px;
+	margin-top: 5px;
+  margin-left: 40px;
 }
 
 .booking-cta h1 {
@@ -1363,7 +1042,7 @@ background-color: #ff9407;
 
 
 
-/*---------------------------------------------*/
+/*-------------------form--------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
@@ -1480,7 +1159,7 @@ iframe {
   background: #fff;
   border-radius: 10px;
   overflow: hidden;
-  padding: 30px 55px 90px 55px;
+  padding: 62px 55px 90px 55px;
 }
 
 
@@ -1730,6 +1409,77 @@ textarea.input100 {
   }
 }
 
+/*==================================================================
+[ Restyle Radio ]*/
+.wrap-contact100-form-radio {
+  width: 100%;
+  padding: 15px 25px 0 25px;
+}
+
+.contact100-form-radio {
+  padding-bottom: 5px;
+}
+
+.input-radio100 {
+  display: none;
+}
+
+.label-radio100 {
+  display: block;
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+  font-family: Montserrat-SemiBold;
+  font-size: 18px;
+  color: #555555;
+  line-height: 1.2;
+}
+
+.label-radio100::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #cdcdcd;
+  background: #fff;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.label-radio100::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 6px solid transparent;
+  background: #00ad5f;
+  -moz-background-clip: padding;     
+  -webkit-background-clip: padding;  
+  background-clip: padding-box; 
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  display: none;
+
+}
+
+.input-radio100:checked + .label-radio100::after {
+  display: block;
+}
+
 
 /*==================================================================
 [ Restyle Select2 ]*/
@@ -1791,20 +1541,15 @@ textarea.input100 {
 
 /*------------------------------------------------------------------
 [ Dropdown option ]*/
-.select2-container--open .select2-dropdown {
+.select2 {
   z-index: 1251;
   width: calc(100% + 2px);
   border: 0px solid transparent;
-  border-radius: 10px;
+  border-radius: 5px ;
   overflow: hidden;
-  background-color: white;
+  background-color: #f7f7f7;
   left: -24px;
 
-  box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
-  -o-box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
-  -ms-box-shadow: 0 3px 10px 0px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 576px) {
@@ -1813,8 +1558,6 @@ textarea.input100 {
   }
 }
 
-.select2-dropdown--above {top: -38px;}
-.select2-dropdown--below {top: 10px;}
 
 .select2-container .select2-results__option[aria-selected] {
   padding-top: 10px;
@@ -1828,40 +1571,6 @@ textarea.input100 {
   }
 }
 
-.select2-container .select2-results__option[aria-selected="true"] {
-  background: #00ad5f;
-  color: white;
-}
-
-.select2-container .select2-results__option--highlighted[aria-selected] {
-  background: #00ad5f;
-  color: white;
-}
-
-.select2-results__options {
-  font-size: 14px;
-  color: #555555;
-  line-height: 1.2;
-}
-
-.select2-search--dropdown .select2-search__field {
-  border: 1px solid #aaa;
-  outline: none;
-  font-family: Poppins-Regular;
-  font-size: 15px;
-  color: #333333;
-  line-height: 1.2;
-}
-
-.wrap-input100 .dropDownSelect2 .select2-container--open {
-  width: 100% !important;
-}
-
-.wrap-input100 .dropDownSelect2 .select2-dropdown {
-  width: calc(100% + 2px) !important;
-}
-
-/*==================================================================
 
 
 /*==================================================================
@@ -1952,7 +1661,8 @@ textarea.input100 {
 
 
 
-
+/*==================================================================
+popup ถามว่าจะลบจริงหรอ  ]*/
 /* Float cancel and delete buttons and add an equal width */
 .cancelbtn, .deletebtn {
   float: left;
@@ -2034,4 +1744,36 @@ hr {
   .cancelbtn, .deletebtn {
      width: 100%;
   }
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+
+}
+
+form.example button {
+  float: left;
+  width: 15%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
 }
