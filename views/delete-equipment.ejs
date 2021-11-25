@@ -28,17 +28,31 @@
             <td>
               <%= eqps.equipment_item_no %>
             </td>
-            <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom">Delete</a></td>
+            <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom" onclick="myFunction()">Delete</a></td>
           </tr>
           <% }) %>
     </table>
-  </div>
 
+  
   <% } else { %>
 
     <p class="text-center">No equipment found.</p>
     <% } %>
       </div>
+
+
+    
+<script>
+  function myFunction() {
+    var txt;
+    if (confirm("Do you want to delete epuipment?")) {
+      txt = "You pressed OK!";
+    } else {
+      txt = "You pressed Cancel!";
+    }
+    document.getElementById("demo").innerHTML = txt;
+  }
+  </script>
 
 
       <style>
