@@ -74,8 +74,13 @@ module.exports = {
         let Equipmentitem = req.body.Equipmentitem;
         let admin_no = 1;
         
-        
 
+        if(Equipmentitem != "No Equipment"){
+            var str = Equipmentitem;
+        var arr = str.split(" SerialID: ");
+        Equipmentitem = arr[1];
+        }
+        
 
         
         image_name = workspace_name + '.' + fileExtension;
@@ -150,7 +155,7 @@ module.exports = {
                             let location_no = result[0].location_no;
                             
     
-                        if(Equipmentitem == "null"){
+                        if(Equipmentitem == "No Equipment"){
 
                                 let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, admin_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ admin_no +"' ) ";
                             db.query(query, (err, result3) => {

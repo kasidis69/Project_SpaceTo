@@ -22,14 +22,17 @@
                         </div>
 
                         <div class="wrap-input100 input100-select bg1">
-                            <span class="label-input100">Location building *</span>
+                            <span class="label-input100">Location building </span>
                             <div>
                                 <select class="select2" name="location">
-                                    <option selected disabled>select location building</option>
-                                    <option value="0">SIT</option>
-                                    <option value="1">CB1</option>
-                                    <option value="2">CB2</option>
-                                    <option value="3">library KMUTT</option>
+
+
+                                    <option selected disabled>select location</option>
+                        <% location.forEach((locations, index) => { %> 
+                        <option><%= locations.location_name %> 
+                            <% }) %> 
+
+
                                 </select>
                                 <div class="dropDownSelect2"></div>
                             </div>
@@ -49,17 +52,18 @@
         
                                         <span class="label-input100">Type</span>
         
-                                        <input class="input-radio100" id="radio1" type="radio" value="0" name="roomtype"
-                                            value="physical" checked="checked" required>
-                                        <label class="label-radio100" for="radio1">
-                                            Room
-                                        </label>
+                                        <% workspacetype.forEach((workspacetypes, index) => { %> 
+
+                                            <input class="input-radio100"  type="radio" value="<%= workspacetypes.workspace_type_no%>" name="roomtype"
+                                                 checked="checked" required>
+                                            <label class="label-radio100" for="radio1">
+                                                <%= workspacetypes.workspace_type_name%>
+                                            </label>
+                                      
+                                            <% }) %> 
         
         
-                                        <input class="input-radio100" id="radio2" name=roomtype type="radio" value="1" required>
-                                        <label class="label-radio100" for="radio2">
-                                            Chair
-                                        </label>
+                                        
                                     </div>
         
                                 </div>

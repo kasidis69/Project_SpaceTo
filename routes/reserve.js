@@ -30,8 +30,13 @@ module.exports = {
     let timeend = req.body.timeend;
     let reserve_datetime_start = reservedate + " " + timestart;
     let reserve_datetime_end = reservedate + " " + timeend;
-    let equipmentitem = req.body.equipmentitem;
+    let equipmentitem = req.body.Equipmentitem;
 
+    if(equipmentitem != "No Equipment"){
+      var str = equipmentitem;
+  var arr = str.split(" SerialID: ");
+  equipmentitem = arr[1];
+  }
 
     let query =
       "SELECT * FROM workspace wp join workspace_equipment we on wp.workspace_no = we.workspace_no join equipmentitem ei on we.equipment_item_no = ei.equipment_item_no join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no where wp.workspace_no = '" +
@@ -123,7 +128,7 @@ module.exports = {
                   return res.status(500).send(err);
                 }
 
-                if(equipmentitem == "null"){
+                if(equipmentitem == "No Equipment"){
 
                   res.redirect('/');
 
@@ -216,7 +221,7 @@ module.exports = {
   
   myreservedPage: (req, res) =>{
       let userNo = req.params.user_no;
-      let query = "SELECT * FROM RESERVE JOIN USERS ON USERS.user_no = RESERVE.user_no JOIN WORKSPACE ON WORKSPACE.workspace_no = RESERVE.workspace_no JOIN WORKSPACE_EQUIPMENT ON WORKSPACE.workspace_no = WORKSPACE_EQUIPMENT.workspace_no JOIN EQUIPMENTNAME ON WORKSPACE_EQUIPMENT.equipment_name_no = EQUIPMENTNAME.equipment_name_no WHERE reserve_status = 'RESERVED' OR reserve_status = 'CHECKIN' ";
+      let query = "SELECT * FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.user_no = us.user_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join request_equipment re on rs.reserve_no = re.reserve_no left join equipmentitem ei on re.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no    WHERE reserve_status = 'RESERVED' OR reserve_status = 'CHECKIN' ORDER BY re.request_equipment_no DESC ";
   
       db.query(query, (err, result) => {
           if (err) {

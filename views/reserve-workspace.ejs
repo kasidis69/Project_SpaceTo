@@ -48,28 +48,27 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-md-6">
+									<div class="">
 										<div class="form-group">
 											<span class="form-label">Choose Equipment</span>
-											<select class="form-control">
-												<option selected disabled>Select Equipment</option>
-												<option>pen</option>
-												<option>notebook</option>
+											<select class="form-control" name="Equipmentitem">
+												
+												
+								<option selected disabled>select equipment</option>
+                            <% reserve.forEach((reserves, index) => { %> 
+                                <option><%= reserves.equipment_name%> SerialID: <%= reserves.equipment_item_no%>
+                                    <% }) %>         
+                                <option>No Equipment  
+                                    
+                              
+                                </select>
+
+
 											</select>
 											<span class="select-arrow"></span>
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<span class="form-label">Amount</span>
-											<select class="form-control">
-												<option selected disabled>Select Amount</option>
-												<option>1</option>
-												<option>2</option>
-											</select>
-											<span class="select-arrow"></span>
-										</div>
-									</div>
+									
 								
 								<div class="form-btn">
 									<button class="submit-btn">Reserve</button>
