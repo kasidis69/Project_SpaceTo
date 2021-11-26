@@ -1,121 +1,147 @@
 <%- include("./partials/header.ejs") %>
 
-<% if (message){%>
+    <% if (message){%>
         <p class="text-center text-danger">
             <%-message%>
-            </p>
-    <% } %>
-    
-    <div class="add-css">
+        </p>
+        <% } %>
 
-        <h1 align='center' style="font-size: 25px;">Edit workspace</h1>  
-            <form class="add-player-form" action="" method="post" enctype="multipart/form-data"> 
-                <div class="add-back-ws">
 
-                <h4>Workspace name</h4>
-                <input name="workspace_name" type="text" class="form-control" placeholder="Enter workspace name"
-                    required>
-                        <br>
+            <div class="container-contact100">
+                <div class="wrap-contact100">
+                    <form class="contact100-form validate-form" action="" method="post" enctype="multipart/form-data">
+                        <span class="contact100-form-title">
+                            Edit workspace
+                        </span>
 
-                <div>
-                    <h4>Location building</h4>
-                    <select name="location" class="form-control" required>
-                        <option selected disabled>select location building</option>
-                        <option value="0">SIT</option>
-                        <option value="1">CB1</option>
-                        <option value="2">CB2</option>
-                        <option value="3">library KMUTT</option>
-                    </select>
+                        <div class="wrap-input100 validate-input bg1"
+                            data-validate="Please Type Your New Workspace Name">
+                            <span class="label-input100">Workspace name *</span>
+                            <input class="input100" name="workspace_name" type="text"
+                                placeholder="Enter Your New Workspace Name">
+                        </div>
+
+                        <div class="wrap-input100 input100-select bg1">
+                            <span class="label-input100">Location building *</span>
+                            <div>
+                                <select class="select2" name="location">
+                                    <option selected disabled>select location building</option>
+                                    <option value="0">SIT</option>
+                                    <option value="1">CB1</option>
+                                    <option value="2">CB2</option>
+                                    <option value="3">library KMUTT</option>
+                                </select>
+                                <div class="dropDownSelect2"></div>
+                            </div>
+                        </div>
+
+
+                                <div class="wrap-input100 validate-input bg1 rs1-alert-validate"
+                                    data-validate="Please Type Your Message">
+                                    <span class="label-input100">Detail</span>
+                                    <textarea class="input100" name="message"
+                                        placeholder="Your message here..."></textarea>
+                                </div>
+
+
+                                <div class="wrap-input100 validate-input bg1">
+                                    <div class="w-full dis-none js-show-service">
+        
+                                        <span class="label-input100">Type</span>
+        
+                                        <input class="input-radio100" id="radio1" type="radio" value="0" name="roomtype"
+                                            value="physical" checked="checked" required>
+                                        <label class="label-radio100" for="radio1">
+                                            Room
+                                        </label>
+        
+        
+                                        <input class="input-radio100" id="radio2" name=roomtype type="radio" value="1" required>
+                                        <label class="label-radio100" for="radio2">
+                                            Chair
+                                        </label>
+                                    </div>
+        
+                                </div>
+                           
+                               
+                               
+                                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
+                                    <span class="label-input100">Timeopen *</span>
+                                    <select name="timeopen"  class="select2">
+                                        <option selected disabled>select tiome open</option>
+                                        <option>08:30
+                                        <option>09:00
+                                        <option>09:30
+                                        <option>10:00
+                                        <option>10:30
+                                        <option>11:00
+                                        <option>11:30
+                                        <option>12:00
+                                        <option>12:30
+                                        <option>13:00
+                                        <option>13:30
+                                        <option>14:00
+                                        <option>14:30
+                                        <option>15:00
+                                        <option>15:30
+                                        <option>16:00
+                                        <option>16:30
+
+                                    </select>
+                                </div>
+
+                                <div class="wrap-input100 bg1 rs1-wrap-input100">
+                                    <span class="label-input100">Timeclose *</span>
+                                    <select name="timeclose"  class="select2">
+                                        <option selected disabled>select time close</option>
+                                        <option>08:30
+                                        <option>09:00
+                                        <option>09:30
+                                        <option>10:00
+                                        <option>10:30
+                                        <option>11:00
+                                        <option>11:30
+                                        <option>12:00
+                                        <option>12:30
+                                        <option>13:00
+                                        <option>13:30
+                                        <option>14:00
+                                        <option>14:30
+                                        <option>15:00
+                                        <option>15:30
+                                        <option>16:00
+                                        <option>16:30
+
+                                    </select>
+                                </div>
+
+
+                                <div class="container-contact100-form-btn">
+                                    <button class="contact100-form-btn">
+                                        <span>
+                                            Submit
+                                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                    </form>
                 </div>
-                    <br>
-
-                <div>
-                    <h4> Detail </h4>
-                    <textarea name="detail" rows="10" cols="55" class="form-control">
-                </textarea>
-                </div>
-                    <br>
-
-                <div>
-                    <h4> Type </h4>
-                    <input name=roomtype type="radio" value="0"> &nbsp;Room &nbsp; &nbsp;
-                    <input name=roomtype type="radio" value="1"> &nbsp;Chair
-                </div>
-
-                <br>
-                <div>
-                    <h4> Time </h4>
-                    <p>Open</p>
-                    <select name="timeopen" class="form-control">
-                        <option selected disabled>select tiome open</option>
-                        <option >08:30
-                        <option >09:00
-                        <option >09:30
-                        <option >10:00
-                        <option >10:30
-                        <option >11:00
-                        <option >11:30
-                        <option >12:00
-                        <option >12:30
-                        <option >13:00
-                        <option >13:30
-                        <option >14:00
-                        <option >14:30
-                        <option >15:00
-                        <option >15:30
-                        <option >16:00
-                        <option >16:30
-
-
-                    </select>
-                    <p>Close</p>
-
-                    <select name="timeclose" class="form-control">
-                        <option selected disabled>select time close</option>
-                        <option >08:30
-                        <option >09:00
-                        <option >09:30
-                        <option >10:00
-                        <option >10:30
-                        <option >11:00
-                        <option >11:30
-                        <option >12:00
-                        <option >12:30
-                        <option >13:00
-                        <option >13:30
-                        <option >14:00
-                        <option >14:30
-                        <option >15:00
-                        <option >15:30
-                        <option >16:00
-                        <option >16:30
-
-                    </select>
-                </div>
-                
-                
-            </div>      
-                   
-                <div class="col-md-12 table-wrapper">
-                </div>
-                    <button type="submit" class="button">Update</a>
-                
-             
-            </form>
+            </div>
         </div>
 
 
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    
-        <%- include("./partials/footer.ejs") %>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 
-        <style>
-            /* Chrome, Safari, Edge, Opera */
-            input::-webkit-outer-spin-button,
-            input::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-        </style>
+ 
+
+
+                <style>
+                    /* Chrome, Safari, Edge, Opera */
+                    input::-webkit-outer-spin-button,
+                    input::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
+                    }
+                </style>
