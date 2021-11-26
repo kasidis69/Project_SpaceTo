@@ -4,23 +4,50 @@ const fs = require('fs');
 
 module.exports = {
     addWorkspacePage: (req, res) => {
-        let query = "SELECT * FROM equipmentname ORDER BY equipment_name_no ASC";
-
-        // execute query
+        let query = "select * from location ORDER BY location_no ASC";
         db.query(query, (err, result) => {
             if (err){
-                res.redirect('/');
+                
+                res.redirect('/'); 
             }
 
-            res.render('add-workspace.ejs', {
-                title: "Welcome to Spaceto | View Workspaces",
-                eqp: result,
-                message:''
+            let location = result
+            let query = "select * from workspacetype ORDER BY workspace_type_no ASC";
+
+            db.query(query, (err, result) => {
+                if (err){
+                    
+                    res.redirect('/');
+                }
+    
+                let workspacetype = result
+                let query = "select * from equipmentitem ei join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no where ei.item_status = 'UNAVAILABLE' ORDER BY en.equipment_name_no ASC";
+
+            db.query(query, (err, result) => {
+                if (err){
+                    
+                    res.redirect('/');
+                }
+    
+                let equipment = result
+                
+                res.render('add-workspace.ejs', {
+                    title: "Welcome to Spaceto | View Workspaces",
+                    location: location,
+                    workspacetype: workspacetype,
+                    equipment: equipment,
+                    message:''
+                });
+                
+  
             });
+                
+                
+                
+            });
+            
         });
-        
-        
-        
+               
 
     },
 
@@ -44,9 +71,9 @@ module.exports = {
         let uploadedFile = req.files.image;
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];
-        let Equipmentname = req.body.Equipmentname;
-        let admin_no = req.body.admin_no;
-        let equipmentamount =req.body.equipmentamount;
+        let Equipmentitem = req.body.Equipmentitem;
+        let admin_no = 1;
+        
         
 
 
@@ -60,19 +87,52 @@ module.exports = {
             }
 
             if (result.length > 0) {
-
-                let query = "SELECT * FROM equipmentname ORDER BY equipment_name_no ASC";
                 message = "Workspace Name already exists";
-                    db.query(query, (err, result) => {
-                        if (err){
-                            return res.status(500).send(err);
-                        }
-                        res.render('add-workspace.ejs', {
-                            title: "Welcome to Spaceto | View Workspaces",
-                            eqp: result,
-                            message
-                        });
-                    });
+                
+                let query = "select * from location ORDER BY location_no ASC";
+
+        db.query(query, (err, result) => {
+            if (err){
+                
+                res.redirect('/'); 
+            }
+
+            let location = result
+            let query = "select * from workspacetype ORDER BY workspace_type_no ASC";
+
+            db.query(query, (err, result) => {
+                if (err){
+                    
+                    res.redirect('/');
+                }
+    
+                let workspacetype = result
+                let query = "select * from equipmentitem ei join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no where ei.item_status = 'UNAVAILABLE' ORDER BY en.equipment_name_no ASC";
+
+            db.query(query, (err, result) => {
+                if (err){
+                    
+                    res.redirect('/');
+                }
+    
+                let equipment = result
+                
+                res.render('add-workspace.ejs', {
+                    title: "Welcome to Spaceto | View Workspaces",
+                    location: location,
+                    workspacetype: workspacetype,
+                    equipment: equipment,
+                    message
+                });
+                
+  
+            });
+                
+                
+                
+            });
+            
+        });
 
             } else {
                 if (uploadedFile.mimetype === 'image/png' || uploadedFile.mimetype === 'image/jpeg' || uploadedFile.mimetype === 'image/gif') {
@@ -81,22 +141,45 @@ module.exports = {
                             return res.status(500).send(err);
                         }
                         
+                        let query = "select * from location where location_name = '" + location + "' "
+                        db.query(query, (err, result) => {
+                        if (err) {
+                                
+                                return res.status(500).send(err);
+                            }    
+                            let location_no = result[0].location_no;
+                            
+    
+                        if(Equipmentitem == "null"){
 
-                            let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, admin_no) VALUES ('"+ workspace_name +"', '"+ location +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ admin_no +"' ) ";
+                                let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, admin_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ admin_no +"' ) ";
                             db.query(query, (err, result3) => {
                             if (err) {
+                                
                                 return res.status(500).send(err);
-                            }          
-                            
-                            let queryequipmentno  = "SELECT * FROM equipmentname where equipment_name = '"+ Equipmentname +"'";                           
-                            db.query(queryequipmentno, (err, result) => {
-                                if (err) {
-                                    return res.status(500).send(err);
-                                }          
-                                
-                                let equipmentnameno  = result[0].equipment_name_no;
-                                
 
+                                
+                            }
+
+                            res.redirect('/');
+
+                        });
+
+
+
+                            }else{
+
+                            let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, admin_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ admin_no +"' ) ";
+                            db.query(query, (err, result3) => {
+                            if (err) {
+                                
+                                return res.status(500).send(err);
+
+                                
+                            }
+                            
+                            
+                        
                                 let insertworkspaceno = "SELECT * FROM workspace where workspace_no = (SELECT MAX(workspace_no) FROM workspace) ";
                                 db.query(insertworkspaceno, (err, result) => {
                                     if (err) {
@@ -105,13 +188,26 @@ module.exports = {
 
                                 let lastworkspaceno = result[0].workspace_no
 
-                                let insertworkspaceequipment = "INSERT INTO workspace_equipment (equipment_name_no, workspace_no, equipment_max_amount) VALUES ('"+ equipmentnameno +"', '"+ lastworkspaceno +"', '"+ equipmentamount +"') ";
+                                let insertworkspaceequipment = "INSERT INTO workspace_equipment (equipment_item_no, workspace_no) VALUES ('"+ Equipmentitem +"', '"+ lastworkspaceno +"') ";
                                 db.query(insertworkspaceequipment, (err, result) => {
+                                    if (err) {
+                                        return res.status(500).send(err);
+                                    }       
+
+                                    let updateavailable = "update equipmentitem set item_status = 'AVAILABLE' where equipment_item_no = '"+ Equipmentitem +"' ";
+                                db.query(updateavailable, (err, result) => {
                                     if (err) {
                                         return res.status(500).send(err);
                                     }          
                                     
                                     res.redirect('/');
+
+                                    
+            
+                            });
+
+
+                                    
             
                             });
 
@@ -121,8 +217,11 @@ module.exports = {
                         });
                                                                    
                                                       
-                    })
+                    
                 })
+            }
+            })
+
             })
                 } else {
                     message = "Invalid File Format. Only 'Png', 'Jpeg', and 'Gif' images are allowed. "
@@ -160,20 +259,33 @@ module.exports = {
     },
     editWorkspacePage: (req, res) =>{
         let workspaceId = req.params.workspace_no;
-        let query = "SELECT * FROM workspace WHERE workspace_no = '"+ workspaceId +"' ";
 
+            let query = "select * from location ORDER BY location_no ASC";
         db.query(query, (err, result) => {
-            if (err) {
-                return res.status(500).send(err);
+            if (err){
+                
+                res.redirect('/'); 
             }
 
-            res.render('edit-workspace.ejs', {
-                title: "Welcome to Spaceto | edit of Workspaces",
-                edit: result,
-                message: ''
-                
-            });
+            let location = result
+            let query = "select * from workspacetype ORDER BY workspace_type_no ASC";
+
+            db.query(query, (err, result) => {
+                if (err){
+                    
+                    res.redirect('/');
+                }
+
+                res.render('edit-workspace.ejs', {
+                    title: "Welcome to Spaceto | edit of Workspaces",
+                    workspacetype: result,
+                    location: location,                   
+                    message: ''
+
+
+                }); 
         });
+    });
 
 
     },
@@ -190,9 +302,20 @@ module.exports = {
 
 
         
-        let query = "update workspace set workspace_name = '" + workspace_name + "', location_no = '" + location + "', time_openclose = '" + timeopenclose + "', detail = '" + detail + "', workspace_type_no = '" + type + "' where workspace_no = '" + workspaceId + "' "
+
+        let query = "select * from location where location_name = '" + location + "' "
+                        db.query(query, (err, result) => {
+                        if (err) {
+                                
+                                return res.status(500).send(err);
+                            }    
+                        let location_no = result[0].location_no;
+
+        let query = "update workspace set workspace_name = '" + workspace_name + "', location_no = '" + location_no + "', time_openclose = '" + timeopenclose + "', detail = '" + detail + "', workspace_type_no = '" + type + "' where workspace_no = '" + workspaceId + "' "
         db.query(query, (err,result) => {
             if(err){
+
+                
                 return res.status(500).send(err);
             }
             
@@ -200,6 +323,7 @@ module.exports = {
 
             
         });
+    });
 
     },
         deleteWorkspace: (req, res) =>{
@@ -217,11 +341,144 @@ module.exports = {
             });
 
         },
-         myreservedPage: (req, res) => { 
+        myReservedPage: (req, res) => { 
 
              res.render('my-reserved.ejs', { title: "Welcome to Spaceto | reserve Workspaces", message: '' }); 
             
-            } 
-        
+        },
+        addLocationPage: (req, res) =>{
+
+            res.render('add-location.ejs', { title: "Welcome to Spaceto | add Location", message: '' }); 
+               
+        },
+
+        addLocation: (req, res) =>{
+            let location_name = req.body.location_name;
+            let query = "INSERT INTO location (location_name) VALUES ('"+ location_name +"') "
+            
+            db.query(query, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                
+                res.redirect('/location');
+
+            });
+    
+    
+        },
+        locationPage: (req, res) =>{
+       
+            let query = "SELECT * FROM location ORDER BY location_no ASC";
+                  
+            db.query(query, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                  
+                res.render('location.ejs', {
+                    title: "Welcome to Spaceto | location",
+                    location: result,
+                    message: ''
+                });
+            });
+               
+        },
+        deleteLocation: (req, res) =>{
+            
+            let location_no = req.params.location_no;
+            let query = "delete from location where location_no = "+ location_no + "";
+            db.query(query, (err,result) => {
+                if(err){
+                    return res.status(500).send(err);
+                }
+                
+                res.redirect('/location');
+
+                
+            });
+
+        },
+        myWorkspacePage: (req, res) =>{
+
+            let search = req.body.search;
+            let where ="";
+            if(search!=null){
+            where = " and workspace_name like '%"+search+"%'";   
+            }
+            
+            let query = "SELECT * FROM workspace where admin_no = 1 "+ where +"ORDER BY workspace_no ASC";
+            
+            // execute query
+            db.query(query, (err, result) => {
+                if (err){
+                    res.redirect('/myworkspace');
+                }
+    
+                
+                res.render('my-workspace.ejs', {
+                    title: "Welcome to Spaceto | View Workspaces",
+                    workspace: result
+                });
+    
+               
+            });
+
+        },
+        addWorkspaceTypePage: (req, res) =>{
+
+            res.render('add-workspace-type.ejs', { title: "Welcome to Spaceto | add type", message: '' }); 
+               
+        },
+
+        addWorkspaceType: (req, res) =>{
+            let workspace_type_name = req.body.workspace_type_name;
+            let query = "INSERT INTO workspacetype (workspace_type_name) VALUES ('"+ workspace_type_name +"') "
+            
+            db.query(query, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                
+                res.redirect('/workspacetype');
+
+            });
+    
+    
+        },
+        workspaceTypePage: (req, res) =>{
+       
+            let query = "SELECT * FROM workspacetype ORDER BY workspace_type_no ASC";
+                  
+            db.query(query, (err, result) => {
+                if (err) {
+                    return res.status(500).send(err);
+                }
+                  
+                res.render('workspace-type.ejs', {
+                    title: "Welcome to Spaceto | workspacetype",
+                    workspacetype: result,
+                    message: ''
+                });
+            });
+               
+        },
+        deleteWorkspaceType: (req, res) =>{
+            
+            let workspace_type_no = req.params.workspace_type_no;
+            let query = "delete from workspacetype where workspace_type_no = "+ workspace_type_no + "";
+            db.query(query, (err,result) => {
+                if(err){
+                    return res.status(500).send(err);
+                }
+                
+                res.redirect('/workspacetype');
+
+                
+            });
+
+
+
+        }
 
 }

@@ -1,0 +1,46 @@
+<%- include("./partials/header.ejs") %>
+
+
+<table  class="table" >
+    <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th scope="col">No</th>
+        <th scope="col">Type Name</th>        
+        <th></th>
+      </tr>
+    </thead>
+    
+    <% if (workspacetype.length > 0 ) { %>
+    <% workspacetype.forEach((workspacetypes, index) => { %>
+    <tbody> 
+      <tr>
+        <td></td>
+        <td><%= workspacetypes.workspace_type_no %></td>
+        <td><%= workspacetypes.workspace_type_name %></td>
+        <td><a href="/workspacetypedel/<%= workspacetypes.workspace_type_no %>" target="_blank" class="btn-custom">delete</a></td>
+      </tr>
+   
+    </tbody>
+
+    
+    <% }) %>
+ </table>
+
+    <br>
+    <a href="/addworkspacetype" target="_blank" class="btn-custom">Add location</a>
+  
+
+  <% } else { %>
+    
+    <p class="text-center">doesn't have type of workspace.</p>
+
+    <br>
+    <a href="/addworkspacetype" target="_blank" class="btn-custom">Add Type</a>
+    <% } %>
+
+  <%- include("./partials/footer.ejs") %>
+
+
+
+  

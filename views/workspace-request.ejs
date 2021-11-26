@@ -1,0 +1,137 @@
+<%- include("./partials/header.ejs") %>
+
+  <div class="add-css">
+    <h2 align='center' style="font-size: 25px;">Workspace Request</h2>
+  </div>
+
+  <% if (reserverequest.length > 0 ) { %>
+
+<% reserverequest.forEach((reserverequests, index) => { %>  
+ 
+  <% if (reserverequests.equipment_name != null ) { %>
+  <div class="blog-card" id="myworksapce">
+    <div class="meta">
+      <div class="photo"
+        style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+      <ul class="details">
+        <li class="author"><a href="#">User : <%= reserverequests.firstname %></a></li>
+        <li class="date">Reserve Timestamp : <%= reserverequests.timestamp %></li>
+        <li class="tags">
+          <ul>
+            <li>Reserve Time : <%= reserverequests.reserve_datetime_start %> - <%= reserverequests.reserve_datetime_end %></a></li>
+           
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+      <div class="modal-content">
+      <div class="container">
+          <h1 style="font-size: 20px;">Cancle Reserve</h1>
+          <p>Are you sure you want to cancle reserve?</p>
+        
+          <div class="clearfix">
+            <button type="button" onclick="document.getElementById('myworksapce').style.display='none'" class="deletebtn" onclick="myFunction()">Yes</button>
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">No</button>
+       
+          </div>
+        </div>
+      </div>  
+    </div>
+    
+
+
+    <div class="description">
+      <div class="read-more">
+        <i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="document.getElementById('id01').style.display='block'"></i>
+      </div>
+      
+      <h1><%= reserverequests.workspace_name %></h1>
+      <h2>rsno:<%= reserverequests.reserve_no %>  <%= reserverequests.workspace_type_name %></h2>
+      <p> <%= reserverequests.detail %>
+      </p>
+      <h5 style="font-size: 18px" class="text-dark mt-1"> Equipment Request</h5>
+
+      <div class="mt-1 mb-1 spec-1">
+      <span><%= reserverequests.equipment_name %></span><span class="dot"></span>
+        
+      </div>
+
+      <div class="read-more">
+        <button type="button" class="button_check">Check in/Check out</button>
+
+      </div>
+    </div>
+  </div>
+
+  <% }else{ %>
+  
+    <div class="blog-card" id="myworksapce">
+      <div class="meta">
+        <div class="photo"  
+          style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+        <ul class="details">
+          <li class="author"><a href="#">User : <%= reserverequests.firstname %></a></li>
+          <li class="date">Reserve Timestamp : <%= reserverequests.timestamp %></li>
+          <li class="tags">
+            <ul>
+              <li>Reserve Time : <%= reserverequests.reserve_datetime_start %> - <%= reserverequests.reserve_datetime_end %></a></li>
+             
+            </ul>
+          </li>
+        </ul>
+      </div>
+  
+      <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+        <div class="modal-content">
+        <div class="container">
+            <h1 style="font-size: 20px;">Cancle Reserve</h1>
+            <p>Are you sure you want to cancle reserve?</p>
+          
+            <div class="clearfix">
+              <button type="button" onclick="document.getElementById('myworksapce').style.display='none'" class="deletebtn" onclick="myFunction()">Yes</button>
+              <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">No</button>
+         
+            </div>
+          </div>
+        </div>  
+      </div>
+
+
+
+      <div class="description">
+        <div class="read-more">
+          <i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="document.getElementById('id01').style.display='block'"></i>
+        </div>
+        
+        <h1><%= reserverequests.workspace_name %></h1>
+        <h2>rsno:<%= reserverequests.reserve_no %>  <%= reserverequests.workspace_type_name %></h2>
+        <p> <%= reserverequests.detail %>
+        </p>
+        
+  
+        <div class="mt-1 mb-1 spec-1">
+        
+          
+        </div>
+  
+        <div class="read-more">
+          <button type="button" class="button_check">Check in/Check out</button>
+  
+        </div>
+      </div>
+    </div>
+
+
+  <% } %>  
+
+  <% }) %>
+
+  <% } else { %>
+    <p class="text-center">No request workspace.</p>
+<% } %>
+
+  <%- include("./partials/footer.ejs") %>

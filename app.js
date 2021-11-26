@@ -8,10 +8,10 @@ const app = express();
 
 const {getHomePage} = require('./routes/index');
 
-const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, myreservedPage} = require('./routes/workspace');
+const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, myreservedPage, myReservedPage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
 
-const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment} = require('./routes/equipment');
-const { reserveWorkspacePage,  reserveWorkspace } = require('./routes/reserve');
+const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment, equipmentPage} = require('./routes/equipment');
+const { reserveWorkspacePage,  reserveWorkspace, workspaceRequestPage } = require('./routes/reserve');
 
 
 const port = 5000;
@@ -44,23 +44,32 @@ app.use(fileUpload());
 
 app.get('/', getHomePage);
 app.get('/add', addWorkspacePage);
-
 app.get('/detail/:workspace_no', detailWorkspacePage);
 app.get('/edit/:workspace_no', editWorkspacePage);
-app.get('/eqp', addEquipmentPage);
-app.get('/eqpdel', deleteEquipmentPage);
+app.get('/addeqp', addEquipmentPage);
+app.get('/eqp', equipmentPage);
 app.get('/reserve/:workspace_no', reserveWorkspacePage);
-app.get('/myreserved', myreservedPage);
-
+app.get('/myreserved', myReservedPage);
+app.get('/workspacerequest', workspaceRequestPage);
+app.get('/addlocation', addLocationPage);
+app.get('/location', locationPage);
+app.get('/myworkspace', myWorkspacePage);
+app.get('/workspacetype', workspaceTypePage);
+app.get('/addworkspacetype', addWorkspaceTypePage);
 
 
 app.get('/delete/:workspace_no', deleteWorkspace);
 app.post('/add', addWorkspace);
-app.post('/eqp', addEquipment);
+app.post('/addeqp', addEquipment);
 app.post('/edit/:workspace_no', editWorkspace);
 app.post('/reserve/:workspace_no', reserveWorkspace);
 app.post('/', getHomePage);
+app.post('/myworkspace', myWorkspacePage);
 app.get('/eqpdel/:equipment_item_no', deleteEquipment);
+app.post('/addlocation', addLocation);
+app.get('/locationdel/:location_no', deleteLocation); 
+app.post('/addworkspacetype', addWorkspaceType);
+app.get('/workspacetypedel/:workspace_type_no', deleteWorkspaceType); 
 
 
 

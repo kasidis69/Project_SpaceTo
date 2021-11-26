@@ -18,7 +18,6 @@ module.exports = {
             }
 
             
-
             res.render('index.ejs', {
                 title: "Welcome to Spaceto | View Workspaces",
                 workspace: result

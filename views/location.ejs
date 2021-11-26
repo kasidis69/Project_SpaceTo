@@ -1,0 +1,46 @@
+<%- include("./partials/header.ejs") %>
+
+
+<table  class="table" >
+    <thead class="thead-dark">
+      <tr>
+        <th></th>
+        <th scope="col">No</th>
+        <th scope="col">Location Name</th>        
+        <th></th>
+      </tr>
+    </thead>
+    
+    <% if (location.length > 0 ) { %>
+    <% location.forEach((locations, index) => { %>
+    <tbody> 
+      <tr>
+        <td></td>
+        <td><%= locations.location_no %></td>
+        <td><%= locations.location_name %></td>
+        <td><a href="/locationdel/<%= locations.location_no %>" target="_blank" class="btn-custom">delete</a></td>
+      </tr>
+   
+    </tbody>
+
+    
+    <% }) %>
+ </table>
+
+    <br>
+    <a href="/addlocation" target="_blank" class="btn-custom">Add location</a>
+  
+
+  <% } else { %>
+    
+    <p class="text-center">doesn't have location.</p>
+
+    <br>
+    <a href="/addlocation" target="_blank" class="btn-custom">Add location</a>
+    <% } %>
+
+  <%- include("./partials/footer.ejs") %>
+
+
+
+  
