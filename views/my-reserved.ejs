@@ -5,13 +5,19 @@
   </div>
 
 
+  <% if (reserve.length > 0 ) { %>
+
+    <% reserve.forEach((reserves, index) => { %> 
+
+      
+      <% if (reserves.reserve_status == "RESERVED" ) { %> 
   <div class="blog-card" id="myworksapce">
     <div class="meta">
       <div class="photo"
         style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
       <ul class="details">
-        <li class="author"><a href="#">Peach</a></li>
-        <li class="date">Aug. 24, 2015</li>
+        <li class="author"><a href="#"><%= reserves.firstname %></a></li>
+        <li class="date"><%= reserves.reserve_datetime_start %></li>
         <li class="tags">
           <ul>
             <li>13:00-15:00</a></li>
@@ -25,27 +31,76 @@
 
     <div class="description">
       <div class="read-more">
-        <i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()"></i>
+       <a href="canclereserve/<%= reserves.reserve_no %>"<i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()"></a></i></a>
       </div>
       
-      <h1>CB 2301</h1>
+      <h1> <%= reserves.workspace_name %> </h1>
       <h2>Opening a door to the future</h2>
-      <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eum dolorum architecto obcaecati enim dicta
-        praesentium, quam nobis! Neque ad aliquam facilis numquam. Veritatis, sit.
+      <p> <h1> <%= reserves.detail %> </h1>
       </p>
       <h5 style="font-size: 18px" class="text-dark mt-1"> Equipment </h5>
 
       <div class="mt-1 mb-1 spec-1">
-        <span class="dot"></span> <span>Post-it</span>
-        <span class="dot"></span><span>Projector<br></span>
+        <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+        <span class="dot"></span><span><br></span>
       </div>
 
       <div class="read-more">
-        <button type="button" class="button_check">Check in/Check out</button>
+        <a href="/checkinworkspace/<%= reserves.reserve_no %>"><button type="button" class="button_check">Check in</button></a>
 
       </div>
     </div>
   </div>
+  <% } %> 
+  <% if (reserves.reserve_status == "CHECKIN" ) { %> 
+    <div class="blog-card" id="myworksapce">
+      <div class="meta">
+        <div class="photo"
+          style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
+        <ul class="details">
+          <li class="author"><a href="#"><%= reserves.firstname %></a></li>
+          <li class="date"><%= reserves.reserve_datetime_start %></li>
+          <li class="tags">
+            <ul>
+              <li>13:00-15:00</a></li>
+             
+            </ul>
+          </li>
+        </ul>
+      </div>
+  
+  
+  
+      <div class="description">
+        <div class="read-more">
+         <a href="canclereserve/<%= reserves.reserve_no %>"<i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()"></a></i></a>
+        </div>
+        
+        <h1> <%= reserves.workspace_name %> </h1>
+        <h2>Opening a door to the future</h2>
+        <p> <h1> <%= reserves.detail %> </h1>
+        </p>
+        <h5 style="font-size: 18px" class="text-dark mt-1"> Equipment </h5>
+  
+        <div class="mt-1 mb-1 spec-1">
+          <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+          <span class="dot"></span><span><br></span>
+        </div>
+  
+        <div class="read-more">
+          <a href="/checkoutworkspace/<%= reserves.reserve_no %>"><button type="button" class="button_check">Check out</button></a>
+  
+        </div>
+      </div>
+    </div>
+    <% } %> 
+ 
+  <% }) %>
+
+  <% } else { %>
+    <p class="text-center">No reserved found.</p>
+<% } %>
+
 
 
   <script>

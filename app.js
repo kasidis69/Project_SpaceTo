@@ -8,10 +8,12 @@ const app = express();
 
 const {getHomePage} = require('./routes/index');
 
-const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, myreservedPage, myReservedPage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
+const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, myReservedPage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
 
+
+const { reserveWorkspacePage,  reserveWorkspace, myreservedPage, cancelReserveWorkspace, checkInWorkspace, checkOutWorkspace, workspaceRequestPage } = require('./routes/reserve');
 const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment, equipmentPage} = require('./routes/equipment');
-const { reserveWorkspacePage,  reserveWorkspace, workspaceRequestPage } = require('./routes/reserve');
+
 
 
 const port = 5000;
@@ -63,6 +65,9 @@ app.post('/add', addWorkspace);
 app.post('/addeqp', addEquipment);
 app.post('/edit/:workspace_no', editWorkspace);
 app.post('/reserve/:workspace_no', reserveWorkspace);
+app.get('/canclereserve/:reserve_no', cancelReserveWorkspace);
+app.get('/checkinworkspace/:reserve_no', checkInWorkspace);
+app.get('/checkoutworkspace/:reserve_no', checkOutWorkspace);
 app.post('/', getHomePage);
 app.post('/myworkspace', myWorkspacePage);
 app.get('/eqpdel/:equipment_item_no', deleteEquipment);

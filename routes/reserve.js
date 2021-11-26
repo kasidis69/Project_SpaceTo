@@ -198,4 +198,110 @@ module.exports = {
       });
     });
   },
-};
+  cancelReserveWorkspace: (req, res) =>{
+      let reserveNo = req.params.reserve_no;
+      let query = "UPDATE RESERVE SET RESERVE_STATUS = 'CANCELRESERVED' WHERE RESERVE_NO = '"+ reserveNo +"' ";
+  
+          
+          
+  
+          db.query(query, (err, result) => {
+              if (err) {
+                  return res.status(500).send(err);
+              }
+  
+              res.redirect('/myreserved');
+          });
+  },
+  
+  myreservedPage: (req, res) =>{
+      let userNo = req.params.user_no;
+      let query = "SELECT * FROM RESERVE JOIN USERS ON USERS.user_no = RESERVE.user_no JOIN WORKSPACE ON WORKSPACE.workspace_no = RESERVE.workspace_no JOIN WORKSPACE_EQUIPMENT ON WORKSPACE.workspace_no = WORKSPACE_EQUIPMENT.workspace_no JOIN EQUIPMENTNAME ON WORKSPACE_EQUIPMENT.equipment_name_no = EQUIPMENTNAME.equipment_name_no WHERE reserve_status = 'RESERVED' OR reserve_status = 'CHECKIN' ";
+  
+      db.query(query, (err, result) => {
+          if (err) {
+              return res.status(500).send(err);
+          }
+  
+          res.render('my-reserved.ejs', {
+              title: "Welcome to Spaceto | reserved",
+              reserve: result,
+              message: ''
+              
+              
+          });
+      });
+  
+  },
+  checkInWorkspace: (req, res) =>{
+      let reserveNo = req.params.reserve_no;
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+  
+      // current month
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  
+      // current year
+      let year = date_ob.getFullYear();
+  
+      // current hours
+      let hours = date_ob.getHours();
+  
+      // current minutes
+      let minutes = date_ob.getMinutes();
+  
+      // current seconds
+      let seconds = date_ob.getSeconds();
+  
+      let current_time = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
+  
+      let query = "UPDATE RESERVE SET RESERVE_STATUS = 'CHECKIN' WHERE RESERVE_NO = '"+ reserveNo +"' AND RESERVE_DATETIME_START <= '"+ current_time +"' AND RESERVE_DATETIME_END >= '"+ current_time +"'";
+  
+          
+          
+  
+          db.query(query, (err, result) => {
+              if (err) {
+                  return res.status(500).send(err);
+              }
+  
+              res.redirect('/myreserved');
+          });
+  },
+  checkOutWorkspace: (req, res) =>{
+      let reserveNo = req.params.reserve_no;
+      let date_ob = new Date();
+      let date = ("0" + date_ob.getDate()).slice(-2);
+  
+      // current month
+      let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  
+      // current year
+      let year = date_ob.getFullYear();
+  
+      // current hours
+      let hours = date_ob.getHours();
+  
+      // current minutes
+      let minutes = date_ob.getMinutes();
+  
+      // current seconds
+      let seconds = date_ob.getSeconds();
+  
+      let current_time = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
+      let query = "UPDATE RESERVE SET RESERVE_STATUS = 'CHECKOUT' WHERE RESERVE_NO = '"+ reserveNo +"' AND RESERVE_DATETIME_START <= '"+ current_time +"'";
+  
+          
+          
+  
+          db.query(query, (err, result) => {
+              if (err) {
+                  return res.status(500).send(err);
+              }
+  
+              res.redirect('/myreserved');
+          });
+  }
+  
+  
+  }
