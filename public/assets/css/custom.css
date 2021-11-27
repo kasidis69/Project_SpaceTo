@@ -448,38 +448,6 @@ footer p{
 
  /*ช่องค้นหา */ 
 
- 
-form.example input[type=text] {
-  padding: 10px;
-  font-size: 17px;
-  border: 1px solid grey;
-  float: left;
-  width: 80%;
-  background: #f1f1f1;
-
-}
-
-form.example button {
-  float: left;
-  width: 15%;
-  padding: 10px;
-  background: #2196F3;
-  color: white;
-  font-size: 17px;
-  border: 1px solid grey;
-  border-left: none;
-  cursor: pointer;
-}
-
-form.example button:hover {
-  background: #0b7dda;
-}
-
-form.example::after {
-  content: "";
-  clear: both;
-  display: table;
-}
 
 .search{
    display: flex;
@@ -513,6 +481,13 @@ form.example::after {
 .button1:hover{
 background-color: #ff9407;
 
+}
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .search, input[type=submit],.button[type=submit]  {
+    width: 100%;
+    margin-top: 0;
+  }
 }
 
  /* หน้า detail */ 
@@ -797,7 +772,7 @@ background-color: #ff9407;
 .blog-card:hover .details {
   left: 0%;
 }
-@media (min-width: 640px) {
+@media (min-width: 300px) {
   .blog-card {
     flex-direction: row;
     max-width: 700px;
