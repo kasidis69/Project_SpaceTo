@@ -7,8 +7,6 @@
         <% } %>
 
 
-
-            
             <div class="container-contact100">
                 <div class="wrap-contact100">
                     <form class="contact100-form validate-form" action="" method="post" enctype="multipart/form-data">
@@ -49,13 +47,13 @@
                         <div class="w-full dis-none js-show-service">
                            
                                 <span class="label-input100">Type</span>
-
+                                <br>
                                 <% workspacetype.forEach((workspacetypes, index) => { %> 
 
-                                    <input class="input-radio100"  type="radio" value="<%= workspacetypes.workspace_type_no%>" name="roomtype"
+                                    <input type="radio" value="<%= workspacetypes.workspace_type_no%>" name="roomtype"
                                          checked="checked" required>
-                                    <label class="label-radio100" for="radio1">
                                         <%= workspacetypes.workspace_type_name%>
+                                        <br>
                                     </label>
                               
                                     <% }) %> 
@@ -119,7 +117,7 @@
                         <div class="wrap-input100 input100-select bg1">
                             <span class="label-input100">Equipment *</span>
                             <div class="container-eq mt-3">
-                                <h6>  (*If doesn't have any equipment please create equipment) </h6>    
+                                <h6>  (*If you want to add equipment please create equipment first) </h6>    
                                 <br> 
 
                             

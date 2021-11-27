@@ -189,7 +189,7 @@ module.exports = {
   },
   workspaceRequestPage: (req, res) => {
     let query =
-      "SELECT rs.reserve_no,us.firstname , rs.timestamp , rs.reserve_datetime_start, rs.reserve_datetime_end, wp.workspace_name,wt.workspace_type_name,wp.detail,en.equipment_name FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.user_no = us.user_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join request_equipment re on rs.reserve_no = re.reserve_no left join equipmentitem ei on re.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no   ORDER BY rs.reserve_no ASC ";
+      "SELECT wp.image,rs.reserve_status,rs.reserve_no,us.firstname , rs.timestamp , rs.reserve_datetime_start, rs.reserve_datetime_end, wp.workspace_name,wt.workspace_type_name,wp.detail,en.equipment_name FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.user_no = us.user_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join request_equipment re on rs.reserve_no = re.reserve_no left join equipmentitem ei on re.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no   ORDER BY re.request_equipment_no DESC ";
 
     db.query(query, (err, result) => {
       if (err) {
@@ -221,7 +221,7 @@ module.exports = {
   
   myReservedPage: (req, res) =>{
       let userNo = req.params.user_no;
-      let query = "SELECT * FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.user_no = us.user_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join request_equipment re on rs.reserve_no = re.reserve_no left join equipmentitem ei on re.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no    WHERE reserve_status = 'RESERVED' OR reserve_status = 'CHECKIN' ORDER BY re.request_equipment_no DESC ";
+      let query = "SELECT wp.image,rs.reserve_status,rs.reserve_no,us.firstname , rs.timestamp , rs.reserve_datetime_start, rs.reserve_datetime_end, wp.workspace_name,wt.workspace_type_name,wp.detail,en.equipment_name  FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.user_no = us.user_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join request_equipment re on rs.reserve_no = re.reserve_no left join equipmentitem ei on re.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no  ORDER BY rs.reserve_no DESC ";
   
       db.query(query, (err, result) => {
           if (err) {
@@ -261,16 +261,19 @@ module.exports = {
       let current_time = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds
   
       let query = "UPDATE RESERVE SET RESERVE_STATUS = 'CHECKIN' WHERE RESERVE_NO = '"+ reserveNo +"' AND RESERVE_DATETIME_START <= '"+ current_time +"' AND RESERVE_DATETIME_END >= '"+ current_time +"'";
-  
-          
+
+      
+        
           
   
           db.query(query, (err, result) => {
               if (err) {
+                
                   return res.status(500).send(err);
-              }
-  
+                  
+              }              
               res.redirect('/myreserved');
+              
           });
   },
   checkOutWorkspace: (req, res) =>{

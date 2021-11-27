@@ -285,7 +285,7 @@ module.exports = {
     equipmentPage: (req, res) => {
 
 
-        let query = "SELECT * FROM equipmentname en join equipmentbrand eb on en.equipment_name_no = eb.equipment_name_no join equipmentmodel em on eb.brand_no = em.brand_no join equipmentitem ei on em.model_no = ei.model_no ORDER BY en.equipment_name_no ASC";
+        let query = "SELECT en.equipment_name,eb.brand_name,em.model_name,ei.equipment_item_no,we.workspace_no,ei.item_status FROM equipmentname en join equipmentbrand eb on en.equipment_name_no = eb.equipment_name_no join equipmentmodel em on eb.brand_no = em.brand_no join equipmentitem ei on em.model_no = ei.model_no left join workspace_equipment we on ei.equipment_item_no = we.equipment_item_no ORDER BY we.workspace_equipment_no ASC";
         db.query(query, (err, result) => {
             if (err){
                 res.redirect('/');

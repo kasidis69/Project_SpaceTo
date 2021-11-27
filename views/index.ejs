@@ -65,10 +65,12 @@
                 <i class="far fa-building"></i>
                 <h5 class="card-title"><%= workspaces.workspace_name %></h5>
                 <br/>
-                <i class="fas fa-check-circle"></i>
-                <p class="status"><%= workspaces.status %></p>
+                Type : <i class="fas fa-check-circle"></i>
+                <p class="status"><%= workspaces.workspace_type_name %></p>  
+                <br>
+                <%= workspaces.location_name %>
                 <i class="far fa-clock"></i>
-                <p class="clock">11.00 - 16.00</p>
+                <p class="clock"><%= workspaces.time_openclose %></p>
                 <meter class="csprogress" value="7" min="0" max="10"></meter>
                 <p class="status">7/10</p>
                 <p class="card-text">

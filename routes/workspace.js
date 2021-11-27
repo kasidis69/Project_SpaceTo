@@ -4,6 +4,46 @@ const fs = require('fs');
 
 module.exports = {
     addWorkspacePage: (req, res) => {
+
+
+        let query = "select * from location ORDER BY location_no ASC";
+        db.query(query, (err, result) => {
+            if (err){               
+                res.redirect('/'); 
+            }
+
+        let msg = "location not found please add location before your create workspace"    
+
+        if(result == 0)  {
+            res.render('location.ejs', {
+                title: "Welcome to Spaceto | location",
+                location: result,
+                message:msg
+            });
+  
+        } else {
+
+        let query2 = "select * from workspacetype ORDER BY workspace_type_no ASC";
+        db.query(query2, (err, result) => {
+            if (err){               
+                res.redirect('/'); 
+            }
+
+        let msg2 = "workspace type not found please add type before your create workspace"    
+
+        if(result == 0)  {
+            res.render('workspace-type.ejs', {
+                title: "Welcome to Spaceto | type",
+                workspacetype: result,
+                message:msg2
+            });
+  
+        } else {
+
+
+        
+           
+        /*/ เข้าหน้าแอดเลย */
         let query = "select * from location ORDER BY location_no ASC";
         db.query(query, (err, result) => {
             if (err){
@@ -13,7 +53,7 @@ module.exports = {
 
             let location = result
             let query = "select * from workspacetype ORDER BY workspace_type_no ASC";
-
+            
             db.query(query, (err, result) => {
                 if (err){
                     
@@ -47,8 +87,12 @@ module.exports = {
             });
             
         });
-               
+    }
+    }); 
 
+}
+});
+        
     },
 
 
@@ -242,7 +286,7 @@ module.exports = {
     detailWorkspacePage: (req, res) => {
 
         let workspaceId = req.params.workspace_no;
-        let query = "SELECT * FROM workspace join location on workspace.location_no = location.location_no join workspacetype on workspace.workspace_type_no = workspacetype.workspace_type_no WHERE workspace_no = '"+ workspaceId +"' ";
+        let query = "SELECT wp.workspace_no,wp.image,wp.workspace_name,lc.location_name,wp.time_openclose,wt.workspace_type_name,wp.workspace_status,wp.detail,en.equipment_name FROM workspace wp join location lc on wp.location_no = lc.location_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join workspace_equipment we on wp.workspace_no = we.workspace_no left join equipmentitem ei on we.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no=em.model_no left join equipmentbrand eb on em.brand_no = eb.brand_no left join equipmentname en on eb.equipment_name_no = en.equipment_name_no  WHERE wp.workspace_no = '"+ workspaceId +"' ";
         
 
         

@@ -247,6 +247,30 @@ nav {
     background: #ff9407;
 }
 
+.btn-custom2 {
+  display: inline-block;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  border-radius: .5rem;
+  border : 1px solid #33CC99;
+  color: white;
+  transition: .2s ease-in-out;
+  background-color:#33CC99;
+}
+
+
+
+.btn-custom2:hover {
+  color: white;
+  background: #009999;
+}
 
 /* footer */
 
@@ -819,10 +843,41 @@ background-color: #ff9407;
   border-radius: 5px;
   
 }
+
 .button_check:hover{
-background-color: #ff9407;
+background-color: #3300FF;
 
 }
+
+
+.button_checkout{
+  background-color:#FF6600;
+  border: none;
+  height: 40px;
+  color: #FFF;
+  cursor: pointer;
+  padding: 0 10px;
+  border-radius: 5px;
+  
+}
+
+.button_checkout:hover{
+background-color: #FF3300;
+
+}
+
+.button_success{
+  background-color:#33CC99;
+  border: none;
+  height: 40px;
+  color: #FFF;
+  cursor: not-allowed;
+  padding: 0 10px;
+  border-radius: 5px;
+  
+}
+
+
 
 
 

@@ -7,7 +7,7 @@ module.exports = {
         where = "where workspace_name like '%"+search+"%'";   
         }
         
-        let query = "SELECT * FROM workspace "+ where +"ORDER BY workspace_no ASC";
+        let query = "SELECT * FROM workspace wp join location lc ON wp.location_no = lc.location_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no "+ where +"ORDER BY wp.workspace_no ASC";
         
         
        
