@@ -4,13 +4,13 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-const port = process.env.port || 5000     
+const PORT = process.env.PORT || 5000     
 
 
 
 const {getHomePage} = require('./routes/index');
-const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, myReservedPage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
-const { reserveWorkspacePage,  reserveWorkspace, myreservedPage, cancelReserveWorkspace, checkInWorkspace, checkOutWorkspace, workspaceRequestPage } = require('./routes/reserve');
+const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
+const { reserveWorkspacePage,  reserveWorkspace, myReservedPage, cancelReserveWorkspace, checkInWorkspace, checkOutWorkspace, workspaceRequestPage } = require('./routes/reserve');
 const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment, equipmentPage} = require('./routes/equipment');
 
 
@@ -78,6 +78,6 @@ app.get('/workspacetypedel/:workspace_type_no', deleteWorkspaceType);
 
 
 
-app.listen(port, ()=> {
-    console.log(`Server running on port : ${port}`)
+app.listen(PORT, ()=> {
+    console.log(`Server running on port : ${PORT}`)
 });
