@@ -4,26 +4,25 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
+const port = process.env.port || 5000     
+
 
 
 const {getHomePage} = require('./routes/index');
-
 const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, myReservedPage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
-
-
 const { reserveWorkspacePage,  reserveWorkspace, myreservedPage, cancelReserveWorkspace, checkInWorkspace, checkOutWorkspace, workspaceRequestPage } = require('./routes/reserve');
 const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment, equipmentPage} = require('./routes/equipment');
 
 
 
-const port = 5000;
-
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '',
-    database: 'spaceto'
+    host: 'eu-cdbr-west-01.cleardb.com',
+    user: 'b7b2d074e77e38',
+    password: 'c5fd1cf4',
+    database: 'heroku_af26ac12eab2980'
 });
+
+
 
 
 db.connect((err) => {
@@ -35,7 +34,7 @@ db.connect((err) => {
 
 global.db = db;
 
-app.set('port', process.env.port || port);                                                                                                                                     
+                                                                                                                                  
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.json()); 
