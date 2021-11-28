@@ -11,8 +11,6 @@ function openPopover(event, popoverID) {
 }
 
 
-
-
 /*หน้า add-workspace_เรียกข้อมูลaddเพิ่ม*/
 $(document).ready(function () {
   var max_fields = 10;
@@ -36,22 +34,6 @@ $(document).ready(function () {
     x--;
   })
 });
-
-/*หน้า add-workspace_ปุ่มเพิ่มลดจำนวน/
-$(document).ready(function () {
-$('#sub1').click(function () {
-    var counter = $('#Number-Box1').val();
-    counter--;
-    $('#Number-Box1').val(counter);
-});
-});
-$(document).ready(function () {
-$('#Add1').click(function () {
-    var counter = $('#Number-Box1').val();
-    counter++;
-    $('#Number-Box1').val(counter);
-});
-}); */
 
 /*หน้า reserve-ws*/
 function setColor(btn, color) {
@@ -87,3 +69,4 @@ function myFunction() {
   myobj.remove();
 
 }
+
