@@ -118,7 +118,7 @@ module.exports = {
         let uploadedFile = req.files.image;
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];       
-        let username = 1234;
+        let username = req.session.account.username;
         
         
 
@@ -262,7 +262,7 @@ module.exports = {
     detailWorkspacePage: (req, res) => {
 
         let workspaceId = req.params.workspace_no;
-        let query = "SELECT wp.workspace_no,wp.image,wp.workspace_name,lc.location_name,wp.time_openclose,wt.workspace_type_name,wp.workspace_status,wp.detail,en.equipment_name FROM workspace wp join location lc on wp.location_no = lc.location_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join equipmentitem ei on wp.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no=em.model_no left join equipmentbrand eb on em.brand_no = eb.brand_no left join equipmentname en on eb.equipment_name_no = en.equipment_name_no  WHERE wp.workspace_no = '"+ workspaceId +"' ";
+        let query = "SELECT wp.workspace_no,wp.image,wp.workspace_name,lc.location_name,wp.time_openclose,wt.workspace_type_name,wp.workspace_status,wp.detail,en.equipment_name FROM workspace wp join location lc on wp.location_no = lc.location_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join equipmentitem ei on wp.workspace_no = ei.workspace_no left join equipmentmodel em on ei.model_no=em.model_no left join equipmentbrand eb on em.brand_no = eb.brand_no left join equipmentname en on eb.equipment_name_no = en.equipment_name_no  WHERE wp.workspace_no = '"+ workspaceId +"' ";
         
 
         
@@ -355,37 +355,6 @@ module.exports = {
     },
         deleteWorkspace: (req, res) =>{
             let workspaceId = req.params.workspace_no;
-
-            let query = "select * from workspace wp join workspace_equipment we on wp.workspace_no = we.workspace_no  join equipmentitem ei on we.equipment_item_no = ei.equipment_item_no where wp.workspace_no = "+ workspaceId + ""                     
-            db.query(query, (err,result) => {
-                if(err){
-                    return res.status(500).send(err);
-                }
- 
-                if(result.length > 0){
-
-                let equipmentitem = result[0].equipment_item_no;
-                let query = "UPDATE equipmentitem SET item_status = 'UNAVAILABLE' where equipment_item_no = "+ equipmentitem + "";
-                db.query(query, (err,result) => {
-                if(err){
-                    return res.status(500).send(err);
-                }
-                
-                let query = "delete from workspace where workspace_no = "+ workspaceId + "";
-                db.query(query, (err,result) => {
-                if(err){
-                    return res.status(500).send(err);
-                }
-                
-                res.redirect('/');
-
-                
-            });
-
-                
-            });
-        }else {
-
             let query = "delete from workspace where workspace_no = "+ workspaceId + "";
                 db.query(query, (err,result) => {
                 if(err){
@@ -397,13 +366,7 @@ module.exports = {
                 
             });
 
-        }
-
-
                 
-            });
-
-                      
 
         },
         myReservedPage: (req, res) => { 
@@ -472,7 +435,7 @@ module.exports = {
             where = " and workspace_name like '%"+search+"%'";   
             }
             
-            let query = "SELECT * FROM workspace where username = 1234 "+ where +"ORDER BY workspace_no ASC";
+            let query = "SELECT * FROM workspace where username = "+ req.session.account.username +" "+ where +"ORDER BY workspace_no ASC";
             
             // execute query
             db.query(query, (err, result) => {
