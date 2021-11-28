@@ -3,13 +3,22 @@ const e = require('express');
 
 module.exports = {
     addEquipmentPage: (req, res) => {
+
+        let Query = "SELECT * FROM workspace"
+        db.query(Query, (err, result) => {
+            if (err) {
+                return res.status(500).send(err);
+
+            }
+        
         res.render('add-equipment.ejs', {
             title: "Welcome to Spaceto | Add your Equipment",
-            message: '',
-            eqpdata: '',
+            message: '',   
+            workspace: result,    
             account: req.session.account
 
         });
+    });
 
     },
     addEquipment: (req, res) => {
@@ -20,7 +29,7 @@ module.exports = {
         let equipment_item_no = req.body.equipment_serial_id;
         let equipment_brand = req.body.equipment_brand;
         let equipment_model = req.body.equipment_model;
-        
+        let workspace_no = req.body.workspace;
 
 
         let equipmentnoQuery = "SELECT * FROM equipmentitem WHERE equipment_item_no  = '" + equipment_item_no + "'";
@@ -68,7 +77,7 @@ module.exports = {
                                 if(result.length>0){
                                     
                                     let modelno = result[0].model_no;
-                                    let insertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no) VALUES ('" + modelno +"', '" + equipment_item_no +"' ) ";
+                                    let insertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no, workspace_no) VALUES ('" + modelno +"', '" + equipment_item_no +"' , '" + workspace_no +"' ) ";
                                     db.query(insertitem, (err, result)=>{
                                     if(err){
                                         return res.status(500).send(err);
@@ -102,7 +111,7 @@ module.exports = {
                                     let eqplastmodelno = result[0].model_no;    
                                     
                                         
-                                    let queryinsertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no) VALUES ('" + eqplastmodelno +"', '" + equipment_item_no +"' ) ";
+                                    let queryinsertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no , workspace_no) VALUES ('" + eqplastmodelno +"', '" + equipment_item_no +"' , '" + workspace_no +"'  ) ";
                                     db.query(queryinsertitem, (err,result) => {
                                     if (err) {
                                         return res.status(500).send(err);
@@ -165,7 +174,7 @@ module.exports = {
                                     let eqplastmodelno = result[0].model_no;    
                                     
                                         
-                                    let queryinsertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no) VALUES ('" + eqplastmodelno +"', '" + equipment_item_no +"' ) ";
+                                    let queryinsertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no , workspace_no) VALUES ('" + eqplastmodelno +"', '" + equipment_item_no +"', '" + workspace_no +"' ) ";
                                     db.query(queryinsertitem, (err,result) => {
                                     if (err) {
                                         return res.status(500).send(err);
@@ -243,7 +252,7 @@ module.exports = {
                                 let eqplastmodelno = result[0].model_no;    
                                 
                                     
-                                let queryinsertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no) VALUES ('" + eqplastmodelno +"', '" + equipment_item_no +"' ) ";
+                                let queryinsertitem = "INSERT INTO equipmentitem (model_no, equipment_item_no, workspace_no) VALUES ('" + eqplastmodelno +"', '" + equipment_item_no +"', '" + workspace_no +"' ) ";
                                 db.query(queryinsertitem, (err,result) => {
                                 if (err) {
                                     return res.status(500).send(err);
@@ -287,7 +296,7 @@ module.exports = {
     equipmentPage: (req, res) => {
 
 
-        let query = "SELECT en.equipment_name,eb.brand_name,em.model_name,ei.equipment_item_no,we.workspace_no,ei.item_status FROM equipmentname en join equipmentbrand eb on en.equipment_name_no = eb.equipment_name_no join equipmentmodel em on eb.brand_no = em.brand_no join equipmentitem ei on em.model_no = ei.model_no left join workspace_equipment we on ei.equipment_item_no = we.equipment_item_no ORDER BY we.workspace_equipment_no ASC";
+        let query = "SELECT eb.brand_name,em.model_name,ei.equipment_item_no,wp.workspace_no FROM equipmentname en join equipmentbrand eb on en.equipment_name_no = eb.equipment_name_no join equipmentmodel em on eb.brand_no = em.brand_no join equipmentitem ei on em.model_no = ei.model_no left join workspace wp on ei.workspace_no = wp.workspace_no ORDER BY wp.workspace_no ASC";
         db.query(query, (err, result) => {
             if (err){
                 res.redirect('/');

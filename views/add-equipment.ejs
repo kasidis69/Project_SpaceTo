@@ -36,6 +36,15 @@
 				</div>
 
 
+				<select class="select2" name="workspace" id="workspace" required>                          
+
+					<% workspace.forEach((workspaces, index) => { %> 
+
+					<option value="<%= workspaces.workspace_no %>"><%= workspaces.workspace_name %> </option>
+
+					<% }) %> 
+				</select>
+
 				<div class="container-contact100-form-btn">
 					<button type="submit"  class="contact100-form-btn">
 						<span>

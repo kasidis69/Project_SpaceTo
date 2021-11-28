@@ -63,7 +63,7 @@ module.exports = {
                 }
     
                 let workspacetype = result
-                let query = "select * from equipmentitem ei join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no where ei.item_status = 'UNAVAILABLE' ORDER BY en.equipment_name_no ASC";
+                let query = "select * from equipmentitem ei join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no ORDER BY en.equipment_name_no ASC";
 
             db.query(query, (err, result) => {
                 if (err){
@@ -117,19 +117,18 @@ module.exports = {
         let timeopenclose =timeopen+"-"+timeclose;
         let uploadedFile = req.files.image;
         let image_name = uploadedFile.name;
-        let fileExtension = uploadedFile.mimetype.split('/')[1];
-        let Equipmentitem = req.body.Equipmentitem;
-        let user_no = 1;
+        let fileExtension = uploadedFile.mimetype.split('/')[1];       
+        let username = 1234;
         
         
 
-        if(Equipmentitem != "No Equipment"){
+      /*  if(Equipmentitem != "No Equipment"){
             var str = Equipmentitem;
         var arr = str.split(" SerialID: ");
         Equipmentitem = arr[1];
-        }
+        } */
         
-
+        
         
         image_name = workspace_name + '.' + fileExtension;
 
@@ -158,29 +157,18 @@ module.exports = {
                     
                     res.redirect('/');
                 }
-    
-                let workspacetype = result
-                let query = "select * from equipmentitem ei join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no where ei.item_status = 'UNAVAILABLE' ORDER BY en.equipment_name_no ASC";
-
-            db.query(query, (err, result) => {
-                if (err){
-                    
-                    res.redirect('/');
-                }
-    
-                let equipment = result
+           
                 
                 res.render('add-workspace.ejs', {
                     title: "Welcome to Spaceto | View Workspaces",
                     location: location,
                     workspacetype: workspacetype,
-                    equipment: equipment,
                     message,
                     account: req.session.account
                 });
                 
   
-            });
+            
                 
                 
                 
@@ -203,10 +191,10 @@ module.exports = {
                             }    
                             let location_no = result[0].location_no;
                             
-    
-                        if(Equipmentitem == "No Equipment"){
+                              
 
-                                let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, user_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ user_no +"' ) ";
+
+                            let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, username) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ username +"' ) ";
                             db.query(query, (err, result3) => {
                             if (err) {
                                 
@@ -214,26 +202,9 @@ module.exports = {
 
                                 
                             }
-
                             res.redirect('/');
-
-                        });
-
-
-
-                            }else{
-
-                            let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, user_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ user_no +"' ) ";
-                            db.query(query, (err, result3) => {
-                            if (err) {
-                                
-                                return res.status(500).send(err);
-
-                                
-                            }
                             
-                            
-                        
+                            /*
                                 let insertworkspaceno = "SELECT * FROM workspace where workspace_no = (SELECT MAX(workspace_no) FROM workspace) ";
                                 db.query(insertworkspaceno, (err, result) => {
                                     if (err) {
@@ -268,12 +239,12 @@ module.exports = {
                                 
                                 
                         
-                        });
+                        }); */
                                                                    
                                                       
                     
                 })
-            }
+            
             })
 
             })
@@ -291,7 +262,7 @@ module.exports = {
     detailWorkspacePage: (req, res) => {
 
         let workspaceId = req.params.workspace_no;
-        let query = "SELECT wp.workspace_no,wp.image,wp.workspace_name,lc.location_name,wp.time_openclose,wt.workspace_type_name,wp.workspace_status,wp.detail,en.equipment_name FROM workspace wp join location lc on wp.location_no = lc.location_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join workspace_equipment we on wp.workspace_no = we.workspace_no left join equipmentitem ei on we.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no=em.model_no left join equipmentbrand eb on em.brand_no = eb.brand_no left join equipmentname en on eb.equipment_name_no = en.equipment_name_no  WHERE wp.workspace_no = '"+ workspaceId +"' ";
+        let query = "SELECT wp.workspace_no,wp.image,wp.workspace_name,lc.location_name,wp.time_openclose,wt.workspace_type_name,wp.workspace_status,wp.detail,en.equipment_name FROM workspace wp join location lc on wp.location_no = lc.location_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join equipmentitem ei on wp.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no=em.model_no left join equipmentbrand eb on em.brand_no = eb.brand_no left join equipmentname en on eb.equipment_name_no = en.equipment_name_no  WHERE wp.workspace_no = '"+ workspaceId +"' ";
         
 
         
@@ -501,7 +472,7 @@ module.exports = {
             where = " and workspace_name like '%"+search+"%'";   
             }
             
-            let query = "SELECT * FROM workspace where user_no = 1 "+ where +"ORDER BY workspace_no ASC";
+            let query = "SELECT * FROM workspace where username = 1234 "+ where +"ORDER BY workspace_no ASC";
             
             // execute query
             db.query(query, (err, result) => {
@@ -522,7 +493,7 @@ module.exports = {
         },
         addWorkspaceTypePage: (req, res) =>{
 
-            res.render('add-workspace-type.ejs', { title: "Welcome to Spaceto | add type", message: '' }); 
+            res.render('add-workspace-type.ejs', { title: "Welcome to Spaceto | add type", message: '',account: req.session.account }); 
                
         },
 

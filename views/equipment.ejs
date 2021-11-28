@@ -31,9 +31,41 @@
               <%= eqps.equipment_item_no %>
             </td>
             <td>
-              <%= eqps.item_status %> workspace <%= eqps.workspace_no %>  
+               workspace <%= eqps.workspace_no %>  
             </td>
-            <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom" onclick="myFunction()">Delete</a></td>
+
+<!-- Modal popup -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p>Do you really want to delete these reserve? <br>This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <a  target="_blank" class="btn btn-success" data-dismiss="modal">Cancle</a>
+        <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom" >Delete</a></td>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<!------------->
+
+        <div class="description">
+          <div class="read-more">
+            <a href="#myModal" class="trigger-btn" data-toggle="modal"><i style="color: red;" class="fa fa-trash"
+                aria-hidden="true"></a></i>
+          </div>
+
+            <td></td>
           </tr>
 
           <% } else { %>
@@ -52,7 +84,7 @@
                 <%= eqps.equipment_item_no %>
               </td>
               <td>
-                <%= eqps.item_status %>   
+                   
               </td>
               <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom" onclick="myFunction()">Delete</a></td>
             </tr>
