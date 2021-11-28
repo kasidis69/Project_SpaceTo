@@ -279,8 +279,8 @@ module.exports = {
   },
   
   myReservedPage: (req, res) =>{
-      let userNo = req.params.username;
-      let query = "SELECT wp.image,rs.reserve_status,rs.reserve_no,us.firstname , rs.timestamp , rs.reserve_datetime_start, rs.reserve_datetime_end, wp.workspace_name,wt.workspace_type_name,wp.detail,en.equipment_name  FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.username = us.username join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no  left join equipmentitem ei on wp.workspace_no = ei.workspace_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no  ORDER BY rs.reserve_no DESC";
+    let userNo = req.session.account.username;
+    let query = "SELECT wp.image,rs.reserve_status,rs.reserve_no,us.firstname , rs.timestamp , rs.reserve_datetime_start, rs.reserve_datetime_end, wp.workspace_name,wt.workspace_type_name,wp.detail,en.equipment_name  FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.username = us.username join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no  left join equipmentitem ei on wp.workspace_no = ei.workspace_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no where us.username = '"+ userNo +"' ORDER BY rs.reserve_no DESC";
   
     
 
