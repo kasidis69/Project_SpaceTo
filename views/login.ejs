@@ -1,48 +1,146 @@
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title><%= title %></title>
-		<style>
-		.login-form {
-			width: 300px;
-			margin: 0 auto;
-			font-family: Tahoma, Geneva, sans-serif;
-		}
-		.login-form h1 {
-			text-align: center;
-			color: #4d4d4d;
-			font-size: 24px;
-			padding: 20px 0 20px 0;
-		}
-		.login-form input[type="password"],
-		.login-form input[type="text"] {
-			width: 100%;
-			padding: 15px;
-			border: 1px solid #dddddd;
-			margin-bottom: 15px;
-			box-sizing:border-box;
-		}
-		.login-form input[type="submit"] {
-			width: 100%;
-			padding: 15px;
-			background-color: #535b63;
-			border: 0;
-			box-sizing: border-box;
-			cursor: pointer;
-			font-weight: bold;
-			color: #ffffff;
-		}
-		</style>
-	</head>
-	<body>
-		
-		<div class="login-form">
-			<h1>Login Form</h1>
-			<form action="" method="post">
-				<input type="text" name="username" placeholder="Username" required>
-				<input type="password" name="password" placeholder="Password" required>
-				<input type="submit">
-			</form>
-		</div>
-	</body>
-</html>
+
+<%- include("./partials/header.ejs") %>
+<div class="fromlogin">
+<div id="login" class="login-form-container">
+	<header style="font-size: 20px;" >LOGIN </header>
+	<form action="" method="post">
+	<fieldset>
+	  <div class="input-wrapper">
+		<input type="text" name="username" placeholder="Username" required>
+	  </div>
+	  <div class="input-wrapper">
+		<input type="password" name="password" placeholder="Password" required>
+	  </div>
+	  <button id="continue" type="submit">CONTINUE</button>
+	</fieldset>
+</form>
+  </div>
+</div>
+
+  <style>
+.fromlogin{
+		background-color: white;
+		color: #fff;
+		line-height: 1.4;
+		font-size: 0.6em;
+   }
+	
+	.login-form-container {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translateY(-50%) translateX(-50%);
+		width: 500px;
+		border-radius: 3px;
+		background-color: #272e38;
+		overflow: hidden;
+		color: #fff;
+   }
+	.denied .login-form-container {
+		animation: shake 0.35s normal forwards ease-in-out;
+   }
+	.login-form-container fieldset {
+		border: none;
+   }
+	.login-form-container header {
+		background-color: #202731;
+		color: #c5c6c8;
+		display: block;
+		padding: 1.5em;
+		text-align: center;
+   }
+	.login-form-container .input-wrapper {
+		position: relative;
+		display: block;
+		margin: 2em auto;
+		border-bottom: 1px solid #fc7148;
+		border-radius: 3px;
+		width: 230px;
+		padding-left: 20px;
+   }
+	.login-form-container .input-wrapper input {
+		width: 100%;
+		line-height: 2;
+		background-color: transparent;
+		border: none;
+		padding: 0.6em 0.5em;
+		outline: 0;
+   }
+	.login-form-container .input-wrapper input::-webkit-input-placeholder, .login-form-container .input-wrapper input::-moz-placeholder, .login-form-container .input-wrapper input:-ms-input-placeholder {
+		color: #9ea2ab;
+   }
+	.login-form-container .input-wrapper:before {
+		font-family: FontAwesome;
+		position: absolute;
+		display: inline-block;
+		top: 9px;
+		left: 8px;
+		font-size: 10px;
+		color: #fc7148;
+   }
+	.login-form-container .input-wrapper:nth-child(1):before {
+		content: "\f007";
+   }
+	.login-form-container .input-wrapper:nth-child(2):before {
+		content: "\f023";
+   }
+	.login-form-container button {
+		outline: 0;
+		font-size: 8px;
+		letter-spacing: 0.1em;
+		background-color: #fc7148;
+		color: #fff;
+		border: none;
+		border-radius: 3px;
+		width: 200px;
+		padding: 1.2em 0;
+		margin: 4em auto;
+		display: block;
+		border-top: 2px solid transparent;
+		border-bottom: 2px solid transparent;
+   }
+	.login-form-container button:hover {
+		border-bottom-color: #c12e03;
+   }
+	@keyframes shake {
+		0% {
+			margin-left: 0;
+	   }
+		12% {
+			margin-left: 0;
+	   }
+		25% {
+			margin-left: -10px;
+	   }
+		50% {
+			margin-left: 10px;
+	   }
+		75% {
+			margin-left: -10px;
+	   }
+		87% {
+			margin-left: 0;
+	   }
+		100% {
+			margin-left: 0;
+	   }
+   }
+	</style>
+	<script>var vContinue = document.getElementById("continue"),
+		vLogin = document.getElementById("login");
+	
+	vContinue.addEventListener("click", function() {
+	   document.body.className += ' denied';
+	}, false);
+	
+	var pfx = ["webkit", "moz", "MS", "o", ""];
+	function PrefixedEvent(element, type, callback) {
+	  for (var p = 0; p < pfx.length; p++) {
+		if (!pfx[p]) type = type.toLowerCase();
+		element.addEventListener(pfx[p]+type, callback, false);
+	  }
+	}
+	
+	PrefixedEvent(vLogin, "AnimationEnd", function () {
+	  document.body.className = '';
+	});</script>
