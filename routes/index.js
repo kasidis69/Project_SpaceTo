@@ -8,12 +8,9 @@ module.exports = {
         }
         
         let query = "SELECT * FROM workspace wp join location lc ON wp.location_no = lc.location_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no "+ where +"ORDER BY wp.workspace_no ASC";
-        
-        
-       
-
-
-        // execute query
+      
+          
+             // execute query
         db.query(query, (err, result) => {
             if (err){
                 res.redirect('/');
@@ -22,10 +19,18 @@ module.exports = {
             
             res.render('index.ejs', {
                 title: "Welcome to Spaceto | View Workspaces",
-                workspace: result
+                workspace: result,
+                account: req.session.account
+
             });
 
            
         });
+        
+        
+       
+
+
+       
     }
 }

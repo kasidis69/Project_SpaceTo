@@ -109,18 +109,27 @@
 
         
         </div>
-
-        <div style="margin-left: 1230px;">
-            <a href="/edit/<%= detail.workspace_no %>">  <i style="font-size: 27px; padding-right: 0.4rem;" class="far fa-edit"></i>  </a>
-        </div>  
-        
-        <div class="add-css" style="text-align: center" >
-        <a href="/reserve/<%= detail.workspace_no %>" class="Edit-btn-res" >Reserve Workspace</a>
-        </div>
-
-        <div class="add-css" style="text-align: center" >
-            <a href="/delete/<%= detail.workspace_no %>" class="Edit-btn" >Delete Workspace</a>
-        </div>
+        <% if (account && account.role == "admin") { %>
+            <div style="margin-left: 1230px;">
+                <a href="/edit/<%= detail.workspace_no %>">  <i style="font-size: 27px; padding-right: 0.4rem;" class="far fa-edit"></i>  </a>
+            </div>  
+            
+            <div class="add-css" style="text-align: center" >
+            <a href="/reserve/<%= detail.workspace_no %>" class="Edit-btn-res" >Reserve Workspace</a>
+            </div>
+    
+            <div class="add-css" style="text-align: center" >
+                <a href="/delete/<%= detail.workspace_no %>" class="Edit-btn" >Delete Workspace</a>
+            </div>
+             <% } else if (account && account.role == "user") { %>
+            <div class="add-css" style="text-align: center" >
+            <a href="/reserve/<%= detail.workspace_no %>" class="Edit-btn-res" >Reserve Workspace</a>
+                </div>
+        <% } else { %>
+            <div class="add-css" style="text-align: center" >
+            <a href="/reserve/<%= detail.workspace_no %>" class="Edit-btn-res" >Reserve Workspace</a>
+            </div>
+        <% }  %>
 
 
         

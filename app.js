@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const mysql = require('mysql');
 const path = require('path');
 const app = express();
-const PORT = process.env.PORT || 5000     
+const session = require('express-session'); 
+const PORT = process.env.PORT || 5000    
 
 
 
@@ -12,6 +13,8 @@ const {getHomePage} = require('./routes/index');
 const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
 const { reserveWorkspacePage,  reserveWorkspace, myReservedPage, cancelReserveWorkspace, checkInWorkspace, checkOutWorkspace, workspaceRequestPage } = require('./routes/reserve');
 const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment, equipmentPage} = require('./routes/equipment');
+const {loginPage, login} = require('./routes/login');
+const {logout} = require('./routes/logout');
 
 
 
@@ -41,7 +44,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(fileUpload());
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
+
+app.get('/login', loginPage);
+app.post('/login', login);
+app.get('/logout', logout);
 
 app.get('/', getHomePage);
 app.get('/add', addWorkspacePage);
