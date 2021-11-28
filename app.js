@@ -13,8 +13,7 @@ const {getHomePage} = require('./routes/index');
 const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
 const { reserveWorkspacePage,  reserveWorkspace, myReservedPage, cancelReserveWorkspace, checkInWorkspace, checkOutWorkspace, workspaceRequestPage } = require('./routes/reserve');
 const {addEquipmentPage, addEquipment, deleteEquipmentPage, deleteEquipment, equipmentPage} = require('./routes/equipment');
-const {loginPage, login} = require('./routes/login');
-const {logout} = require('./routes/logout');
+const {loginPage, login, logout, registerPage, register} = require('./routes/login');
 
 
 
@@ -50,7 +49,8 @@ app.use(session({
 	saveUninitialized: true
 }));
 
-
+app.get('/register', registerPage);
+app.post('/register', register);
 app.get('/login', loginPage);
 app.post('/login', login);
 app.get('/logout', logout);
