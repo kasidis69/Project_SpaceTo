@@ -6,7 +6,7 @@ module.exports = {
   reserveWorkspacePage: (req, res) => {
     let workspaceId = req.params.workspace_no;
     let query =
-      "SELECT * FROM workspace wp join workspace_equipment we on wp.workspace_no = we.workspace_no join equipmentitem ei on we.equipment_item_no = ei.equipment_item_no join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no where wp.workspace_no = '" +
+      "SELECT * FROM workspace wp join workspace_equipment we on wp.workspace_no = we.workspace_no join equipmentitem ei on we.equipment_item_no = ei.equipment_item_no join equipmentmodel em on ei.model_no = em.model_no join equipmentbrand eb on em.brand_no = eb.brand_no join equipmentname en on eb.equipment_name_no = en.equipment_name_no  where wp.workspace_no = '" +
       workspaceId +
       "' ";
 
@@ -15,13 +15,40 @@ module.exports = {
         return res.status(500).send(err);
       }
 
+      let result1 = result;
+      let query ="SELECT * from reserve rs join workspace wp on rs.workspace_no = wp.workspace_no where wp.workspace_no = '" +workspaceId + "' order by rs.reserve_datetime_start ASC ";
+
+      db.query(query, (err, result2) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+      
+
+      let reserve = result2;
+      var array = [] ;
+
+      reserve.forEach((reserves, index) => {  
+          let a = reserves.reserve_datetime_start   
+          let c = reserves.reserve_datetime_end    
+          let b  = a+""+c  
+
+          var arr = b.split(" ");
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          array.push(datetime)
+       })   
+           
+       
       res.render("reserve-workspace.ejs", {
         title: "Welcome to Spaceto | edit of Workspaces",
-        reserve: result,
+        reserve: result1,
+        reserved: array,
         message: "",
       });
     });
+  });
   },
+
+
 
   reserveWorkspace: (req, res) => {
     let workspaceId = req.params.workspace_no;
@@ -48,8 +75,30 @@ module.exports = {
         return res.status(500).send(err);
       }
 
-      let reserve = result;
 
+
+      let query ="SELECT * from reserve rs join workspace wp on rs.workspace_no = wp.workspace_no where wp.workspace_no = '" +workspaceId + "' order by rs.reserve_datetime_start ASC ";
+
+      db.query(query, (err, result2) => {
+        if (err) {
+          return res.status(500).send(err);
+        }
+      
+
+      let date = result2;
+      var array = [] ;
+
+      date.forEach((dates, index) => {  
+          let a = dates.reserve_datetime_start   
+          let b = dates.reserve_datetime_end    
+          let c  = a+""+b  
+
+          var arr = c.split(" ");
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          array.push(datetime)
+       })
+
+    let reserve = result;
     let reservecheck = "select * from reserve where workspace_no = " +workspaceId +" and (reserve_datetime_start <= '" +reserve_datetime_start +"' and reserve_datetime_end >= '" +reserve_datetime_end +
       "')";
     db.query(reservecheck, (err, result) => {
@@ -62,7 +111,9 @@ module.exports = {
         res.render("reserve-workspace.ejs", {
           message,
           title: "Welcome to Spaceto | Add a new Workspaces",
-          reserve : reserve
+          reserve : reserve,
+          reserved: array
+
         });
       } else {
         let reservecheck2 ="select * from reserve where workspace_no = " +workspaceId +" and (reserve_datetime_start > '" +reserve_datetime_start +"' and reserve_datetime_start <= '" +reserve_datetime_end +"')";
@@ -78,7 +129,8 @@ module.exports = {
             res.render("reserve-workspace.ejs", {
               message,
               title: "Welcome to Spaceto | Add a new Workspaces",
-              reserve : reserve
+              reserve : reserve,
+              reserved: array
             });
           } else {
             let reservecheck3 =
@@ -96,7 +148,8 @@ module.exports = {
                 res.render("reserve-workspace.ejs", {
                   message,
                   title: "Welcome to Spaceto | Add a new Workspaces",
-                  reserve : reserve
+                  reserve : reserve,
+                  reserved: array
                 });
               } else {
                  "select * from reserve where workspace_no = " +workspaceId +" and (reserve_datetime_end >= '" +reserve_datetime_start +"' and reserve_datetime_end < '" +reserve_datetime_end +
@@ -113,7 +166,8 @@ module.exports = {
                 res.render("reserve-workspace.ejs", {
                   message,
                   title: "Welcome to Spaceto | Add a new Workspaces",
-                  reserve : reserve
+                  reserve : reserve,
+                  reserved: array
                 });
                 
               } else {///// เช็คของ reserve หมดแล้วว่าไม่ทับเวลากัน เช็คrequest eqp ต่อ
@@ -186,6 +240,9 @@ module.exports = {
       }
     });
   });
+});
+
+
   },
   workspaceRequestPage: (req, res) => {
     let query =
@@ -196,12 +253,29 @@ module.exports = {
         return res.status(500).send(err);
       }
 
+      let date = result;
+      var array = [] ;
+
+      date.forEach((dates, index) => {  
+          let a = dates.reserve_datetime_start   
+          let b = dates.reserve_datetime_end    
+          let c  = a+""+b  
+
+          var arr = c.split(" ");
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          array.push(datetime)
+          
+       })
+
+
       res.render("workspace-request.ejs", {
         title: "Welcome to Spaceto | Workspaces request",
-        reserverequest: result,
+        reserverequests: result,
+        reserved: array,
         message: "",
       });
     });
+  
   },
   cancelReserveWorkspace: (req, res) =>{
       let reserveNo = req.params.reserve_no;
@@ -223,14 +297,31 @@ module.exports = {
       let userNo = req.params.user_no;
       let query = "SELECT wp.image,rs.reserve_status,rs.reserve_no,us.firstname , rs.timestamp , rs.reserve_datetime_start, rs.reserve_datetime_end, wp.workspace_name,wt.workspace_type_name,wp.detail,en.equipment_name  FROM reserve rs join workspace wp on rs.workspace_no=wp.workspace_no join users us on rs.user_no = us.user_no join workspacetype wt on wp.workspace_type_no = wt.workspace_type_no left join request_equipment re on rs.reserve_no = re.reserve_no left join equipmentitem ei on re.equipment_item_no = ei.equipment_item_no left join equipmentmodel em on ei.model_no = em.model_no left join equipmentbrand eb on eb.brand_no = em.brand_no left join equipmentname en on en.equipment_name_no = eb.equipment_name_no  ORDER BY rs.reserve_no DESC ";
   
+    
+
       db.query(query, (err, result) => {
           if (err) {
               return res.status(500).send(err);
           }
-  
+          
+          let date = result;
+          var array = [] ;
+
+           date.forEach((dates, index) => {  
+          let a = dates.reserve_datetime_start   
+          let b = dates.reserve_datetime_end    
+          let c  = a+""+b  
+
+          var arr = c.split(" ");
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          array.push(datetime)
+          
+       })
+
           res.render('my-reserved.ejs', {
               title: "Welcome to Spaceto | reserved",
-              reserve: result,
+              reserves: result,
+              reserved: array,
               message: ''
               
               

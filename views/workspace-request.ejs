@@ -4,22 +4,22 @@
     <h2 align='center' style="font-size: 25px;">Workspace Request</h2>
   </div>
 
-  <% if (reserverequest.length > 0 ) { %>
+  <% if (reserverequests.length > 0 ) { %>
 
-<% reserverequest.forEach((reserverequests, index) => { %>  
- 
-  <% if (reserverequests.equipment_name != null ) { %>
+  <% for (var i = 0; i < reserverequests.length; i++) { %>
+
+
+  <% if (reserverequests[i].equipment_name != null ) { %>
+
+    
+
   <div class="blog-card" id="myworksapce">
     <div class="meta">
-      <img src="/assets/img/<%= reserverequests.image %>" alt="Card image cap" />
+      <img src="/assets/img/<%= reserverequests[i].image %>" alt="Card image cap" />
       <ul class="details">
-        <li class="author"><a href="#">User : <%= reserverequests.firstname %></a></li>
-        <li class="date">Reserve Timestamp : <%= reserverequests.timestamp %></li>
-        <li class="tags">
-          <ul>
-            <li>Reserve Time : <%= reserverequests.reserve_datetime_start %> - <%= reserverequests.reserve_datetime_end %></a></li>
-           
-          </ul>
+        <li class="author">User : <%= reserverequests[i].firstname %></a></li>
+        <li class="date">Reserve Timestamp : <%= reserverequests[i].timestamp %></li>
+        
         </li>
       </ul>
     </div>
@@ -45,16 +45,18 @@
     <div class="description">
       
       
-      <h1><%= reserverequests.workspace_name %></h1>
-      <h2>rsno:<%= reserverequests.reserve_no %>  <%= reserverequests.workspace_type_name %> </h2>
-      <p> <%= reserverequests.detail %>
+      <h1><%= reserverequests[i].workspace_name %></h1>
+      <h2>rsno:<%= reserverequests[i].reserve_no %>  <%= reserverequests[i].workspace_type_name %> </h2>
+      <p> <%= reserverequests[i].detail %>
       </p>
+      <h5>Reserve Time : <%= reserved[i] %></h5>
+
       <h5 style="font-size: 18px" class="text-dark mt-1"> Equipment Request</h5>
 
       <div class="mt-1 mb-1 spec-1">
-      <span><%= reserverequests.equipment_name %></span><span class="dot"></span>
+      <span><%= reserverequests[i].equipment_name %></span><span class="dot"></span>
       <br><br>
-      <span> Status: <%= reserverequests.reserve_status %> </span>
+      <span> Status: <%= reserverequests[i].reserve_status %> </span>
       </div>
 
       
@@ -62,18 +64,21 @@
       </div>
     </div>
   </div>
+  
 
   <% }else{ %>
-  
+    
+    
+
     <div class="blog-card" id="myworksapce">
       <div class="meta">
-        <img src="/assets/img/<%= reserverequests.image %>" alt="Card image cap" />
+        <img src="/assets/img/<%= reserverequests[i].image %>" alt="Card image cap" />
         <ul class="details">
-          <li class="author"><a href="#">User : <%= reserverequests.firstname %></a></li>
-          <li class="date">Reserve Timestamp : <%= reserverequests.timestamp %></li>
+          <li class="author"><a href="#">User : <%= reserverequests[i].firstname %></a></li>
+          <li class="date">Reserve Timestamp : <%= reserverequests[i].timestamp %></li>
           <li class="tags">
             <ul>
-              <li>Reserve Time : <%= reserverequests.reserve_datetime_start %> - <%= reserverequests.reserve_datetime_end %></a></li>
+              
              
             </ul>
           </li>
@@ -87,13 +92,14 @@
       <div class="description">
         
         
-        <h1><%= reserverequests.workspace_name %></h1>
-        <h2>rsno:<%= reserverequests.reserve_no %>  <%= reserverequests.workspace_type_name %></h2>
-        <p> <%= reserverequests.detail %>
+        <h1><%= reserverequests[i].workspace_name %></h1>
+        <h2>rsno:<%= reserverequests[i].reserve_no %>  <%= reserverequests[i].workspace_type_name %></h2>
+        <p> <%= reserverequests[i].detail %>
+          <h5>Reserve Time : <%= reserved[i] %></h5>
         </p>
         
         <br>
-      <span> Status: <%= reserverequests.reserve_status %> </span>
+      <span> Status: <%= reserverequests[i].reserve_status %> </span>
   
         <div class="mt-1 mb-1 spec-1">
         
@@ -109,11 +115,11 @@
 
 
   <% } %>  
-
-  <% }) %>
+ 
+  
+  <% } %>
 
   <% } else { %>
     <p class="text-center">No request workspace.</p>
 <% } %>
 
-  <%- include("./partials/footer.ejs") %>

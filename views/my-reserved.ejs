@@ -5,21 +5,21 @@
   </div>
 
 
-  <% if (reserve.length > 0 ) { %>
+  <% if (reserves.length > 0 ) { %>
 
-    <% reserve.forEach((reserves, index) => { %> 
+    <% for (var i = 0; i < reserves.length; i++) { %>
 
-      <%if (reserves.equipment_name != null) {%>
+      <%if (reserves[i].equipment_name != null) {%>
       
-      <% if (reserves.reserve_status == "RESERVED" ) { %> 
+      <% if (reserves[i].reserve_status == "RESERVED" ) { %> 
   <div class="blog-card" id="myworksapce">
     <div class="meta">
       
-        <img src="/assets/img/<%= reserves.image %>" alt="Card image cap" />
+        <img src="/assets/img/<%= reserves[i].image %>" alt="Card image cap" />
 
       <ul class="details">
-        <li class="author"><a href="#"><%= reserves.firstname %></a></li>
-        <li class="date"><%= reserves.reserve_datetime_start %></li>
+        <li class="author"><a href="#"><%= reserves[i].firstname %></a></li>
+        <li class="date">Reserve Timestamp : <%= reserves[i].reserve_datetime_start %></li>
         <li class="tags">
           <ul>
             
@@ -30,37 +30,62 @@
     </div>
 
 
-
-    <div class="description">
-      <div class="read-more">
-       <a href="canclereserve/<%= reserves.reserve_no %>"<i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()"></a></i></a>
+<!-- Modal popup -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
       </div>
+
+      <div class="modal-body">
+        <p>Do you really want to cancel these reserve? <br>This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <a  target="_blank" class="btn btn-success" data-dismiss="modal">Cancle</a>
+        <a href="canclereserve/<%= reserves[i].reserve_no %>" target="_blank" class="btn btn-danger " >Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------->
+
+        <div class="description">
+          <div class="read-more">
+            <a href="#myModal" class="trigger-btn" data-toggle="modal"><i style="color: red;" class="fa fa-trash"
+                aria-hidden="true"></a></i>
+          </div>
       
-      <h1> <%= reserves.workspace_name %> </h1>
-      <h2><%= reserves.workspace_type_name %> </h2>
-      <p> <h1> <%= reserves.detail %> </h1>
+      <h1> <%= reserves[i].workspace_name %> </h1>
+      <h2><%= reserves[i].workspace_type_name %> </h2>
+      <p> <h1> <%= reserves[i].detail %> </h1>
+        <h5>Reserve Time : <%= reserved[i] %></h5>
       </p>
       <h5 style="font-size: 18px" class="text-dark mt-1"> Equipment </h5>
 
       <div class="mt-1 mb-1 spec-1">
-        <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+        <span class="dot"></span> <span><%= reserves[i].equipment_name %></span>
         <span class="dot"></span><span><br></span>
       </div>
 
       <div class="read-more">
-        <a href="/checkinworkspace/<%= reserves.reserve_no %>"><button type="button" class="button_check">Check in</button></a>
+        <a href="/checkinworkspace/<%= reserves[i].reserve_no %>"><button type="button" class="button_check">Check in</button></a>
 
       </div>
     </div>
   </div>
   <% } %> 
-  <% if (reserves.reserve_status == "CHECKIN" ) { %> 
+  <% if (reserves[i].reserve_status == "CHECKIN" ) { %> 
     <div class="blog-card" id="myworksapce">
       <div class="meta">
-        <img src="/assets/img/<%= reserves.image %>" alt="Card image cap" />
+        <img src="/assets/img/<%= reserves[i].image %>" alt="Card image cap" />
         <ul class="details">
-          <li class="author"><a href="#"><%= reserves.firstname %></a></li>
-          <li class="date"><%= reserves.reserve_datetime_start %></li>
+          <li class="author"><a href="#"><%= reserves[i].firstname %></a></li>
+          <li class="date">Reserve Timestamp : <%= reserves[i].reserve_datetime_start %></li>
           <li class="tags">
             <ul>
               
@@ -72,38 +97,36 @@
   
   
   
-      <div class="description">
-        <div class="read-more">
-         <a href="canclereserve/<%= reserves.reserve_no %>"<i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()"></a></i></a>
-        </div>
         
-        <h1> <%= reserves.workspace_name %> </h1>
-        <h2><%= reserves.workspace_type_name %> </h2>
-        <p> <h1> <%= reserves.detail %> </h1>
+        <h1> <%= reserves[i].workspace_name %> </h1>
+        <h2><%= reserves[i].workspace_type_name %> </h2>
+        <p> <h1> <%= reserves[i].detail %> </h1>
         </p>
+
+        <h5>Reserve Time : <%= reserved[i] %></h5>
         <h5 style="font-size: 18px" class="text-dark mt-1"> Equipment </h5>
   
         <div class="mt-1 mb-1 spec-1">
-          <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+          <span class="dot"></span> <span><%= reserves[i].equipment_name %></span>
           <span class="dot"></span><span><br></span>
         </div>
   
         <div class="read-more">
-          <a href="/checkoutworkspace/<%= reserves.reserve_no %>"><button type="button" class="button_checkout">Check out</button></a>
+          <a href="/checkoutworkspace/<%= reserves[i].reserve_no %>"><button type="button" class="button_checkout">Check out</button></a>
   
         </div>
       </div>
     </div>
     <% } %> 
-    <% if (reserves.reserve_status == "CHECKOUT" ) { %> 
+    <% if (reserves[i].reserve_status == "CHECKOUT" ) { %> 
       <div class="blog-card" id="myworksapce">
         <div class="meta">
           
-            <img src="/assets/img/<%= reserves.image %>" alt="Card image cap" />
+            <img src="/assets/img/<%= reserves[i].image %>" alt="Card image cap" />
     
           <ul class="details">
-            <li class="author"><a href="#"><%= reserves.firstname %></a></li>
-            <li class="date"><%= reserves.reserve_datetime_start %></li>
+            <li class="author"><a href="#"><%= reserves[i].firstname %></a></li>
+            <li class="date">Reserve Timestamp : <%= reserves[i].reserve_datetime_start %></li>
             <li class="tags">
               <ul>
                 
@@ -118,14 +141,16 @@
         <div class="description">
           
           
-          <h1> <%= reserves.workspace_name %> </h1>
-          <h2><%= reserves.workspace_type_name %> </h2>
-          <p> <h1> <%= reserves.detail %> </h1>
+          <h1> <%= reserves[i].workspace_name %> </h1>
+          <h2><%= reserves[i].workspace_type_name %> </h2>
+          <p> <h1> <%= reserves[i].detail %> </h1>
           </p>
+
+          <h5>Reserve Time : <%= reserved[i] %></h5>
           <h5 style="font-size: 18px" class="text-dark mt-1"> Equipment </h5>
     
           <div class="mt-1 mb-1 spec-1">
-            <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+            <span class="dot"></span> <span><%= reserves[i].equipment_name %></span>
             <span class="dot"></span><span><br></span>
           </div>
     
@@ -139,13 +164,13 @@
 
     <% }else{ %>
 ็
-      <% if (reserves.reserve_status == "RESERVED" ) { %> 
+      <% if (reserves[i].reserve_status == "RESERVED" ) { %> 
         <div class="blog-card" id="myworksapce">
           <div class="meta">
-            <img src="/assets/img/<%= reserves.image %>" alt="Card image cap" />
+            <img src="/assets/img/<%= reserves[i].image %>" alt="Card image cap" />
             <ul class="details">
-              <li class="author"><a href="#"><%= reserves.firstname %></a></li>
-              <li class="date"><%= reserves.reserve_datetime_start %></li>
+              <li class="author"><a href="#"><%= reserves[i].firstname %></a></li>
+              <li class="date">Reserve Timestamp : <%= reserves[i].reserve_datetime_start %></li>
               <li class="tags">
                 <ul>
                  
@@ -157,36 +182,55 @@
       
       
       
-          <div class="description">
-            <div class="read-more">
-             <a href="canclereserve/<%= reserves.reserve_no %>"<i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()"></a></i></a>
-            </div>
+         <!-- Modal popup -->
+<div id="myModal" class="modal fade">
+  <div class="modal-dialog modal-confirm">
+    <div class="modal-content">
+      <div class="modal-header flex-column">
+        <div class="icon-box">
+          <i class="material-icons">&#xE5CD;</i>
+        </div>
+        <h4 class="modal-title w-100">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <p>Do you really want to cancel these reserve? <br>This process cannot be undone.</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <a  target="_blank" class="btn btn-success" data-dismiss="modal">Cancle</a>
+        <a href="canclereserve/<%= reserves[i].reserve_no %>" target="_blank" class="btn btn-danger " >Delete</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------->
             
-            <h1> <%= reserves.workspace_name %> </h1>
-            <h2><%= reserves.workspace_type_name %> </h2>
-            <p> <h1> <%= reserves.detail %> </h1>
+            <h1> <%= reserves[i].workspace_name %> </h1>
+            <h2><%= reserves[i].workspace_type_name %> </h2>
+            <p> <h1> <%= reserves[i].detail %> </h1>
             </p>
             
-      
+            <h5>Reserve Time : <%= reserved[i] %></h5>
             <div class="mt-1 mb-1 spec-1">
-              <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+              <span class="dot"></span> <span><%= reserves[i].equipment_name %></span>
               <span class="dot"></span><span><br></span>
             </div>
       
             <div class="read-more">
-              <a href="/checkinworkspace/<%= reserves.reserve_no %>"><button type="button" class="button_check">Check in</button></a>
+              <a href="/checkinworkspace/<%= reserves[i].reserve_no %>"><button type="button" class="button_check">Check in</button></a>
       
             </div>
           </div>
         </div>
         <% } %> 
-        <% if (reserves.reserve_status == "CHECKIN" ) { %> 
+        <% if (reserves[i].reserve_status == "CHECKIN" ) { %> 
           <div class="blog-card" id="myworksapce">
             <div class="meta">
-              <img src="/assets/img/<%= reserves.image %>" alt="Card image cap" />
+              <img src="/assets/img/<%= reserves[i].image %>" alt="Card image cap" />
               <ul class="details">
-                <li class="author"><a href="#"><%= reserves.firstname %></a></li>
-                <li class="date"><%= reserves.reserve_datetime_start %></li>
+                <li class="author"><a href="#"><%= reserves[i].firstname %></a></li>
+                <li class="date">Reserve Timestamp : <%= reserves[i].reserve_datetime_start %></li>
                 <li class="tags">
                   <ul>
                    
@@ -196,40 +240,35 @@
               </ul>
             </div>
         
-        
-        
-            <div class="description">
-              <div class="read-more">
-               <a href="canclereserve/<%= reserves.reserve_no %>"<i style="color: red;" class="fa fa-trash" aria-hidden="true" onclick="myFunction()"></a></i></a>
-              </div>
               
-              <h1> <%= reserves.workspace_name %> </h1>
-              <h2><%= reserves.workspace_type_name %> </h2>
-              <p> <h1> <%= reserves.detail %> </h1>
+              
+              <h1> <%= reserves[i].workspace_name %> </h1>
+              <h2><%= reserves[i].workspace_type_name %> </h2>
+              <p> <h1> <%= reserves[i].detail %> </h1>
               </p>
               
-        
+              <h5>Reserve Time : <%= reserved[i] %></h5>
               <div class="mt-1 mb-1 spec-1">
-                <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+                <span class="dot"></span> <span><%= reserves[i].equipment_name %></span>
                 <span class="dot"></span><span><br></span>
               </div>
         
               <div class="read-more">
-                <a href="/checkoutworkspace/<%= reserves.reserve_no %>"><button type="button" class="button_checkout">Check out</button></a>
+                <a href="/checkoutworkspace/<%= reserves[i].reserve_no %>"><button type="button" class="button_checkout">Check out</button></a>
         
               </div>
             </div>
           </div>
           <% } %> 
-          <% if (reserves.reserve_status == "CHECKOUT" ) { %> 
+          <% if (reserves[i].reserve_status == "CHECKOUT" ) { %> 
             <div class="blog-card" id="myworksapce">
               <div class="meta">
                 
-                  <img src="/assets/img/<%= reserves.image %>" alt="Card image cap" />
+                  <img src="/assets/img/<%= reserves[i].image %>" alt="Card image cap" />
           
                 <ul class="details">
-                  <li class="author"><a href="#"><%= reserves.firstname %></a></li>
-                  <li class="date"><%= reserves.reserve_datetime_start %></li>
+                  <li class="author"><a href="#"><%= reserves[i].firstname %></a></li>
+                  <li class="date">Reserve Timestamp : <%= reserves[i].reserve_datetime_start %></li>
                   <li class="tags">
                     <ul>
                       
@@ -244,14 +283,14 @@
               <div class="description">
                 
                 
-                <h1> <%= reserves.workspace_name %> </h1>
-                <h2><%= reserves.workspace_type_name %> </h2>
-                <p> <h1> <%= reserves.detail %> </h1>
+                <h1> <%= reserves[i].workspace_name %> </h1>
+                <h2><%= reserves[i].workspace_type_name %> </h2>
+                <p> <h1> <%= reserves[i].detail %> </h1>
                 </p>
-                
+                <h5>Reserve Time : <%= reserved[i] %></h5>
           
                 <div class="mt-1 mb-1 spec-1">
-                  <span class="dot"></span> <span><%= reserves.equipment_name %></span>
+                  <span class="dot"></span> <span><%= reserves[i].equipment_name %></span>
                   <span class="dot"></span><span><br></span>
                 </div>
           
@@ -265,7 +304,9 @@
 
   <% } %>    
 
-  <% }) %>
+  
+  
+  <% } %> 
 
   <% } else { %>
     <p class="text-center">No reserved found.</p>

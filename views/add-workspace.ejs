@@ -18,20 +18,23 @@
                             data-validate="Please Type Your New Workspace Name">
                             <span class="label-input100">Workspace name *</span>
                             <input class="input100" name="workspace_name" type="text"
-                                placeholder="Enter Your New Workspace Name">
+                                placeholder="Enter Your New Workspace Name" required>
                         </div>
 
                         <div class="wrap-input100 input100-select bg1">
                             <span class="label-input100">Location building *</span>
                             <div>
-                                <select class="select2" name="location">
-                                    
-                                    <option selected disabled>select location</option>
-                        <% location.forEach((locations, index) => { %> 
-                        <option><%= locations.location_name %> 
-                            <% }) %> 
 
+                                <select class="select2" name="location" id="location" required>                          
+
+                                    <% location.forEach((locations, index) => { %> 
+
+                                    <option value="<%= locations.location_name %>"><%= locations.location_name %> </option>
+
+                                    <% }) %> 
                                 </select>
+
+
                                 <div class="dropDownSelect2"></div>
                             </div>
                         </div>
@@ -40,7 +43,7 @@
                         <div class="wrap-input100 validate-input bg1 rs1-alert-validate"
                             data-validate="Please Type Your Message">
                             <span class="label-input100">Detail</span>
-                            <textarea class="input100" name="detail" placeholder="Your message here..."></textarea>
+                            <textarea class="input100" name="detail" placeholder="Your message here..." required></textarea>
                         </div>
 
                         <div class="wrap-input100 validate-input bg1">
@@ -66,8 +69,8 @@
                         <br> <br> <br> <br> <br>
                         <div class="wrap-input100 validate-input bg1 rs1-wrap-input100">
                             <span class="label-input100">Timeopen *</span>
-                            <select name="timeopen" class="select2">
-                                <option selected disabled>select tiome open</option>
+                            <select name="timeopen" class="select2" required>
+                                
                                 <option>08:30
                                 <option>09:00
                                 <option>09:30
@@ -91,8 +94,8 @@
 
                         <div class="wrap-input100 bg1 rs1-wrap-input100">
                             <span class="label-input100">Timeclose *</span>
-                            <select name="timeclose" class="select2">
-                                <option selected disabled>select time close</option>
+                            <select name="timeclose" class="select2" required>
+                                
                                 <option>08:30
                                 <option>09:00
                                 <option>09:30
@@ -117,14 +120,14 @@
                         <div class="wrap-input100 input100-select bg1">
                             <span class="label-input100">Equipment *</span>
                             <div class="container-eq mt-3">
-                                <h6>  (*If you want to add equipment please create equipment first) </h6>    
+                                <h6>  (*If no equipment Please add the equipment first) </h6>    
                                 <br> 
 
                             
 
-                            <select class="select2" name="Equipmentitem">
+                            <select class="select2" name="Equipmentitem" required>
 
-                            <option selected disabled>select equipment</option>
+                            
                             <% equipment.forEach((equipments, index) => { %> 
                                 <option><%=equipments.equipment_name%> SerialID: <%= equipments.equipment_item_no%>
                                     <% }) %>         
@@ -166,7 +169,7 @@
             <!-- addequipment-->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-            <%- include("./partials/footer.ejs") %>
+            
 
 
                 <style>

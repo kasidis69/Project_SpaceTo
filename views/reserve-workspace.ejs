@@ -19,6 +19,15 @@
 							
 						</div>
 
+<br>
+						<table>
+								<tr><th>Time Reserved</th></tr>
+								<% reserved.forEach((reserveds, index) => { %> 
+									<tr><td><%= reserveds%></td></tr>
+								<% }) %> 
+
+						</table>
+
 						
 					</div>
 					<div class="col-md-7 col-md-offset-1">
@@ -29,7 +38,7 @@
 									<div class="">
 										<div class="form-group">
 											<span class="form-label">Date</span>
-											<input  name="reservedate"  type="date"  id="datefield"  class="form-control" required>
+											<input  name="reservedate"  type="date"  id="datefield" class="form-control" required>
 										</div>
 									</div>
 								</div>
@@ -85,22 +94,23 @@
             </form>
 
    
+			<script>
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
+				var yyyy = today.getFullYear();
+				if(dd<10){
+				  dd='0'+dd
+				} 
+				if(mm<10){
+				  mm='0'+mm
+				} 
+				
+				today = yyyy+'-'+mm+'-'+dd;
+				document.getElementById("datefield").setAttribute("min", today);
+				
+				</script>
 
-<script>
-  var today = new Date();
-  var dd = today.getDate();
-  var mm = today.getMonth()+1; //January is 0 so need to add 1 to make it 1!
-  var yyyy = today.getFullYear();
-  if(dd<10){
-    dd='0'+dd
-  } 
-  if(mm<10){
-    mm='0'+mm
-  } 
-  
-  today = yyyy+'-'+mm+'-'+dd;
-  document.getElementById("datefield").setAttribute("min", today);
-  </script>
   
 
 

@@ -118,6 +118,7 @@ module.exports = {
         let Equipmentitem = req.body.Equipmentitem;
         let admin_no = 1;
         
+        
 
         if(Equipmentitem != "No Equipment"){
             var str = Equipmentitem;
@@ -376,10 +377,25 @@ module.exports = {
 
     },
         deleteWorkspace: (req, res) =>{
-            
             let workspaceId = req.params.workspace_no;
-            let query = "delete from workspace where workspace_no = "+ workspaceId + "";
+
+            let query = "select * from workspace wp join workspace_equipment we on wp.workspace_no = we.workspace_no  join equipmentitem ei on we.equipment_item_no = ei.equipment_item_no where wp.workspace_no = "+ workspaceId + ""                     
             db.query(query, (err,result) => {
+                if(err){
+                    return res.status(500).send(err);
+                }
+ 
+                if(result.length > 0){
+
+                let equipmentitem = result[0].equipment_item_no;
+                let query = "UPDATE equipmentitem SET item_status = 'UNAVAILABLE' where equipment_item_no = "+ equipmentitem + "";
+                db.query(query, (err,result) => {
+                if(err){
+                    return res.status(500).send(err);
+                }
+                
+                let query = "delete from workspace where workspace_no = "+ workspaceId + "";
+                db.query(query, (err,result) => {
                 if(err){
                     return res.status(500).send(err);
                 }
@@ -388,6 +404,29 @@ module.exports = {
 
                 
             });
+
+                
+            });
+        }else {
+
+            let query = "delete from workspace where workspace_no = "+ workspaceId + "";
+                db.query(query, (err,result) => {
+                if(err){
+                    return res.status(500).send(err);
+                }
+                
+                res.redirect('/');
+
+                
+            });
+
+        }
+
+
+                
+            });
+
+                      
 
         },
         myReservedPage: (req, res) => { 
