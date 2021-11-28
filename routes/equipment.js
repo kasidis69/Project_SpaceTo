@@ -6,7 +6,8 @@ module.exports = {
         res.render('add-equipment.ejs', {
             title: "Welcome to Spaceto | Add your Equipment",
             message: '',
-            eqpdata: ''
+            eqpdata: '',
+            account: req.session.account
 
         });
 
@@ -34,7 +35,8 @@ module.exports = {
                 message = "equipment serial ID is already add";
                 res.render('add-equipment.ejs', {
                     message,
-                    title: "Welcome to Spaceto | Add a new Workspaces"
+                    title: "Welcome to Spaceto | Add a new Workspaces",
+                    account: req.session.account
                 });
 
             } else {
@@ -293,7 +295,8 @@ module.exports = {
 
             res.render('equipment.ejs', {
                 title: "Welcome to Spaceto | All Equipment",
-                eqp: result
+                eqp: result,
+                account: req.session.account
             });
 
            

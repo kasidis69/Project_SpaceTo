@@ -18,7 +18,8 @@ module.exports = {
             res.render('location.ejs', {
                 title: "Welcome to Spaceto | location",
                 location: result,
-                message:msg
+                message:msg,
+                account: req.session.account
             });
   
         } else {
@@ -35,7 +36,8 @@ module.exports = {
             res.render('workspace-type.ejs', {
                 title: "Welcome to Spaceto | type",
                 workspacetype: result,
-                message:msg2
+                message:msg2,
+                account: req.session.account
             });
   
         } else {
@@ -76,7 +78,8 @@ module.exports = {
                     location: location,
                     workspacetype: workspacetype,
                     equipment: equipment,
-                    message:''
+                    message:'',
+                    account: req.session.account
                 });
                 
   
@@ -172,7 +175,8 @@ module.exports = {
                     location: location,
                     workspacetype: workspacetype,
                     equipment: equipment,
-                    message
+                    message,
+                    account: req.session.account
                 });
                 
   
@@ -301,7 +305,8 @@ module.exports = {
             res.render('detail-workspace.ejs', {
                 title: "Welcome to Spaceto | detail of Workspaces",
                 detail: result[0],
-                message: ''
+                message: '',
+                account: req.session.account
             });
         });
 
@@ -330,7 +335,8 @@ module.exports = {
                     title: "Welcome to Spaceto | edit of Workspaces",
                     workspacetype: result,
                     location: location,                   
-                    message: ''
+                    message: '',
+                    account: req.session.account
 
 
                 }); 
@@ -467,7 +473,8 @@ module.exports = {
                 res.render('location.ejs', {
                     title: "Welcome to Spaceto | location",
                     location: result,
-                    message: ''
+                    message: '',
+                    account: req.session.account
                 });
             });
                
@@ -506,7 +513,8 @@ module.exports = {
                 
                 res.render('my-workspace.ejs', {
                     title: "Welcome to Spaceto | View Workspaces",
-                    workspace: result
+                    workspace: result,
+                    account: req.session.account
                 });
     
                
@@ -546,7 +554,8 @@ module.exports = {
                 res.render('workspace-type.ejs', {
                     title: "Welcome to Spaceto | workspacetype",
                     workspacetype: result,
-                    message: ''
+                    message: '',
+                    account: req.session.account
                 });
             });
                

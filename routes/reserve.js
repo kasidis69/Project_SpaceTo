@@ -33,7 +33,7 @@ module.exports = {
           let b  = a+""+c  
 
           var arr = b.split(" ");
-          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[10];
           array.push(datetime)
        })   
            
@@ -43,6 +43,7 @@ module.exports = {
         reserve: result1,
         reserved: array,
         message: "",
+        account: req.session.account
       });
     });
   });
@@ -94,10 +95,11 @@ module.exports = {
           let c  = a+""+b  
 
           var arr = c.split(" ");
-          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[10];
+          
           array.push(datetime)
        })
-
+    if (req.session.account) {
     let reserve = result;
     let reservecheck = "select * from reserve where workspace_no = " +workspaceId +" and (reserve_datetime_start <= '" +reserve_datetime_start +"' and reserve_datetime_end >= '" +reserve_datetime_end +
       "')";
@@ -112,7 +114,8 @@ module.exports = {
           message,
           title: "Welcome to Spaceto | Add a new Workspaces",
           reserve : reserve,
-          reserved: array
+          reserved: array,
+          account: req.session.account
 
         });
       } else {
@@ -130,7 +133,8 @@ module.exports = {
               message,
               title: "Welcome to Spaceto | Add a new Workspaces",
               reserve : reserve,
-              reserved: array
+              reserved: array,
+              account: req.session.account
             });
           } else {
             let reservecheck3 =
@@ -149,7 +153,8 @@ module.exports = {
                   message,
                   title: "Welcome to Spaceto | Add a new Workspaces",
                   reserve : reserve,
-                  reserved: array
+                  reserved: array,
+                  account: req.session.account
                 });
               } else {
                  "select * from reserve where workspace_no = " +workspaceId +" and (reserve_datetime_end >= '" +reserve_datetime_start +"' and reserve_datetime_end < '" +reserve_datetime_end +
@@ -167,7 +172,8 @@ module.exports = {
                   message,
                   title: "Welcome to Spaceto | Add a new Workspaces",
                   reserve : reserve,
-                  reserved: array
+                  reserved: array,
+                  account: req.session.account
                 });
                 
               } else {///// เช็คของ reserve หมดแล้วว่าไม่ทับเวลากัน เช็คrequest eqp ต่อ
@@ -239,6 +245,11 @@ module.exports = {
         });
       }
     });
+
+  } else {
+     res.redirect('/login');
+  }
+
   });
 });
 
@@ -262,7 +273,7 @@ module.exports = {
           let c  = a+""+b  
 
           var arr = c.split(" ");
-          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[10];
           array.push(datetime)
           
        })
@@ -273,6 +284,7 @@ module.exports = {
         reserverequests: result,
         reserved: array,
         message: "",
+        account: req.session.account
       });
     });
   
@@ -313,7 +325,7 @@ module.exports = {
           let c  = a+""+b  
 
           var arr = c.split(" ");
-          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[11];
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[10];
           array.push(datetime)
           
        })
@@ -322,7 +334,8 @@ module.exports = {
               title: "Welcome to Spaceto | reserved",
               reserves: result,
               reserved: array,
-              message: ''
+              message: '',
+              account: req.session.account
               
               
           });
