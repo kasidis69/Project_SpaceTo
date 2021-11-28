@@ -437,12 +437,12 @@ module.exports = {
         },
         myReservedPage: (req, res) => { 
 
-             res.render('my-reserved.ejs', { title: "Welcome to Spaceto | reserve Workspaces", message: '' }); 
+             res.render('my-reserved.ejs', { title: "Welcome to Spaceto | reserve Workspaces", message: '', account: req.session.account }); 
             
         },
         addLocationPage: (req, res) =>{
 
-            res.render('add-location.ejs', { title: "Welcome to Spaceto | add Location", message: '' }); 
+            res.render('add-location.ejs', { title: "Welcome to Spaceto | add Location", message: '', account: req.session.account }); 
                
         },
 
@@ -454,7 +454,6 @@ module.exports = {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                
                 res.redirect('/location');
 
             });
@@ -469,7 +468,7 @@ module.exports = {
                 if (err) {
                     return res.status(500).send(err);
                 }
-                  
+                
                 res.render('location.ejs', {
                     title: "Welcome to Spaceto | location",
                     location: result,
