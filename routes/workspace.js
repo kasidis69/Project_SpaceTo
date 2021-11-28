@@ -116,7 +116,7 @@ module.exports = {
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];
         let Equipmentitem = req.body.Equipmentitem;
-        let admin_no = 1;
+        let user_no = 1;
         
         
 
@@ -202,7 +202,7 @@ module.exports = {
     
                         if(Equipmentitem == "No Equipment"){
 
-                                let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, admin_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ admin_no +"' ) ";
+                                let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, user_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ user_no +"' ) ";
                             db.query(query, (err, result3) => {
                             if (err) {
                                 
@@ -219,7 +219,7 @@ module.exports = {
 
                             }else{
 
-                            let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, admin_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ admin_no +"' ) ";
+                            let query = "INSERT INTO workspace (workspace_name, location_no, detail, image, time_openclose, workspace_type_no, user_no) VALUES ('"+ workspace_name +"', '"+ location_no +"', '"+ detail +"', '"+ image_name +"' , '"+ timeopenclose +"' , '"+ workspacetypeid +"', '"+ user_no +"' ) ";
                             db.query(query, (err, result3) => {
                             if (err) {
                                 
@@ -495,7 +495,7 @@ module.exports = {
             where = " and workspace_name like '%"+search+"%'";   
             }
             
-            let query = "SELECT * FROM workspace where admin_no = 1 "+ where +"ORDER BY workspace_no ASC";
+            let query = "SELECT * FROM workspace where user_no = 1 "+ where +"ORDER BY workspace_no ASC";
             
             // execute query
             db.query(query, (err, result) => {
