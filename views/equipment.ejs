@@ -16,24 +16,25 @@
       <% if (eqp.length> 0 ) { %>
         <% eqp.forEach((eqps, index)=> { %>
 
-          <% if (eqps.workspace_no != null ) { %>
-          <tr>
-            <td>
-              <%= eqps.equipment_name %>
-            </td>
-            <td>
-              <%= eqps.brand_name %>
-            </td>
-            <td>
-              <%= eqps.model_name %>
-            </td>
-            <td>
-              <%= eqps.equipment_item_no %>
-            </td>
-            <td>
-               workspace <%= eqps.workspace_no %>  
-            </td>
-
+          <% if (eqps.workspace_no !=null ) { %>
+            <tr>
+              <td>
+                <%= eqps.equipment_name %>
+              </td>
+              <td>
+                <%= eqps.brand_name %>
+              </td>
+              <td>
+                <%= eqps.model_name %>
+              </td>
+              <td>
+                <%= eqps.equipment_item_no %>
+              </td>
+              <td>
+                <%= eqps.item_status %> workspace <%= eqps.workspace_no %>
+              </td>
+              <td> <a href="#myModal"  data-toggle="modal" target="_blank" class="btn btn-danger ">Delete</a></td>
+            </tr>
 <!-- Modal popup -->
 <div id="myModal" class="modal fade">
   <div class="modal-dialog modal-confirm">
@@ -51,289 +52,280 @@
       </div>
       <div class="modal-footer justify-content-center">
         <a  target="_blank" class="btn btn-success" data-dismiss="modal">Cancle</a>
-        <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom" >Delete</a></td>
-        
+        <a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank"  class="btn btn-danger " >Delete</a>
       </div>
     </div>
   </div>
 </div>
 <!------------->
 
-        <div class="description">
-          <div class="read-more">
-            <a href="#myModal" class="trigger-btn" data-toggle="modal"><i style="color: red;" class="fa fa-trash"
-                aria-hidden="true"></a></i>
-          </div>
+            <% } else { %>
 
-            <td></td>
-          </tr>
+              <tr>
+                <td>
+                  <%= eqps.equipment_name %>
+                </td>
+                <td>
+                  <%= eqps.brand_name %>
+                </td>
+                <td>
+                  <%= eqps.model_name %>
+                </td>
+                <td>
+                  <%= eqps.equipment_item_no %>
+                </td>
+                <td>
+                  <%= eqps.item_status %>
+                </td>
+                <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom"
+                    onclick="myFunction()">Delete</a></td>
+              </tr>
 
-          <% } else { %>
+              <%}%>
+                <% }) %>
+                  <tr>
 
-            <tr>
-              <td>
-                <%= eqps.equipment_name %>
-              </td>
-              <td>
-                <%= eqps.brand_name %>
-              </td>
-              <td>
-                <%= eqps.model_name %>
-              </td>
-              <td>
-                <%= eqps.equipment_item_no %>
-              </td>
-              <td>
-                   
-              </td>
-              <td><a href="/eqpdel/<%= eqps.equipment_item_no %>" target="_blank" class="btn-custom" onclick="myFunction()">Delete</a></td>
-            </tr>
 
-          <%}%>  
-          <% }) %>
-    <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a href="/addeqp" target="_blank" class="btn-custom2">Add Equipment</a></td>
 
-    
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td><a href="/addeqp" target="_blank" class="btn-custom2">Add Equipment</a></td>
+                  </tr>
 
-    </tr>
+    </table>
+    <% } else { %>
 
-</table>
-  <% } else { %>
-    
-    <tr>
-      
-    <td></td>
-    <td></td>  
-    <td><p class="text-center">No equipment found.</p></td>
-    <td><a href="/addeqp" target="_blank" class="btn-custom2">Add Equipment</a></td>
-    <td></td>
-    <td></td>
+      <tr>
 
-  </tr>
+        <td></td>
+        <td></td>
+        <td>
+          <p class="text-center">No equipment found.</p>
+        </td>
+        <td><a href="/addeqp" target="_blank" class="btn-custom2">Add Equipment</a></td>
+        <td></td>
+        <td></td>
 
-    <% } %>
+      </tr>
+
+      <% } %>
 
 
 
 
 
-      <script>
-        function myFunction() {
-          var txt;
-          if (confirm("Press a button!")) {
-            
-          } else {
-          
+        <script>
+          function myFunction() {
+            var txt;
+            if (confirm("Press a button!")) {
+
+            } else {
+
+            }
+
           }
-    
-        }
         </script>
-        
 
-      <style>
-        /*หน้า   delete equiment*/
-        /*//////////////////////////////////////////////////////////////////
+
+        <style>
+          /*หน้า   delete equiment*/
+          /*//////////////////////////////////////////////////////////////////
 [ Table ]*/
 
 
-        @media screen and (max-width: 35.5em) {
-          table {
-            display: block;
+          @media screen and (max-width: 35.5em) {
+            table {
+              display: block;
+            }
+
+            table>*,
+            table tr,
+            table td,
+            table th {
+              display: block;
+            }
+
+            table thead {
+              display: none;
+            }
           }
 
-          table>*,
-          table tr,
-          table td,
-          table th {
-            display: block;
-          }
-
-          table thead {
-            display: none;
-          }
-        }
-
-        .header {
-          background-color: #666666;
-          color: white;
-          font-size: 1.5em;
-          padding: 1rem;
-          text-align: center;
-          text-transform: uppercase;
-        }
-       
-        .pppp {
-          text-align: center;
-        }
-
-        .table-users {
-          border: 1px solid #CCCCCC;
-          border-radius: 10px;
-          box-shadow: 3px 3px 0 rgba(133, 123, 123, 0.1);
-          max-width: calc(100% - 2em);
-          margin: 1em auto;
-          overflow: hidden;
-          width: 800px;
-          margin-top: 50px;
-        }
-
-        table {
-          width: 100%;
-        }
-
-        table td,
-        table th {
-          color: black;
-          padding: 10px;
-        }
-
-        table td {
-          text-align: center;
-          vertical-align: middle;
-        }
-
-        table td:last-child {
-          font-size: 0.95em;
-          line-height: 1.4;
-          text-align: left;
-        }
-
-        table th {
-          background-color: #BBBBBB;
-          font-weight: 300;
-          text-align: center;
-        }
-
-        table tr:nth-child(2n) {
-          background-color: white;
-        }
-
-        table tr:nth-child(2n+1) {
-          background-color: #EEEEEE;
-        }
-
-        @media screen and (max-width: 700px) {
-
-          table,
-          tr,
-          td {
-            display: block;
-          }
-
-          td:first-child {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100px;
-          }
-
-          td:not(:first-child) {
-            clear: both;
-            margin-left: 100px;
-            padding: 4px 20px 4px 90px;
-            position: relative;
-            text-align: left;
-          }
-
-          td:not(:first-child):before {
-            color: #91ced4;
-            content: '';
-            display: block;
-            left: 0;
-            position: absolute;
-
-          }
-
-          td:nth-child(2):before {
-            content: 'Brand :';
-          }
-
-          td:nth-child(3):before {
-            content: 'Model :';
-          }
-
-          td:nth-child(4):before {
-            content: 'Serial Id :';
-          }
-
-          td:nth-child(5):before {
-            content: '';
-          }
-
-          tr {
-            padding: 10px 0;
-            position: relative;
-          }
-
-          tr:first-child {
-            display: none;
-          }
-        }
-
-        @media screen and (max-width: 500px) {
           .header {
-            background-color: transparent;
-            color: #fff;
-            font-size: 2em;
-            font-weight: 700;
-            padding: 0;
-            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            background-color: #666666;
+            color: white;
+            font-size: 1.5em;
+            padding: 1rem;
+            text-align: center;
+            text-transform: uppercase;
           }
 
-          td:first-child {
-            background-color: #c8e7ea;
-            border-bottom: 1px solid #91ced4;
-            border-radius: 10px 10px 0 0;
-            position: relative;
-            top: 0;
-            transform: translateY(0);
-            width: 100%;
-          }
-
-          td:not(:first-child) {
-            margin: 0;
-            padding: 5px 1em;
-            width: 100%;
-          }
-
-          td:not(:first-child):before {
-            font-size: 0.8em;
-            padding-top: 0.3em;
-            position: relative;
-          }
-
-          td:last-child {
-            padding-bottom: 1rem !important;
-          }
-
-          tr {
-            background-color: white !important;
-            border: 1px solid #6cbec6;
-            border-radius: 10px;
-            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
-            margin: 0.5rem 0;
-            padding: 0;
+          .pppp {
+            text-align: center;
           }
 
           .table-users {
-            border: none;
-            box-shadow: none;
-            overflow: visible;
+            border: 1px solid #CCCCCC;
+            border-radius: 10px;
+            box-shadow: 3px 3px 0 rgba(133, 123, 123, 0.1);
+            max-width: calc(100% - 2em);
+            margin: 1em auto;
+            overflow: hidden;
+            width: 800px;
+            margin-top: 50px;
           }
-        }
 
-        .btn-custom{
-          background-color: brown;
-          color:  white;
-          border: none;
-          width: 100px;
-        }
-      </style>
+          table {
+            width: 100%;
+          }
 
-  
+          table td,
+          table th {
+            color: black;
+            padding: 10px;
+          }
+
+          table td {
+            text-align: center;
+            vertical-align: middle;
+          }
+
+          table td:last-child {
+            font-size: 0.95em;
+            line-height: 1.4;
+            text-align: left;
+          }
+
+          table th {
+            background-color: #BBBBBB;
+            font-weight: 300;
+            text-align: center;
+          }
+
+          table tr:nth-child(2n) {
+            background-color: white;
+          }
+
+          table tr:nth-child(2n+1) {
+            background-color: #EEEEEE;
+          }
+
+          @media screen and (max-width: 700px) {
+
+            table,
+            tr,
+            td {
+              display: block;
+            }
+
+            td:first-child {
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 100px;
+            }
+
+            td:not(:first-child) {
+              clear: both;
+              margin-left: 100px;
+              padding: 4px 20px 4px 90px;
+              position: relative;
+              text-align: left;
+            }
+
+            td:not(:first-child):before {
+              color: #91ced4;
+              content: '';
+              display: block;
+              left: 0;
+              position: absolute;
+
+            }
+
+            td:nth-child(2):before {
+              content: 'Brand :';
+            }
+
+            td:nth-child(3):before {
+              content: 'Model :';
+            }
+
+            td:nth-child(4):before {
+              content: 'Serial Id :';
+            }
+
+            td:nth-child(5):before {
+              content: '';
+            }
+
+            tr {
+              padding: 10px 0;
+              position: relative;
+            }
+
+            tr:first-child {
+              display: none;
+            }
+          }
+
+          @media screen and (max-width: 500px) {
+            .header {
+              background-color: transparent;
+              color: #fff;
+              font-size: 2em;
+              font-weight: 700;
+              padding: 0;
+              text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+            }
+
+            td:first-child {
+              background-color: #c8e7ea;
+              border-bottom: 1px solid #91ced4;
+              border-radius: 10px 10px 0 0;
+              position: relative;
+              top: 0;
+              transform: translateY(0);
+              width: 100%;
+            }
+
+            td:not(:first-child) {
+              margin: 0;
+              padding: 5px 1em;
+              width: 100%;
+            }
+
+            td:not(:first-child):before {
+              font-size: 0.8em;
+              padding-top: 0.3em;
+              position: relative;
+            }
+
+            td:last-child {
+              padding-bottom: 1rem !important;
+            }
+
+            tr {
+              background-color: white !important;
+              border: 1px solid #6cbec6;
+              border-radius: 10px;
+              box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+              margin: 0.5rem 0;
+              padding: 0;
+            }
+
+            .table-users {
+              border: none;
+              box-shadow: none;
+              overflow: visible;
+            }
+          }
+
+          .btn-custom {
+            background-color: brown;
+            color: white;
+            border: none;
+            width: 100px;
+          }
+        </style>
