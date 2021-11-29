@@ -9,6 +9,7 @@ const PORT = process.env.PORT || 5000
 
 
 
+
 const {getHomePage} = require('./routes/index');
 const {addWorkspacePage, addWorkspace, deleteWorkspace, editWorkspacePage, editWorkspace, detailWorkspacePage, myworkspacePage, addLocationPage, addLocation, LocationPage, deleteLocation, locationPage, myWorkspacePage, workspaceTypePage, addWorkspaceTypePage, addWorkspaceType, deleteWorkspaceType} = require('./routes/workspace');
 const { reserveWorkspacePage,  reserveWorkspace, myReservedPage, cancelReserveWorkspace, checkInWorkspace, checkOutWorkspace, workspaceRequestPage } = require('./routes/reserve');
@@ -17,7 +18,8 @@ const {loginPage, login, logout, registerPage, register} = require('./routes/log
 
 
 
-const db = mysql.createConnection({
+
+const db = mysql.createPool({
     host: 'eu-cdbr-west-01.cleardb.com',
     user: 'b7b2d074e77e38',
     password: 'c5fd1cf4',
@@ -26,15 +28,26 @@ const db = mysql.createConnection({
 
 
 
-
-db.connect((err) => {
-    if (err) {
-        throw err;
-    }
-    console.log('Connected to database successfully');
+app.listen(PORT, ()=> {
+    console.log(`Server running on port : ${PORT}`)
 });
 
 global.db = db;
+
+db.getConnection(function(err, connection) {
+    // Use the connection
+    connection.query('SELECT * FROM workspace', function (error, results, fields) {
+      // And done with the connection.
+      connection.release();
+  
+      // Handle error after the release.
+      if (error) throw error;
+  
+      // Don't use the connection here, it has been returned to the pool.
+    });
+  });
+
+
 
                                                                                                                                   
 app.set('views', __dirname + '/views');
@@ -90,6 +103,3 @@ app.get('/workspacetypedel/:workspace_type_no', deleteWorkspaceType);
 
 
 
-app.listen(PORT, ()=> {
-    console.log(`Server running on port : ${PORT}`)
-});
