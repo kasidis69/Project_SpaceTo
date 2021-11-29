@@ -102,7 +102,7 @@ module.exports = {
           let c  = a+""+b  
 
           var arr = c.split(" ");
-          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[12];
+          datetime = arr[2]+"  "+arr[1]+"  "+arr[4]+" - "+arr[14];
           
           array.push(datetime)
        })
