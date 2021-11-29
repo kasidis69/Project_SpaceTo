@@ -69,14 +69,13 @@
                 <p class="status"><%= workspaces.workspace_type_name %></p>  
                 <br>
                 <%= workspaces.location_name %>
+                <br>
                 <i class="far fa-clock"></i>
-                <p class="clock"><%= workspaces.time_openclose %></p>
-                <meter class="csprogress" value="7" min="0" max="10"></meter>
-                <p class="status">7/10</p>
+                <p class="clock" ><%= workspaces.time_openclose %></p>      
                 <p class="card-text">
                     <%= workspaces.detail %>
                 </p>
-                <a href="/detail/<%= workspaces.workspace_no %>" target="_blank" class="btn-custom">ดูรายละเอียด</a>
+                <a href="/detail/<%= workspaces.workspace_no %>"  target="_blank" class="btn-custom">See Datail</a>
             </div>
         </div>
         
